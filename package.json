@@ -1,0 +1,31 @@
+{
+  "name": "project-catwalk-fec",
+  "description": "-OVERVIEW: Refactor existing retail application with new user features including item detail pages, peformance optimization, and allowing users to search, browse, add to cart, and checkout. -",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poggiez/Project-Catwalk-FEC.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Poggiez/Project-Catwalk-FEC/issues"
+  },
+  "homepage": "https://github.com/Poggiez/Project-Catwalk-FEC#readme",
+  "devDependencies": {
+    "webpack": "^5.32.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.7",
+    "path": "^0.12.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
