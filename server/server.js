@@ -1,6 +1,6 @@
 const path = require("path");
 const express = require("express");
-const apiUrl = require('https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax43/');
+const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax43/';
 const API_KEY = require('../config.js');
 
 const app = express();
