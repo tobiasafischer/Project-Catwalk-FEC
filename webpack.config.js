@@ -8,6 +8,7 @@ module.exports = {
     path: DIST_DIR,
   },
   module: {
+      
     rules: [
       {
         test: /\.jsx?/,
@@ -16,6 +17,13 @@ module.exports = {
           loader: "babel-loader",
         },
       },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i, 
+        loader: 'file-loader',
+        options: {
+          name: '[path][name].[ext]',
+        },
+      }
     ],
   },
 };
