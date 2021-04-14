@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Review from '../../client/src/components/R-and-R/r-and-r.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -11,7 +13,10 @@ class App extends React.Component {
 
   render() {
     return (
-      <h1>This is our app</h1>
+      <div>
+        <h1>This is our app</h1>
+        <Review />
+      </div>
     )
   }
 }
