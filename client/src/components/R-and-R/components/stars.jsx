@@ -19,12 +19,12 @@ function renderStars(stop, step, fractions, initialRating, readonly) {
   );
 }
 
-function Stars() {
-  const [stop] = useState(5);
-  const [step] = useState(1);
-  const [fractions] = useState(1);
-  const [initialRating] = useState(5);
-  const [readOnly] = useState(false);
+function Stars(props) {
+  const [stop] = useState(props);
+  const [step] = useState(props);
+  const [fractions] = useState(props);
+  const [initialRating] = useState(props);
+  const [readOnly] = useState(props);
 
   return (
     <div className="stars">
