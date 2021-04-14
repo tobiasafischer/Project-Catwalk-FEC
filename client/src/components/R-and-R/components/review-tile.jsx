@@ -1,5 +1,5 @@
 import React from 'react';
-import Ratings from 'react-ratings-declarative';
+import Rating from 'react-rating';
 
 
 class ReviewTile extends React.Component {
@@ -12,19 +12,18 @@ class ReviewTile extends React.Component {
   }
 
   renderStars() {
-    let starsRounded = Math.floor(this.state.stars * 4) / 4; //this rounds to nearest 0.25
+    let starsRounded = Math.floor(this.state.stars * 4); //this rounds to nearest 0.25
     return (
       <div id='stars'>
-        <Ratings
-          rating={starsRounded}
-          widgetDimensions='20px'
-          widgetSpacings='5px'
+        <Rating 
+        stop='20'
+        step='4'
+        fractions='4'
+        initialRating={starsRounded}
+        readonly={true}
+        //emptySymbol={<img src="../../../lib/assets/star-empty.png" className="icon" />}
+        //fullSymbol={<img src="../../../../../lib/assets/star-full.png" className="icon" />}
         />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
-        <Ratings.Widget />
       </div>
     );
 

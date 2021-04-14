@@ -15,7 +15,7 @@ class ReviewsList extends React.Component {
     return (
       <div className="reviews-list">
         <h2>ReviewList</h2>
-        <ReviewTile />
+        <ReviewTile stars={4.35}/>
       </div>
       
     )
