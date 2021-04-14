@@ -1,6 +1,7 @@
 import React from 'react';
 import Rating from 'react-rating';
-
+import emptyStar from '../../../../../lib/assets/star-empty.png';
+import fullStar from '../../../../../lib/assets/star-empty.png';
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -21,8 +22,8 @@ class ReviewTile extends React.Component {
         fractions='4'
         initialRating={starsRounded}
         readonly={true}
-        //emptySymbol={<img src="../../../lib/assets/star-empty.png" className="icon" />}
-        //fullSymbol={<img src="../../../../../lib/assets/star-full.png" className="icon" />}
+        emptySymbol={<img src={emptyStar} className="icon" />}
+        fullSymbol={<img src={fullStar} className="icon" />}
         />
       </div>
     );
