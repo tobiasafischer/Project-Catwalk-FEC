@@ -1,45 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Rating from 'react-rating';
 import emptyStar from '../../../../../lib/assets/star-empty.png';
 import fullStar from '../../../../../lib/assets/star-full.png';
 
-class Stars extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      stop: this.props.stop,
-      step: this.props.step,
-      fractions: this.props.fractions,
-      initialRating: this.props.initialRating,
-      readonly: this.props.readonly,
-      
-    };
-    this.renderStars = this.renderStars.bind(this);
-  }
+function renderStars(stop, step, fractions, initialRating, readonly) {
+  return (
+    <div id="stars">
+      <Rating
+        stop={stop}
+        step={step}
+        fractions={fractions}
+        initialRating={initialRating}
+        readonly={readonly}
+        emptySymbol={<img src={emptyStar} className="icon" alt="" />}
+        fullSymbol={<img src={fullStar} className="icon" alt="" />}
+      />
+    </div>
+  );
+}
 
-  renderStars() {
-    return (
-      <div id='stars'>
-        <Rating 
-        stop={this.state.stop}
-        step={this.state.step}
-        fractions={this.state.fractions}
-        initialRating={this.state.initialRating}
-        readonly={this.state.readonly}
-        emptySymbol={<img src={emptyStar} className="icon" />}
-        fullSymbol={<img src={fullStar} className="icon" />}
-        />
-      </div>
-    );
-  }
+function Stars() {
+  const [stop] = useState(5);
+  const [step] = useState(1);
+  const [fractions] = useState(1);
+  const [initialRating] = useState(5);
+  const [readOnly] = useState(false);
 
-  render() {
-    return (
-      <div className="stars">
-        {this.renderStars()}
-      </div>
-    )
-  }
+  return (
+    <div className="stars">
+      {renderStars(stop, step, fractions, initialRating, readOnly)}
+    </div>
+  );
 }
 
 export default Stars;
