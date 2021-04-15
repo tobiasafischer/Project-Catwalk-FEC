@@ -17,12 +17,19 @@ function ReviewTile(props) {
     <div className="review-tile">
       <Stars stop={20} step={4} fractions={4} initialRating={starsRounded} readonly="true" />
       <div id="review-text-container">
-        <h1>{ title }</h1>
-        <p>{ body }</p>
+        <p className="h2">
+          { title }
+          <strong>This is the title of my review</strong>
+        </p>
+        <p className="lead">
+          { body }
+          and this is the text of my review. and this is the texthe ndthis is the text of my review.
+        </p>
         <div id="helpful">
           <p>Helpful?</p>
           <div id="helpful-yes" onClick={() => setPositiveReviews(positiveReviews + 1)} aria-hidden="true">
-            Yes (
+            <u>Yes</u>
+            (
             {positiveReviews}
             )
           </div>
