@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
 import { Card } from 'react-bootstrap';
 import Stars from './stars';
@@ -29,18 +30,18 @@ function ReviewTile(props) {
             { body }
             d this is the text of my review. and this is the texthe ndthis is the text of my review.
           </Card.Text>
-          <div className="d-sm-inline-flex justify-content-sm-between" id="helpful">
-            <div id="helpful-text" className="ml-auto p-2">Helpful?</div>
-            <div id="helpful-text" className="ml-auto p-2" onClick={() => setPositiveReviews(positiveReviews + 1)} aria-hidden="true">
-              <u>Yes</u>
-              (
-              {positiveReviews}
-              )
-            </div>
-            <div className="ml-auto p-2">|</div>
-            <div id="helpful-text" className="ml-auto p-2" onClick={() => setReportCount(reportCount + 1)} aria-hidden="true">
-              Report
-            </div>
+        </div>
+        <div className="d-inline-flex">
+          <div className="mt-2">Helpful?</div>
+          <a id="helpful-yes" className="ml-auto p-2" onClick={() => setPositiveReviews(positiveReviews + 1)} aria-hidden="true"><u>Yes</u></a>
+          <div className="mt-2">
+            (
+            {positiveReviews}
+            )
+          </div>
+          <div className="ml-auto p-2">|</div>
+          <div className="ml-auto p-2" onClick={() => setReportCount(reportCount + 1)} aria-hidden="true">
+            Report
           </div>
         </div>
       </Card>

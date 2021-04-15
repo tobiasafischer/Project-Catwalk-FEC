@@ -1,0 +1,11 @@
+#helpful-yes,
+#helpful-yes:active,
+#helpful-yes:visited,
+#helpful-yes:focus {
+  text-decoration: none;
+  color: black;
+}
+
+#helpful-yes:hover {
+  cursor: pointer;
+}
