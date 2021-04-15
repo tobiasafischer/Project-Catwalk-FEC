@@ -61,11 +61,10 @@ function ReviewTile(props) {
     return [bodyStr, remainingStr];
   }
 
-  function validateBody(body, showMore) {
+  function validateBody(body) {
     const [open, setOpen] = useState(false);
-    if (body.length >= 30 && !showMore) {
-      const [bodyStr, remainingStr] = getBodyStrings(body, 29);
-      console.log(bodyStr, remainingStr);
+    if (body.length >= 250) {
+      const [bodyStr, remainingStr] = getBodyStrings(body, 249);
       return (
         <div>
           <div>{ `${bodyStr}...` }</div>
@@ -101,9 +100,8 @@ function ReviewTile(props) {
   const [reportCount, setReportCount] = useState(0); // # of reports
   const [yesDidClick, setYesDidClick] = useState(false); // if the user clicked Yes -> disable
   const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
-  const [showMore, setShowMore] = useState(false);
   // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
-  const bodyText = 'd this is the text of my review. and this is the texthe ndthis is the text of my review.';
+  const bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
   const other = 'Hello my name is tobias fischer and i am here to talk to you about this really cool review product that i have to share with you';
   return (
     <div className="review-tile">
@@ -131,7 +129,7 @@ function ReviewTile(props) {
             {validateTitle(other)}
           </Card.Title>
           {/* body of the review */}
-          { validateBody(bodyText, showMore) }
+          { validateBody(bodyText) }
         </div>
         {/* this is for the helpful section at the bottom */}
         <div style={{ color: '#949494' }} className="d-inline-flex">
