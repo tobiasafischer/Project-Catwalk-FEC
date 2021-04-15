@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Collapse, Button } from 'react-bootstrap';
 import Stars from './stars';
 
 function ReviewTile(props) {
@@ -46,6 +46,50 @@ function ReviewTile(props) {
     return [<strong>{title}</strong>];
   }
 
+  function getBodyStrings(body, size) {
+    let bodyStr = body.substring(0, size);
+    let newIndex = Infinity;
+    const valid = [' ', '!', '.', '?'];
+    for (let i = bodyStr.length; i >= 0; i -= 1) {
+      if (valid.includes(bodyStr[i])) {
+        newIndex = i;
+        bodyStr = bodyStr.substring(0, i);
+        break;
+      }
+    }
+    const remainingStr = body.substring(newIndex);
+    return [bodyStr, remainingStr];
+  }
+
+  function validateBody(body, showMore) {
+    const [open, setOpen] = useState(false);
+    if (body.length >= 30 && !showMore) {
+      const [bodyStr, remainingStr] = getBodyStrings(body, 29);
+      console.log(bodyStr, remainingStr);
+      return (
+        <div>
+          <div>{ `${bodyStr}...` }</div>
+          <Collapse in={open}>
+            <div>
+              <Card.Text id="collapse-text" style={{ color: '#949494' }}>
+                { remainingStr }
+              </Card.Text>
+            </div>
+          </Collapse>
+          <Button
+            variant="link"
+            onClick={() => setOpen(!open)}
+            aria-controls="collapse-text"
+            aria-expanded={open}
+          >
+            Show More
+          </Button>
+        </div>
+      );
+    }
+    return body;
+  }
+
   const [{ stars }] = useState(props); // initial rating
   const [starsRounded] = useState(() => roundStars(stars)); // rounding to nearest .25
   // const [{ title }] = useState(props); // review card title
@@ -57,7 +101,9 @@ function ReviewTile(props) {
   const [reportCount, setReportCount] = useState(0); // # of reports
   const [yesDidClick, setYesDidClick] = useState(false); // if the user clicked Yes -> disable
   const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
+  const [showMore, setShowMore] = useState(false);
   // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
+  const bodyText = 'd this is the text of my review. and this is the texthe ndthis is the text of my review.';
   const other = 'Hello my name is tobias fischer and i am here to talk to you about this really cool review product that i have to share with you';
   return (
     <div className="review-tile">
@@ -85,10 +131,7 @@ function ReviewTile(props) {
             {validateTitle(other)}
           </Card.Title>
           {/* body of the review */}
-          <Card.Text style={{ color: '#949494' }}>
-            { body }
-            d this is the text of my review. and this is the texthe ndthis is the text of my review.
-          </Card.Text>
+          { validateBody(bodyText, showMore) }
         </div>
         {/* this is for the helpful section at the bottom */}
         <div style={{ color: '#949494' }} className="d-inline-flex">
