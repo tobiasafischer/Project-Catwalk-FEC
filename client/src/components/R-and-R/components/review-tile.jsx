@@ -26,26 +26,6 @@ function ReviewTile(props) {
     }
   }
 
-  function validateTitle(title) {
-    // if title > 60 chars we need to truncate
-    if (title.length > 60) {
-      // for the first 60 chars
-      const sub = (<strong>{`${title.substring(0, 59)}...`}</strong>);
-      // this is for the wrapped text
-      const remaining = (
-        <div style={({
-          color: '#949494', fontSize: '12px', marginTop: '10px', marginBottom: '20px',
-        })}
-        >
-          {`...${title.substring(59)}`}
-        </div>
-      );
-      return [sub, remaining];
-    }
-    // else just return the title bolded
-    return [<strong>{title}</strong>];
-  }
-
   function getBodyStrings(body, size) {
     let bodyStr = body.substring(0, size);
     let newIndex = Infinity;
@@ -60,6 +40,30 @@ function ReviewTile(props) {
     const remainingStr = body.substring(newIndex);
     return [bodyStr, remainingStr];
   }
+
+  function validateTitle(title) {
+    // if title > 60 chars we need to truncate
+    if (title.length > 60) {
+      const [bodyStr, remainingStr] = getBodyStrings(title, 59);
+      // for the first 60 chars
+      const sub = (<strong>{`${bodyStr}...`}</strong>);
+      // this is for the wrapped text
+      const remaining = (
+        <div style={({
+          color: '#949494', fontSize: '12px', marginTop: '10px', marginBottom: '20px',
+        })}
+        >
+          {`...${remainingStr}`}
+        </div>
+      );
+      return [sub, remaining];
+    }
+    // else just return the title bolded
+    return [<strong>{title}</strong>];
+  }
+
+  
+  
 
   function validateBody(body) {
     const [open, setOpen] = useState(false);
@@ -101,7 +105,8 @@ function ReviewTile(props) {
   const [yesDidClick, setYesDidClick] = useState(false); // if the user clicked Yes -> disable
   const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
   // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
-  const bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
+  // const bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
+  const bodyText = 'ahjsfposajdvopjsdaviopjsdpovijsdopiavjsdpoiavjopsidvjopisdajvpoijsadopivjsdoip';
   const other = 'Hello my name is tobias fischer and i am here to talk to you about this really cool review product that i have to share with you';
   return (
     <div className="review-tile">
