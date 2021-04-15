@@ -96,7 +96,7 @@ function ReviewTile(props) {
   const [{ stars }] = useState(props); // initial rating
   const [starsRounded] = useState(() => roundStars(stars)); // rounding to nearest .25
   // const [{ title }] = useState(props); // review card title
-  const [{ body }] = useState(props); // review card body text
+  // const [{ body }] = useState(props); // review card body text
   const [name] = useState('Tobias Fischer'); // name of reviewer
   const [date] = useState('January 29, 2019'); // date reviewed
   const [verified] = useState(true); // if the user is a verified purchaser
@@ -106,8 +106,8 @@ function ReviewTile(props) {
   const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
   // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
   const bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
-  // const bodyText = 'ahjsfposajdvopjsdaviopjsdpovijsdopiavjsdpoiavjopsidvjopisdajvpoijsadopivjsdoip';
-  const other = 'Hello my name is tobias fischer and i am here to talk to you about this really cool review product that i have to share with you';
+  // const bodyText = 'ahjssajdvopjsdaviopjsdpovijsdopiavjsdpoiavjopsidvjopisdajvpoijsadopivjsdoip';
+  const other = 'Helly name is tobias fischer and i am here to talk to you about this really cool review product that i have to share with you';
   return (
     <div className="review-tile">
       {/* think of this as a container with special bootstrap options */}

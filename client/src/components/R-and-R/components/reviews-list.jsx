@@ -13,10 +13,10 @@ function renderTiles(tiles) {
   return arrOfTiles;
 }
 
-function ReviewsList() {
+function ReviewsList(props) {
   // const [tilesDisplayed, setTilesDisplayed] = useState(2);
   // const [reviews, setReviews] = useState(() => getReviews());
-  const [tiles] = useState([{ stars: 2 }, { stars: 2 }]);
+  const [{ tiles }] = useState(props);
   return (
     <div className="reviews-list">
       {renderTiles(tiles)}
