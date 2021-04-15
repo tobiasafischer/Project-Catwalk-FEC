@@ -9,3 +9,7 @@
 #helpful-yes:hover {
   cursor: pointer;
 }
+
+#star-icon {
+  color: #525252;
+}

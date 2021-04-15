@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import Rating from 'react-rating';
-import emptyStar from '../../../../../lib/assets/star-empty.png';
-import fullStar from '../../../../../lib/assets/star-full.png';
 
 function Stars(props) {
   const [{ stop }] = useState(props);
@@ -18,8 +16,8 @@ function Stars(props) {
         fractions={fractions}
         initialRating={initialRating}
         readonly={readOnly}
-        emptySymbol={<img src={emptyStar} className="icon" alt="" />}
-        fullSymbol={<img src={fullStar} className="icon" alt="" />}
+        emptySymbol={<i id="star-icon" className="bi bi-star" />}
+        fullSymbol={<i id="star-icon" className="bi bi-star-fill" />}
         quiet={quiet}
       />
     </div>
