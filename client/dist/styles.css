@@ -13,3 +13,12 @@
 #star-icon {
   color: #525252;
 }
+
+#star {
+  margin-top: 10px;
+  position: absolute;
+}
+
+#user-container-item {
+  margin-left: 10px;
+}

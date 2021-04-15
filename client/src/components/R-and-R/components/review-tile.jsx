@@ -10,8 +10,11 @@ function ReviewTile(props) {
     return Math.floor(star * 4);
   }
 
+  // eslint-disable-next-line consistent-return
   function isVerified(verified) {
-    return verified ? <i className="bi bi-check-circle-fill" /> : '';
+    if (verified) {
+      return <i className="bi bi-check-circle-fill" />;
+    }
   }
 
   const [{ stars }] = useState(props);
@@ -20,20 +23,21 @@ function ReviewTile(props) {
   const [{ body }] = useState(props);
   const [positiveReviews, setPositiveReviews] = useState(0);
   const [reportCount, setReportCount] = useState(0);
-  const [{ name }] = useState(props);
-  const [{ date }] = useState(props);
-  const [{ verified }] = useState(props);
+  const [name] = useState('Tobias Fischer');
+  const [date] = useState('January 29, 2019');
+  const [verified] = useState(true);
 
   return (
     <div className="review-tile">
       <Card style={{ color: '#525252' }}>
-        <div id="star" className="mt-2">
+        <div id="star" className="">
           <Stars stop={20} step={4} fractions={4} initialRating={starsRounded} readOnly="true" quiet="true" />
         </div>
-        <div id="user-container">
+        <div id="user-container" className="d-inline-flex justify-content-end">
           {isVerified(verified)}
-          {name}
-          {date}
+          <div id="user-container-item" className="ml-3">{name}</div>
+          ,
+          <div id="user-container-item" className="ml-3">{date}</div>
         </div>
         <div className="mt-3" id="review-text-container">
           <Card.Title>
