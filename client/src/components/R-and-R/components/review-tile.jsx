@@ -18,6 +18,8 @@ function ReviewTile(props) {
   }
 
   function handleHelpfulClick(callback, item, clickedCb, clicked) {
+    // cb, item is for the setter of the count
+    // clickedCb, clicked is the setter for the boolean if clicked
     if (!clicked) {
       callback(item + 1);
       clickedCb(true);
@@ -25,12 +27,14 @@ function ReviewTile(props) {
   }
 
   function validateTitle(title) {
-    console.log(title.length);
+    // if title > 60 chars we need to truncate
     if (title.length > 60) {
+      // for the first 60 chars
       const sub = (<strong>{`${title.substring(0, 59)}...`}</strong>);
+      // this is for the wrapped text
       const remaining = (
         <div style={({
-          color: '#949494', fontSize: '12px', marginTop: '10px', marginBottom: '20px' 
+          color: '#949494', fontSize: '12px', marginTop: '10px', marginBottom: '20px',
         })}
         >
           {`...${title.substring(59)}`}
@@ -38,54 +42,69 @@ function ReviewTile(props) {
       );
       return [sub, remaining];
     }
+    // else just return the title bolded
     return [<strong>{title}</strong>];
   }
 
-  const [{ stars }] = useState(props);
-  const [starsRounded] = useState(() => roundStars(stars));
-  const [{ title }] = useState(props);
-  const [{ body }] = useState(props);
-  const [positiveReviews, setPositiveReviews] = useState(0);
-  const [reportCount, setReportCount] = useState(0);
-  const [name] = useState('Tobias Fischer');
-  const [date] = useState('January 29, 2019');
-  const [verified] = useState(true);
-  const [yesDidClick, setYesDidClick] = useState(false);
-  const [reportDidClick, setReportDidClick] = useState(false);
-  const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
+  const [{ stars }] = useState(props); // initial rating
+  const [starsRounded] = useState(() => roundStars(stars)); // rounding to nearest .25
+  // const [{ title }] = useState(props); // review card title
+  const [{ body }] = useState(props); // review card body text
+  const [name] = useState('Tobias Fischer'); // name of reviewer
+  const [date] = useState('January 29, 2019'); // date reviewed
+  const [verified] = useState(true); // if the user is a verified purchaser
+  const [positiveReviews, setPositiveReviews] = useState(0); // # of positive reviews (Yes (#))
+  const [reportCount, setReportCount] = useState(0); // # of reports
+  const [yesDidClick, setYesDidClick] = useState(false); // if the user clicked Yes -> disable
+  const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
+  // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
   const other = 'Hello my name is tobias fischer and i am here to talk to you about this really cool review product that i have to share with you';
-  console.log(other.length);
   return (
     <div className="review-tile">
-      <Card style={{ color: '#525252'}}>
+      {/* think of this as a container with special bootstrap options */}
+      <Card style={{ color: '#525252' }}>
         <div id="star" className="">
+          {/* creating the star rating with a immutable review --> quarter stars */}
           <Stars stop={20} step={4} fractions={4} initialRating={starsRounded} readOnly="true" quiet="true" />
         </div>
+        {/* this creates the username info in the top right */}
         <div id="user-container" className="d-inline-flex justify-content-end">
+          {/* checks if we need to add the verified icon */}
           {isVerified(verified)}
+          {/* making the name with margin spacing */}
           <div id="user-container-item" className="ml-3">{name}</div>
           ,
+          {/* making the date with margin spacing */}
           <div id="user-container-item" className="ml-3">{date}</div>
         </div>
+        {/* where we hold the meat of the review */}
         <div className="mt-3" id="review-text-container">
+          {/* title of the review */}
           <Card.Title>
-            { title }
+            {/* join me in the function above to explain */}
             {validateTitle(other)}
           </Card.Title>
+          {/* body of the review */}
           <Card.Text style={{ color: '#949494' }}>
             { body }
             d this is the text of my review. and this is the texthe ndthis is the text of my review.
           </Card.Text>
         </div>
+        {/* this is for the helpful section at the bottom */}
         <div style={{ color: '#949494' }} className="d-inline-flex">
+          {/* this creates the helpful text with appropriate spacing */}
           <div className="mt-2">Helpful?</div>
+          {/* this is the link for Yes(#) */}
           <a style={{ color: '#949494' }} id="helpful-yes" className="ml-auto p-2" onClick={() => handleHelpfulClick(setPositiveReviews, positiveReviews, setYesDidClick, yesDidClick)} aria-hidden="true"><u>Yes</u></a>
+          {/* this is the number for above ^ */}
           <div className="mt-2">
             (
             {positiveReviews}
             )
           </div>
+          {/* same things as above but it is for reporting */}
           <div className="ml-auto p-2">|</div>
+          {/* same things as above but it is for reporting */}
           <a style={{ color: '#949494' }} id="helpful-yes" className="ml-auto p-2" onClick={() => handleHelpfulClick(setReportCount, reportCount, setReportDidClick, reportDidClick)} aria-hidden="true"><u>Report</u></a>
         </div>
       </Card>

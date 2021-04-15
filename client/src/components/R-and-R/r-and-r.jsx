@@ -5,6 +5,7 @@ function Review() {
   return (
     <div className="review">
       <p>RATINGS & REVIEWS</p>
+      {/* ReviewsList instantiation */}
       <ReviewsList />
     </div>
   );

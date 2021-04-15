@@ -5,6 +5,7 @@ import ReviewTile from './review-tile';
 function renderTiles(tiles) {
   const arrOfTiles = [];
   for (let i = 0; i < tiles.length; i += 1) {
+    // tile instantiation based on # of reviews
     arrOfTiles.push(
       <ReviewTile key={i} stars={tiles[i].stars} yesDidClick={false} reportDidClick={false} />,
     );
