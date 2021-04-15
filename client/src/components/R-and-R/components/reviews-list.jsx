@@ -6,7 +6,7 @@ function renderTiles(tiles) {
   const arrOfTiles = [];
   for (let i = 0; i < tiles.length; i += 1) {
     arrOfTiles.push(
-      <ReviewTile key={i} stars={tiles[i].stars} />,
+      <ReviewTile key={i} stars={tiles[i].stars} yesDidClick={false} reportDidClick={false} />,
     );
   }
   return arrOfTiles;
