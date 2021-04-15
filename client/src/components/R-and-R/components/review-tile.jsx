@@ -19,7 +19,7 @@ function ReviewTile(props) {
   return (
     <div className="review-tile">
       <Card style={{ color: '#000' }}>
-        <Stars stop={20} step={4} fractions={4} initialRating={starsRounded} readonly="true" />
+        <Stars stop={20} step={4} fractions={4} initialRating={starsRounded} readOnly="true" quiet="true" />
         <div className="mt-3" id="review-text-container">
           <Card.Title>
             { title }

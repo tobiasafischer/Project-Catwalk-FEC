@@ -9,6 +9,7 @@ function Stars(props) {
   const [{ fractions }] = useState(props);
   const [{ initialRating }] = useState(props);
   const [{ readOnly }] = useState(props);
+  const [{ quiet }] = useState(props);
   return (
     <div className="stars">
       <Rating
@@ -19,6 +20,7 @@ function Stars(props) {
         readonly={readOnly}
         emptySymbol={<img src={emptyStar} className="icon" alt="" />}
         fullSymbol={<img src={fullStar} className="icon" alt="" />}
+        quiet={quiet}
       />
     </div>
   );
