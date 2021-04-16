@@ -63,3 +63,8 @@ body {
   float: left;
   margin-right: 5px;
 }
+
+#owner-response {
+  background-color: "#ebebeb";
+  padding: 20px;
+}

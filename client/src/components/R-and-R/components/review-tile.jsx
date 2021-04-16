@@ -98,8 +98,15 @@ function ReviewTile(props) {
     if (recommend) {
       return (
         <div id="recommends">
-          <i id="recommend-icon"className="bi bi-check2" />
-          <div className="ml-2">I recommend this product</div>
+          <h4
+            style={{
+              color: '#454545',
+              marginTop: '5px',
+            }}
+          >
+            <i id="recommend-icon" className="bi bi-check2" />
+          </h4>
+          <div style={{ color: '#949494' }} className="ml-2">I recommend this product</div>
         </div>
       );
     }
@@ -118,19 +125,38 @@ function ReviewTile(props) {
     return <br />;
   }
 
+  function validateOwnerResponse(responded, response) {
+    if (responded) {
+      return (
+        <div style={{ backgroundColor: '#ebebeb' }} id="owner-response">
+          <strong>Response:</strong>
+          <div
+            className="mt-2"
+            style={{
+              fontSize: 14,
+            }}
+          >
+            {response}
+          </div>
+        </div>
+      );
+    }
+    return <br />;
+  }
+
   const [{ stars }] = useState(props); // initial rating
   const [starsRounded] = useState(() => roundStars(stars)); // rounding to nearest .25
   // const [{ title }] = useState(props); // review card title
   // const [{ body }] = useState(props); // review card body text
   const [name] = useState('Tobias Fischer'); // name of reviewer
   const [date] = useState('January 29, 2019'); // date reviewed
-  const [verified] = useState(true); // if the user is a verified purchaser
   const [positiveReviews, setPositiveReviews] = useState(0); // # of positive reviews (Yes (#))
   const [reportCount, setReportCount] = useState(0); // # of reports
   const [yesDidClick, setYesDidClick] = useState(false); // if the user clicked Yes -> disable
   const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
   const [doesRecommend, setDoesRecommend] = useState(true);
-  const [purchased, setPurchased] = useState(false);
+  const [purchased, setPurchased] = useState(true);
+  const [response, setReponse] = useState(true);
   // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
   const bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
   // const bodyText = 'ahjssajdvopjsdaviopjsdpovijsdopiavjsdpoiavjopsidvjopisdajvpoijsadopivjsdoip';
@@ -163,7 +189,8 @@ function ReviewTile(props) {
           {/* body of the review */}
           { validateBody(bodyText) }
         </div>
-        { validateRecommend(doesRecommend) }
+        {validateOwnerResponse(response, 'Thank sadgasdgsadgasdgasdgasdgasdgdasdgasdgsadgasdgsadgsadgsdyou for dhsdhsdfrhershyershserherhserhserhserhserhserrhserhyour review lol')}
+        {validateRecommend(doesRecommend)}
 
         {/* this is for the helpful section at the bottom */}
         <div style={{ color: '#949494' }} className="d-inline-flex">
