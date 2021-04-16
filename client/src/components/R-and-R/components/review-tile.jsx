@@ -92,7 +92,7 @@ function ReviewTile(props) {
     if (recommend) {
       return (
         <div id="recommends">
-          <i id="recommend-icon"className="bi bi-check2" />
+          <i id="recommend-icon" className="bi bi-check2" />
           <div className="ml-2">I recommend this product</div>
         </div>
       );
@@ -112,6 +112,19 @@ function ReviewTile(props) {
     return <br />;
   }
 
+  function validateOwnerResponse(response) {
+    const res = [];
+    if (response) {
+      res.push(
+        <div className="mt2" style={{ backgroundColor: '#ebebeb' }} id="owner-response">
+          <div style={{ color: '#454545' }}><strong>Response:</strong></div>
+          <div className="mt-2" style={{ fontSize: '15px' }}>{response}</div>
+        </div>,
+      );
+    }
+    return res;
+  }
+
   const [{ stars }] = useState(props); // initial rating
   const [starsRounded] = useState(() => roundStars(stars)); // rounding to nearest .25
   // const [{ title }] = useState(props); // review card title
@@ -124,6 +137,7 @@ function ReviewTile(props) {
   const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
   const [doesRecommend, setDoesRecommend] = useState(true);
   const [purchased, setPurchased] = useState(false);
+  const [ownerResponse] = useState('aosfijaoisfjoasfasf');
   // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
   const bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
   // const bodyText = 'ahjssajdvopjsdaviopjsdpovijsdopiavjsdpoiavjopsidvjopisdajvpoijsadopivjsdoip';
@@ -156,6 +170,7 @@ function ReviewTile(props) {
           {/* body of the review */}
           { validateBody(bodyText) }
         </div>
+        { validateOwnerResponse(ownerResponse) }
         { validateRecommend(doesRecommend) }
 
         {/* this is for the helpful section at the bottom */}
@@ -176,6 +191,7 @@ function ReviewTile(props) {
           <a style={{ color: '#949494' }} id="helpful-yes" className="ml-auto p-2" onClick={() => handleHelpfulClick(setReportCount, reportCount, setReportDidClick, reportDidClick)} aria-hidden="true"><u>Report</u></a>
 
         </div>
+      
       </Card>
     </div>
   );
