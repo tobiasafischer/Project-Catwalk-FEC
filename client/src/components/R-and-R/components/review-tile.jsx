@@ -97,9 +97,13 @@ function ReviewTile(props) {
   function validateRecommend(recommend) {
     if (recommend) {
       return (
-        <div id="reccomends" />
+        <div id="recommends">
+          <i id="recommend-icon"className="bi bi-check2" />
+          <div className="ml-2">I recommend this product</div>
+        </div>
       );
     }
+    return <br />;
   }
 
   function verifiedPurchaser(verified) {
@@ -159,6 +163,8 @@ function ReviewTile(props) {
           {/* body of the review */}
           { validateBody(bodyText) }
         </div>
+        { validateRecommend(doesRecommend) }
+
         {/* this is for the helpful section at the bottom */}
         <div style={{ color: '#949494' }} className="d-inline-flex">
           {/* this creates the helpful text with appropriate spacing */}
@@ -175,6 +181,7 @@ function ReviewTile(props) {
           <div className="ml-auto p-2">|</div>
           {/* same things as above but it is for reporting */}
           <a style={{ color: '#949494' }} id="helpful-yes" className="ml-auto p-2" onClick={() => handleHelpfulClick(setReportCount, reportCount, setReportDidClick, reportDidClick)} aria-hidden="true"><u>Report</u></a>
+
         </div>
       </Card>
     </div>
