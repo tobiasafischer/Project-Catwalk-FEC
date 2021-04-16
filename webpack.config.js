@@ -1,5 +1,5 @@
 const path = require('path');
-const autoprefixer = require('autoprefixer');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const SRC_DIR = path.join(__dirname, '/client/src');
 const DIST_DIR = path.join(__dirname, '/client/dist');
@@ -8,6 +8,9 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: DIST_DIR,
+  },
+  resolve: {
+    extensions: ['*', '.js', '.jsx', '.scss'],
   },
   module: {
     rules: [
@@ -30,36 +33,38 @@ module.exports = {
         },
       },
       {
-        test: /\.(scss)$/,
-        use: [{
-          // inject CSS to page
-          loader: 'style-loader',
-        }, {
-          // translates CSS into CommonJS modules
-          loader: 'css-loader',
-        }, {
-          // Run postcss actions
-          loader: 'postcss-loader',
-          options: {
-            // `postcssOptions` is needed for postcss 8.x;
-            // if you use postcss 7.x skip the key
-            postcssOptions: {
-              // postcss plugins, can be exported to postcss.config.js
-              plugins() {
-                return [
-                  autoprefixer,
-                ];
-              },
+        test: /\.module\.s(a|c)ss$/,
+        loader: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
             },
           },
-        }, {
-          // compiles Sass to CSS
-          loader: 'sass-loader',
-        }],
+          {
+            loader: 'sass-loader',
+          },
+        ],
+      },
+      {
+        test: /\.s(a|c)ss$/,
+        exclude: /\.module.(s(a|c)ss)$/,
+        loader: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'sass-loader',
+          },
+        ],
       },
     ],
   },
-  resolve: {
-    extensions: ['*', '.js', '.jsx'],
-  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+    }),
+  ],
+
 };

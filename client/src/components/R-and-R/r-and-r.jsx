@@ -1,5 +1,6 @@
 import React from 'react';
 import ReviewsList from './components/reviews-list';
+import './style';
 
 function Review() {
   return (
@@ -7,7 +8,7 @@ function Review() {
       <p>RATINGS & REVIEWS</p>
       {/* ReviewsList instantiation */}
       <div id="reviews-list">
-        <ReviewsList tiles={[{ stars: 2 }, { stars: 4 }]} />
+        <ReviewsList stars={[{ stars: 2 }, { stars: 4 }]} />
       </div>
     </div>
   );
