@@ -66,26 +66,31 @@ body {
   padding: 20px;
 }
 
-a.review-button {
+#review-button {
   display: inline-block;
-  padding: 0.35em 1.2em;
-  border: 0.1em solid #ffffff;
+  padding: 1em 1.5em;
+  border: 0.16em solid #454545;
   margin: 0 0.3em 0.3em 0;
-  border-radius: 0.12em;
   box-sizing: border-box;
   text-decoration: none;
+  text-transform: uppercase;
   font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  color: #ffffff;
+  font-weight: 400;
+  color: #454545;
   text-align: center;
-  transition: all 0.2s;
+  transition: all 0.15s;
 }
-a.review-button:hover {
-  color: #000000;
-  background-color: #ffffff;
+
+#review-button:hover {
+  color: #959595;
+  border-color: #959595;
+}
+#review-button:active {
+  color: #bbbbbb;
+  border-color: #bbbbbb;
 }
 @media all and (max-width: 30em) {
-    a.review-button {
+  #review-button {
     display: block;
     margin: 0.4em auto;
   }

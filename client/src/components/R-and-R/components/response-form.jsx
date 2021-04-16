@@ -1,17 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
-import { Card, Collapse, Button } from 'react-bootstrap';
-import Stars from './stars';
+import React from 'react';
 
-function ResponseForm(props) {
-  const date = 1;
-
+function ResponseForm() {
   return (
-    <div style={{ marginLeft: '5px' }}>
-      <Button>
-        Add a Review  +
-      </Button>
-    </div>
+    <a href="#review-button" id="review-button">ADD A REVIEW +</a>
   );
 }
 
