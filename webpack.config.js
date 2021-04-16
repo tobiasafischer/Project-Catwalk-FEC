@@ -18,7 +18,6 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-
         options: {
           presets: [
             '@babel/preset-react',
@@ -33,26 +32,14 @@ module.exports = {
         },
       },
       {
-        test: /\.module\.s(a|c)ss$/,
-        loader: [
-          'style-loader',
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
           {
             loader: 'css-loader',
-            options: {
-              modules: true,
-            },
           },
-          {
-            loader: 'sass-loader',
-          },
-        ],
-      },
-      {
-        test: /\.s(a|c)ss$/,
-        exclude: /\.module.(s(a|c)ss)$/,
-        loader: [
-          'style-loader',
-          'css-loader',
           {
             loader: 'sass-loader',
           },
@@ -60,11 +47,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    }),
-  ],
-
 };

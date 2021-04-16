@@ -1,6 +1,6 @@
 import React from 'react';
 import ReviewsList from './components/reviews-list';
-import './style';
+import './style.scss';
 
 function Review() {
   return (

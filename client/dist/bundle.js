@@ -9,6 +9,16 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./client/src/components/R-and-R/style.scss":
+/*!**************************************************!*\
+  !*** ./client/src/components/R-and-R/style.scss ***!
+  \**************************************************/
+/***/ (() => {
+
+eval("throw new Error(\"Module parse failed: Unexpected character '#' (3:0)\\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\\n| //@import \\\"../../../dist/style.scss\\\";\\n| \\n> #helpful-yes {\\n|   text-decoration: none;\\n|   color: black;\");\n\n//# sourceURL=webpack://project-catwalk-fec/./client/src/components/R-and-R/style.scss?");
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
@@ -104,7 +114,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _components_reviews_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/reviews-list */ \"./client/src/components/R-and-R/components/reviews-list.jsx\");\nObject(function webpackMissingModule() { var e = new Error(\"Cannot find module './style'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }());\n\n\n\n\nfunction Review() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"review\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", null, \"RATINGS & REVIEWS\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    id: \"reviews-list\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_reviews_list__WEBPACK_IMPORTED_MODULE_1__.default, {\n    stars: [{\n      stars: 2\n    }, {\n      stars: 4\n    }]\n  })));\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Review);\n\n//# sourceURL=webpack://project-catwalk-fec/./client/src/components/R-and-R/r-and-r.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _components_reviews_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/reviews-list */ \"./client/src/components/R-and-R/components/reviews-list.jsx\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ \"./client/src/components/R-and-R/style.scss\");\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_scss__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nfunction Review() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"review\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"p\", null, \"RATINGS & REVIEWS\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    id: \"reviews-list\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_reviews_list__WEBPACK_IMPORTED_MODULE_1__.default, {\n    stars: [{\n      stars: 2\n    }, {\n      stars: 4\n    }]\n  })));\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Review);\n\n//# sourceURL=webpack://project-catwalk-fec/./client/src/components/R-and-R/r-and-r.jsx?");
 
 /***/ }),
 
