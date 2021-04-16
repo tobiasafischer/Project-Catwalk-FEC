@@ -13,7 +13,6 @@ test('Review renders', () => {
 });
 
 test('ReviewList renders tiles', () => {
-  const { getByText, container } = render(<ReviewList stars={[{ stars: 3}, {stars: 4}]}/>);
-
-  expect(container.childNodes.length).toBe(true);
+  const { getByText, container } = render(<ReviewList tiles={[{ stars: 3}, {stars: 4}]}/>);
+  expect(container.getElementsByClassName('review-tile').length).toBe(2);
 });
