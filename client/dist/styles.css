@@ -37,3 +37,17 @@ body {
   color: #454545;
   letter-spacing: 0.1em;
 }
+
+#verified-purchaser {
+  display: flex;
+  position: absolute;
+  margin-top: 25px;
+  font-size: 13px;
+  color: #949494;
+}
+
+#verified-icon {
+  float: bottom;
+  color: #454545;
+  margin-right: 5px;
+}

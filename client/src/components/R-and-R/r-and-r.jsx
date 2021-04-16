@@ -6,7 +6,9 @@ function Review() {
     <div className="review">
       <p>RATINGS & REVIEWS</p>
       {/* ReviewsList instantiation */}
-      <ReviewsList tiles={[{ stars: 2 }, { stars: 4 }]} />
+      <div id="reviews-list">
+        <ReviewsList tiles={[{ stars: 2 }, { stars: 4 }]} />
+      </div>
     </div>
   );
 }

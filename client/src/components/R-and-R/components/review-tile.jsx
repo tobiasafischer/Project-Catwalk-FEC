@@ -13,7 +13,6 @@ function ReviewTile(props) {
   // eslint-disable-next-line consistent-return
   function isVerified(verified) {
     if (verified) {
-      return <i className="bi bi-check-circle-fill" />;
     }
   }
 
@@ -95,6 +94,26 @@ function ReviewTile(props) {
     return body;
   }
 
+  function validateRecommend(recommend) {
+    if (recommend) {
+      return (
+        <div id="reccomends" />
+      );
+    }
+  }
+
+  function verifiedPurchaser(verified) {
+    if (verified) {
+      return (
+        <div id="verified-purchaser">
+          <i id="verified-icon" className="bi bi-check-circle-fill" />
+          <div className="ml-2">Verified Purchaser</div>
+        </div>
+      );
+    }
+    return <br />;
+  }
+
   const [{ stars }] = useState(props); // initial rating
   const [starsRounded] = useState(() => roundStars(stars)); // rounding to nearest .25
   // const [{ title }] = useState(props); // review card title
@@ -106,6 +125,8 @@ function ReviewTile(props) {
   const [reportCount, setReportCount] = useState(0); // # of reports
   const [yesDidClick, setYesDidClick] = useState(false); // if the user clicked Yes -> disable
   const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
+  const [doesRecommend, setDoesRecommend] = useState(true);
+  const [purchased, setPurchased] = useState(false);
   // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
   const bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
   // const bodyText = 'ahjssajdvopjsdaviopjsdpovijsdopiavjsdpoiavjopsidvjopisdajvpoijsadopivjsdoip';
@@ -121,12 +142,12 @@ function ReviewTile(props) {
         {/* this creates the username info in the top right */}
         <div id="user-container" className="d-inline-flex justify-content-end">
           {/* checks if we need to add the verified icon */}
-          {isVerified(verified)}
           {/* making the name with margin spacing */}
           <div id="user-container-item" className="ml-3">{name}</div>
           ,
           {/* making the date with margin spacing */}
           <div id="user-container-item" className="ml-3">{date}</div>
+          {verifiedPurchaser(purchased)}
         </div>
         {/* where we hold the meat of the review */}
         <div className="mt-3" id="review-text-container">
@@ -141,7 +162,7 @@ function ReviewTile(props) {
         {/* this is for the helpful section at the bottom */}
         <div style={{ color: '#949494' }} className="d-inline-flex">
           {/* this creates the helpful text with appropriate spacing */}
-          <div className="mt-2">Helpful?</div>
+          <div className="mt-2">Was this helpful?</div>
           {/* this is the link for Yes(#) */}
           <a style={{ color: '#949494' }} id="helpful-yes" className="ml-auto p-2" onClick={() => handleHelpfulClick(setPositiveReviews, positiveReviews, setYesDidClick, yesDidClick)} aria-hidden="true"><u>Yes</u></a>
           {/* this is the number for above ^ */}
