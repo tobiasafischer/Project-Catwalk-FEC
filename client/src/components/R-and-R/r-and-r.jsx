@@ -7,7 +7,7 @@ function Review() {
       <p>RATINGS & REVIEWS</p>
       {/* ReviewsList instantiation */}
       <div id="reviews-list">
-        <ReviewsList stars={[{ stars: 1 }, { stars: 6 }, { stars: 2 }, { stars: 4 }].splice(3)} />
+        <ReviewsList stars={[{ stars: 1 }, { stars: 6 }, { stars: 2 }, { stars: 4 }]} />
       </div>
     </div>
   );
