@@ -1,36 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import ReviewTile from './review-tile';
 import ResponseForm from './response-form';
 
-// tiles will be [{stars}, {}]
-function renderTiles(tiles, currentTile, setCurrentTile) {
-  const newArr = tiles.splice(0, currentTile);
-  if (tiles.length - 1 > currentTile) {
-    setCurrentTile(currentTile + 2);
-  }
-  return newArr;
-}
-
-function getTiles(tiles) {
+function getTiles(tiles, currentRender, setCurrentRender) {
   const arr = [];
-  for (let i = 0; i < tiles.length; i += 1) {
-    arr.push(
-      <ReviewTile
-        key={i}
-        stars={tiles[i].stars}
-        yesDidClick={false}
-        reportDidClick={false}
-      />,
-    );
+  if (tiles.length >= currentRender.length) {
+    for (let i = currentRender.length; i < currentRender.length + 2; i += 1) {
+      if (tiles[i]) {
+        arr.push(
+          <ReviewTile
+            key={Math.random().toString(36).substr(2, 9)}
+            stars={tiles[i].stars}
+            yesDidClick={false}
+            reportDidClick={false}
+          />,
+        );
+      }
+    }
+    setCurrentRender(currentRender.concat(arr));
   }
-  return arr;
 }
 
-function showMoreButton() {
+function showMoreButton(tiles, currentRender, setCurrentRender) {
   return (
     <div>
-      <a href="#review-button" id="review-button">SHOW MORE</a>
+      <a href="#review-button" onClick={() => getTiles(tiles, currentRender, setCurrentRender)} id="review-button">SHOW MORE</a>
     </div>
   );
 }
@@ -39,13 +34,13 @@ function ReviewsList(props) {
   // const [tilesDisplayed, setTilesDisplayed] = useState(2);
   // const [reviews, setReviews] = useState(() => getReviews());
   const [{ stars }] = useState(props);
-  const [tiles] = useState(getTiles(stars));
-  const [currentTile, setCurrentTile] = useState(0);
+  const [currentRender, setCurrentRender] = useState([]);
+  useEffect(() => getTiles(stars, currentRender, setCurrentRender), []);
   return (
     <div className="reviews-list">
-      {renderTiles(tiles, currentTile, setCurrentTile)}
+      {currentRender}
       <div className="d-inline-flex mt-5">
-        {showMoreButton()}
+        {showMoreButton(stars, currentRender, setCurrentRender)}
         <ResponseForm />
       </div>
     </div>

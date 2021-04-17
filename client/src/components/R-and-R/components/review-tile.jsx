@@ -43,7 +43,6 @@ function ReviewTile(props) {
       // this is for the wrapped text
       const remaining = (
         <div
-          key={title}
           style={({
             color: '#949494', fontSize: '12px', marginTop: '10px', marginBottom: '20px',
           })}
@@ -54,7 +53,7 @@ function ReviewTile(props) {
       return [sub, remaining];
     }
     // else just return the title bolded
-    return [<div key={title}><strong>{title}</strong></div>];
+    return [<div><strong>{title}</strong></div>];
   }
 
   function validateBody(body) {
