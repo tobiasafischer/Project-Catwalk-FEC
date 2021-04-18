@@ -1,9 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Modal,
   Form,
   Col,
+  Image,
+  Row,
+  Container
 } from 'react-bootstrap';
 import Stars from './stars';
 
@@ -17,9 +20,43 @@ function getDate(date) {
   return (`${month} ${day}, ${year}`);
 }
 
-function checkChar(str, max) {
-  if (str.length === max) {
+function checkChar(str, max, callback) {
+  callback(str.slice(0, max));
+}
 
+function checkFiles(images, files) {
+  for (let i = 0; i < files.length; i += 1) {
+    if (images.includes(files[i])) {
+      files.slice(i, 1);
+    }
+  }
+  return files;
+}
+
+function formatThumbnail(image) {
+  return (
+    <Col id="thumbnail-col-container" xs={3} md={2}>
+      <Image style={{ width: '175px', height: 'auto' }} src={image} rounded />
+    </Col>
+  );
+}
+
+function renderThumbnails(images, thumbnailCb) {
+  const arr = [];
+  images.forEach((image) => {
+    arr.push(formatThumbnail(image));
+  });
+  thumbnailCb(arr);
+}
+
+function handleChange(event, images, imageCb) {
+  if (images.length < 5) {
+    let arrOfImages = [];
+    for (let i = 0; i < event.target.files.length; i += 1) {
+      arrOfImages.push(URL.createObjectURL(event.target.files[i]));
+    }
+    arrOfImages = checkFiles(images, arrOfImages);
+    imageCb(images.concat(arrOfImages));
   }
 }
 
@@ -33,8 +70,10 @@ function ResponseForm() {
   const [recommend, setRecommend] = useState('');
   const [product] = useState('tshirtlol');
   const [show, setShow] = useState(false);
-  const [canWriteBody, setCanWriteBody] = useState(false);
-  const [canWriteSummary, setCanWriteSummary] = useState(false);
+  const [images, setImages] = useState([]);
+  const [thumbnails, setThumbnails] = useState([]);
+
+  useEffect(() => renderThumbnails(images, setThumbnails), [images]);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -83,7 +122,7 @@ function ResponseForm() {
                       Name
                     </div>
                   </Form.Label>
-                  <Form.Control type="name" placeholder="First Last" />
+                  <Form.Control type="name" placeholder="tobiasaf" />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridEmail">
@@ -102,8 +141,12 @@ function ResponseForm() {
                     Summary
                   </div>
                 </Form.Label>
-                <Form.Control placeholder="Review summary..." />
-                <Form.Text id="passwordHelpBlock" muted>
+                <Form.Control
+                  placeholder="Review summary..."
+                  onChange={(e) => checkChar(e.target.value, 60, setSummary)}
+                  value={summary}
+                />
+                <Form.Text id="summaryHelpBlock" muted>
                   Your summary must be 1-60 characters long.
                 </Form.Text>
               </Form.Group>
@@ -114,10 +157,35 @@ function ResponseForm() {
                     Review
                   </div>
                 </Form.Label>
-                <Form.Control 
-                  as="textarea" 
+                <Form.Control
+                  as="textarea"
                   placeholder="Write your review here..."
-                  onChange={(e) => checkChar(e.target.value)} 
+                  onChange={(e) => checkChar(e.target.value, 1000, setBody)}
+                  value={body}
+                />
+                <Form.Text id="bodyHelpBlock" muted>
+                  Your review must be 50-1000 characters long.
+                </Form.Text>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>
+                  <div style={{ marginTop: '20px' }}>
+                    Upload up to (5) images
+                  </div>
+                </Form.Label>
+                <div id="thumbnail-container">
+                  <Container className="d-inline-flex justify-content-end">
+                    <Row>
+                      {thumbnails}
+                    </Row>
+                  </Container>
+                </div>
+                <Form.File
+                  id="imageFileUpload"
+                  onChange={(e) => {
+                    handleChange(e, images, setImages);
+                  }}
+                  multiple
                 />
               </Form.Group>
             </Form>

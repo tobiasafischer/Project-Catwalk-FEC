@@ -95,3 +95,14 @@ body {
     margin: 0.4em auto;
   }
 }
+
+#thumbnail-container {
+  height: 150px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+#thumbnail-col-container {
+  height: 200px;
+  margin-right: 100px;
+}
