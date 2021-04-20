@@ -451,6 +451,14 @@ function handleChange(event, images, imageCb) {
   }
 }
 
+function handleSubmit(stars, name, summary, body, email, recommend, images) {
+  console.log(stars, name, email, recommend);
+}
+
+function handleOnChangeInfo(info, cb) {
+  cb(info);
+}
+
 function ResponseForm() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(getDate(new Date())),
       _useState2 = _slicedToArray(_useState, 1),
@@ -481,7 +489,7 @@ function ResponseForm() {
       email = _useState12[0],
       setEmail = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState14 = _slicedToArray(_useState13, 2),
       recommend = _useState14[0],
       setRecommend = _useState14[1];
@@ -519,8 +527,8 @@ function ResponseForm() {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "responseForm"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#review-button",
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "button",
     onClick: handleShow,
     id: "review-button"
   }, "ADD A REVIEW +"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -550,7 +558,11 @@ function ResponseForm() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Check, {
     type: "checkbox",
     id: "default-checkbox",
-    label: "I recommend this item"
+    label: "I recommend this item",
+    value: recommend,
+    onChange: function onChange() {
+      return handleOnChangeInfo(!recommend, setRecommend);
+    }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Group, {
     as: react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default,
     controlId: "formGridName"
@@ -559,6 +571,10 @@ function ResponseForm() {
       marginTop: '20px'
     }
   }, "Name")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Control, {
+    value: name,
+    onChange: function onChange(e) {
+      return handleOnChangeInfo(e.target.value, setName);
+    },
     type: "name",
     placeholder: "tobiasaf"
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Group, {
@@ -569,6 +585,10 @@ function ResponseForm() {
       marginTop: '20px'
     }
   }, "Email")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Control, {
+    value: email,
+    onChange: function onChange(e) {
+      return handleOnChangeInfo(e.target.value, setEmail);
+    },
     type: "email",
     placeholder: "example@example.com"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Group, {
@@ -606,23 +626,24 @@ function ResponseForm() {
     style: {
       marginTop: '20px'
     }
-  }, "Upload up to (5) images")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    id: "thumbnail-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+  }, "Upload up to (5) images")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+    id: "thumbnail-container",
     className: "d-inline-flex justify-content-end"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, null, thumbnails))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.File, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, null, thumbnails)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.File, {
     id: "imageFileUpload",
     onChange: function onChange(e) {
       handleChange(e, images, setImages);
     },
     multiple: true
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#review-button",
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "button",
     onClick: handleClose,
     id: "review-button"
-  }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-    href: "#review-button",
-    onClick: handleClose,
+  }, "Close"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    type: "submit",
+    onClick: function onClick() {
+      return handleSubmit(stars, name, summary, body, email, recommend, images);
+    },
     id: "review-button"
   }, "Submit Review")))));
 }

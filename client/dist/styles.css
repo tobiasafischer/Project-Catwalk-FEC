@@ -98,8 +98,8 @@ body {
 
 #thumbnail-container {
   height: 150px;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 #thumbnail-col-container {

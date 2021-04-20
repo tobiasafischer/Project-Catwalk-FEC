@@ -6,7 +6,7 @@ import {
   Col,
   Image,
   Row,
-  Container
+  Container,
 } from 'react-bootstrap';
 import Stars from './stars';
 
@@ -60,6 +60,14 @@ function handleChange(event, images, imageCb) {
   }
 }
 
+function handleSubmit(stars, name, summary, body, email, recommend, images) {
+  console.log(stars, name, email, recommend);
+}
+
+function handleOnChangeInfo(info, cb) {
+  cb(info);
+}
+
 function ResponseForm() {
   const [date] = useState(getDate(new Date()));
   const [stars, setStars] = useState(0);
@@ -67,7 +75,7 @@ function ResponseForm() {
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [email, setEmail] = useState('');
-  const [recommend, setRecommend] = useState('');
+  const [recommend, setRecommend] = useState(false);
   const [product] = useState('tshirtlol');
   const [show, setShow] = useState(false);
   const [images, setImages] = useState([]);
@@ -79,7 +87,7 @@ function ResponseForm() {
   const handleShow = () => setShow(true);
   return (
     <div id="responseForm">
-      <a href="#review-button" onClick={handleShow} id="review-button">ADD A REVIEW +</a>
+      <button type="button" onClick={handleShow} id="review-button">ADD A REVIEW +</button>
       <div id="review-form">
         <Modal
           show={show}
@@ -112,6 +120,8 @@ function ResponseForm() {
                     type="checkbox"
                     id="default-checkbox"
                     label="I recommend this item"
+                    value={recommend}
+                    onChange={() => handleOnChangeInfo(!recommend, setRecommend)}
                   />
                 </div>
               </Form.Row>
@@ -122,7 +132,7 @@ function ResponseForm() {
                       Name
                     </div>
                   </Form.Label>
-                  <Form.Control type="name" placeholder="tobiasaf" />
+                  <Form.Control value={name} onChange={(e) => handleOnChangeInfo(e.target.value, setName)} type="name" placeholder="tobiasaf" />
                 </Form.Group>
 
                 <Form.Group as={Col} controlId="formGridEmail">
@@ -131,7 +141,7 @@ function ResponseForm() {
                       Email
                     </div>
                   </Form.Label>
-                  <Form.Control type="email" placeholder="example@example.com" />
+                  <Form.Control value={email} onChange={(e) => handleOnChangeInfo(e.target.value, setEmail)} type="email" placeholder="example@example.com" />
                 </Form.Group>
               </Form.Row>
 
@@ -173,13 +183,11 @@ function ResponseForm() {
                     Upload up to (5) images
                   </div>
                 </Form.Label>
-                <div id="thumbnail-container">
-                  <Container className="d-inline-flex justify-content-end">
-                    <Row>
-                      {thumbnails}
-                    </Row>
-                  </Container>
-                </div>
+                <Container id="thumbnail-container" className="d-inline-flex justify-content-end">
+                  <Row>
+                    {thumbnails}
+                  </Row>
+                </Container>
                 <Form.File
                   id="imageFileUpload"
                   onChange={(e) => {
@@ -191,8 +199,8 @@ function ResponseForm() {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <a href="#review-button" onClick={handleClose} id="review-button">Close</a>
-            <a href="#review-button" onClick={handleClose} id="review-button">Submit Review</a>
+            <button type="button" onClick={handleClose} id="review-button">Close</button>
+            <button type="submit" onClick={() => handleSubmit(stars, name, summary, body, email, recommend, images)} id="review-button">Submit Review</button>
           </Modal.Footer>
         </Modal>
       </div>
