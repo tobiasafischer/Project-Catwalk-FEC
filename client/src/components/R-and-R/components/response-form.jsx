@@ -8,6 +8,7 @@ import {
   Row,
   Container,
 } from 'react-bootstrap';
+import Rating from 'react-rating';
 import Stars from './stars';
 
 function getDate(date) {
@@ -61,7 +62,28 @@ function handleChange(event, images, imageCb) {
 }
 
 function handleSubmit(stars, name, summary, body, email, recommend, images) {
-  console.log(stars, name, email, recommend);
+  const data = {
+    stars,
+    recommend,
+    name,
+    email,
+    summary,
+    body,
+    images,
+  };
+  console.log(data);
+}
+
+// eslint-disable-next-line max-len
+function reset(setStars, setName, setSummary, setBody, setEmail, setRecommend, setImages, setThumbnails) {
+  setStars(20);
+  setName('');
+  setSummary('');
+  setBody('');
+  setEmail('');
+  setRecommend(false);
+  setImages([]);
+  setThumbnails([]);
 }
 
 function handleOnChangeInfo(info, cb) {
@@ -70,7 +92,7 @@ function handleOnChangeInfo(info, cb) {
 
 function ResponseForm() {
   const [date] = useState(getDate(new Date()));
-  const [stars, setStars] = useState(0);
+  const [stars, setStars] = useState(20);
   const [name, setName] = useState('');
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
@@ -82,7 +104,6 @@ function ResponseForm() {
   const [thumbnails, setThumbnails] = useState([]);
 
   useEffect(() => renderThumbnails(images, setThumbnails), [images]);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
@@ -106,11 +127,15 @@ function ResponseForm() {
               {` ${product}`}
             </h5>
             <div style={{ marginTop: '20px' }}>
-              <Stars
+              <Rating
+                start={0}
                 stop={20}
                 step={4}
                 fractions={4}
-                initialRating={20}
+                initialRating={stars}
+                emptySymbol={<i id="star-icon" className="bi bi-star" />}
+                fullSymbol={<i id="star-icon" className="bi bi-star-fill" />}
+                onClick={(e) => setStars(e)}
               />
             </div>
             <Form>
@@ -200,7 +225,18 @@ function ResponseForm() {
           </Modal.Body>
           <Modal.Footer>
             <button type="button" onClick={handleClose} id="review-button">Close</button>
-            <button type="submit" onClick={() => handleSubmit(stars, name, summary, body, email, recommend, images)} id="review-button">Submit Review</button>
+            <button
+              type="submit"
+              onClick={() => {
+                handleClose();
+                handleSubmit(stars, name, summary, body, email, recommend, images);
+                // eslint-disable-next-line max-len
+                reset(setStars, setName, setSummary, setBody, setEmail, setRecommend, setImages, setThumbnails);
+              }}
+              id="review-button"
+            >
+              Submit Review
+            </button>
           </Modal.Footer>
         </Modal>
       </div>
