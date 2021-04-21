@@ -5,7 +5,7 @@ const Description = () => {
     <div id='descrip'>
 
       <div className='row'>
-        <div className='col-7'>
+        <div className='col-7 left'>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin non mattis odio. Suspendisse ullamcorper risus sit amet eros pulvinar lobortis. Nam euismod dignissim enim at mollis.
           </p>
           <p>

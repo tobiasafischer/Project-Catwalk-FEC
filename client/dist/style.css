@@ -10,6 +10,7 @@
   vertical-align: center;
   position: relative;
   color: gray;
+  padding-left: 5%
 }
 #img{
   width: 100%;
@@ -39,9 +40,11 @@
   margin: 1em auto 0 auto;
   display: inline-block;
   text-align: left;
+  padding-left: 5%;
 }
 #descrip .left p {
   width: 101%;
+  padding-left: 0%;
 }
 #detail .rating {
   /* position: absolute; */
@@ -84,6 +87,7 @@
   font-weight: 700;
   color: gray;
   margin-right: 1em;
+  text-align: center;
 }
 
 #detail .quantitySelector{
@@ -94,6 +98,7 @@
   font-weight: 700;
   color: gray;
   margin-right: 1em;
+  text-align: center;
 }
 
 #detail .addtoCart{
@@ -107,7 +112,6 @@
   border: 0.3px solid dimgray;
   background-color: white;
 }
-
 
 #detail .save{
   width: 4rem;
