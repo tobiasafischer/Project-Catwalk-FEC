@@ -1040,6 +1040,10 @@ function ReviewTile(props) {
     keyboard: false,
     dialogClassName: "modal-90w",
     "aria-labelledby": "example-custom-modal-styling-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    style: {
+      justifyContent: 'center'
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
     style: {
       width: '100%',
@@ -1048,7 +1052,17 @@ function ReviewTile(props) {
     src: thumbnailModal,
     rounded: true,
     thumbnail: "true"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+    style: {
+      marginTop: '2%',
+      marginLeft: '5%',
+      width: '90%',
+      height: 'auto'
+    },
+    type: "button",
+    onClick: handleClose,
+    id: "review-button"
+  }, "Close"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
     style: {
       color: '#525252'
     }

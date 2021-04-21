@@ -193,7 +193,10 @@ function ReviewTile(props) {
         dialogClassName="modal-90w"
         aria-labelledby="example-custom-modal-styling-title"
       >
-        <Image style={{ width: '100%', height: 'auto' }} src={thumbnailModal} rounded thumbnail="true" />
+        <div style={{ justifyContent: 'center' }}>
+          <Image style={{ width: '100%', height: 'auto' }} src={thumbnailModal} rounded thumbnail="true" />
+          <button style={{ marginTop: '2%', marginLeft: '5%', width: '90%', height: 'auto' }} type="button" onClick={handleClose} id="review-button">Close</button>
+        </div>
       </Modal>
       {/* think of this as a container with special bootstrap options */}
       <Card style={{ color: '#525252' }}>
