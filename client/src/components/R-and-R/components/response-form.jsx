@@ -9,11 +9,10 @@ import {
   Container,
 } from 'react-bootstrap';
 import Rating from 'react-rating';
-import Stars from './stars';
 
 function getDate(date) {
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    'July', 'August', 'September', 'October', 'November', 'December',
   ];
   const month = monthNames[date.getMonth() + 1];
   const day = date.getDate();
@@ -107,6 +106,16 @@ function ResponseForm() {
   const [images, setImages] = useState([]);
   const [thumbnails, setThumbnails] = useState([]);
   const [bodyCounter, setBodyCounter] = useState([]);
+  const [canUpload, setCanUpload] = useState(false);
+
+  useEffect(() => {
+    if (images.length >= 5) {
+      setImages(images.slice(0, 5));
+      setCanUpload(true);
+    } else {
+      setCanUpload(false);
+    }
+  }, [images]);
   useEffect(() => renderBodyCount(body, setBodyCounter), [body]);
   useEffect(() => renderThumbnails(images, setThumbnails), [images]);
   const handleClose = () => setShow(false);
@@ -238,6 +247,7 @@ function ResponseForm() {
                   onChange={(e) => {
                     handleChange(e, images, setImages);
                   }}
+                  disabled={canUpload}
                   multiple
                 />
               </Form.Group>
