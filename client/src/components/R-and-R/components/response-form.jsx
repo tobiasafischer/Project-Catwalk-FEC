@@ -60,8 +60,9 @@ function handleChange(event, images, imageCb) {
   }
 }
 
-function handleSubmit(stars, name, summary, body, email, recommend, images) {
+function handleSubmit(stars, name, summary, body, email, recommend, images, date) {
   const data = {
+    date,
     stars,
     recommend,
     name,
@@ -70,6 +71,7 @@ function handleSubmit(stars, name, summary, body, email, recommend, images) {
     body,
     images,
   };
+  // eslint-disable-next-line no-console
   console.log(data);
 }
 
@@ -259,7 +261,7 @@ function ResponseForm() {
               type="submit"
               onClick={() => {
                 handleClose();
-                handleSubmit(stars, name, summary, body, email, recommend, images);
+                handleSubmit(stars, name, summary, body, email, recommend, images, date);
                 // eslint-disable-next-line max-len
                 reset(setStars, setName, setSummary, setBody, setEmail, setRecommend, setImages, setThumbnails);
               }}

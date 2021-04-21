@@ -1,7 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
-import { Card, Collapse, Button } from 'react-bootstrap';
-import Stars from './stars';
+import {
+  Card,
+  Collapse,
+  Button,
+  Container,
+  Row,
+  Col,
+  Image,
+} from 'react-bootstrap';
+import Rating from 'react-rating';
 
 function ReviewTile(props) {
   // refactor to use ref so it only rerenders on stars change --> memoize the roundStars
@@ -124,6 +132,21 @@ function ReviewTile(props) {
     return res;
   }
 
+  function renderThumbnails(images) {
+    if (images.length > 0) {
+      const thumbnails = images.map((image) => (
+        <div>
+          <Image style={{ width: '100px', height: 'auto' }} src={image} rounded thumbnail="true" />
+        </div>
+      ));
+
+      return (
+        <Container style={{ height: '150px' }} className="d-inline-flex">
+          {thumbnails}
+        </Container>
+      );
+    }
+  }
   const [{ stars }] = useState(props); // initial rating
   const [starsRounded] = useState(() => roundStars(stars)); // rounding to nearest .25
   // const [{ title }] = useState(props); // review card title
@@ -137,6 +160,17 @@ function ReviewTile(props) {
   const [doesRecommend] = useState(true);
   const [purchased] = useState(false);
   const [ownerResponse] = useState('aosfijaoisfjoasfasf');
+
+  const images = [
+    'blob:http://localhost:3000/3665fc09-d99a-4347-bbe5-3534c5368f21',
+    'blob:http://localhost:3000/15e44ee2-2643-4320-b991-7985b0fc521c',
+    'blob:http://localhost:3000/f5a66d00-8668-43fc-a0be-d3eb0fe0e6b2',
+    'blob:http://localhost:3000/7fa65aed-0128-4af0-9c32-5001870d8788',
+    'blob:http://localhost:3000/dd1a1bbd-f608-4e3a-a998-dde9c4fa1da1',
+  ];
+
+  const [thumbnails] = useState(renderThumbnails(images));
+
   // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
   const bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
   // const bodyText = 'ahjssajdvopjsdaviopjsdpovijsdopiavjsdpoiavjopsidvjopisdajvpoijsadopivjsdoip';
@@ -147,7 +181,16 @@ function ReviewTile(props) {
       <Card style={{ color: '#525252' }}>
         <div id="star" className="">
           {/* creating the star rating with a immutable review --> quarter stars */}
-          <Stars stop={20} step={4} fractions={4} initialRating={starsRounded} readOnly="true" quiet="true" />
+          <Rating
+            stop={20}
+            step={4}
+            fractions={4}
+            initialRating={starsRounded}
+            readonly="true"
+            quiet="false"
+            emptySymbol={<i id="star-icon" className="bi bi-star" />}
+            fullSymbol={<i id="star-icon" className="bi bi-star-fill" />}
+          />
         </div>
         {/* this creates the username info in the top right */}
         <div id="user-container" className="d-inline-flex justify-content-end">
@@ -171,7 +214,7 @@ function ReviewTile(props) {
         </div>
         { validateOwnerResponse(ownerResponse) }
         { validateRecommend(doesRecommend) }
-
+        {thumbnails}
         {/* this is for the helpful section at the bottom */}
         <div style={{ color: '#949494' }} className="d-inline-flex">
           {/* this creates the helpful text with appropriate spacing */}
