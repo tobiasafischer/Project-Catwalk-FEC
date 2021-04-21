@@ -1,0 +1,132 @@
+#overview .carousel-inner {
+  height: 500px;
+}
+#overview #detail {
+  height: 500px;
+  width: 100%;
+  margin: 0 auto;
+  display: inline-block;
+  text-align: left;
+  vertical-align: center;
+  position: relative;
+  color: gray;
+}
+#img{
+  width: 100%;
+  position: relative;
+}
+.carousel-control-next, .carousel-control-prev {
+  width: 5%;
+}
+#img .expand{
+  margin: 0 auto;
+  position: absolute;
+  top: 8%;
+  right: 8%;
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  color: gray;
+}
+#descrip .row {
+  width: 95%;
+  margin: 0 auto;
+  text-align: center;
+}
+#descrip p {
+  /* background-color: purple; */
+  width: 97%;
+  margin: 1em auto 0 auto;
+  display: inline-block;
+  text-align: left;
+}
+#descrip .left p {
+  width: 101%;
+}
+#detail .rating {
+  /* position: absolute; */
+  width: 100%;
+  top: 3%;
+  /* border: 1px solid pink; */
+  text-align: left;
+}
+#detail .star {
+  vertical-align: bottom;
+  color: black
+}
+#detail a{
+  color: grey;
+  vertical-align: bottom;
+  margin-left: 2%;
+}
+
+#detail .category {
+  /* position: absolute; */
+  margin-top: 3%;
+  /* border: 1px solid pink; */
+  text-align: left;
+  color: gray;
+  font-weight: normal;
+}
+
+#detail .price{
+  margin: 3% auto
+}
+#detail .style span{
+  font-weight: 300;
+}
+
+#detail .sizeSelector{
+  width: 10rem;
+  height: 3rem;
+  padding: 0.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: gray;
+  margin-right: 1em;
+}
+
+#detail .quantitySelector{
+  width: 6rem;
+  height: 3rem;
+  padding: 0.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: gray;
+  margin-right: 1em;
+}
+
+#detail .addtoCart{
+  width: 12rem;
+  height: 3rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: gray;
+  margin: 1em;
+  margin-left: 0;
+  border: 0.3px solid dimgray;
+  background-color: white;
+}
+
+
+#detail .save{
+  width: 4rem;
+  height: 3rem;
+  padding: 0.2em;
+  font-size: 1rem;
+  font-weight: 400;
+  color: gray;
+  margin: 1em;
+  margin-left: 0;
+  border: 0.3px solid dimgray;
+  background-color: white;
+}
+
+#detail .styleOpt span{
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid pink;
+  border-radius: 2rem;
+  display: inline-block;
+  margin: 0.5rem
+}
