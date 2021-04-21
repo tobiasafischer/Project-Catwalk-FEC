@@ -86,8 +86,12 @@ function reset(setStars, setName, setSummary, setBody, setEmail, setRecommend, s
   setThumbnails([]);
 }
 
-function handleOnChangeInfo(info, cb) {
-  cb(info);
+function renderBodyCount(body, cb) {
+  if (body.length >= 50) {
+    cb('Minimum reached');
+  } else {
+    cb(`Minimum required characters left: ${50 - body.length}`);
+  }
 }
 
 function ResponseForm() {
@@ -102,7 +106,8 @@ function ResponseForm() {
   const [show, setShow] = useState(false);
   const [images, setImages] = useState([]);
   const [thumbnails, setThumbnails] = useState([]);
-
+  const [bodyCounter, setBodyCounter] = useState([]);
+  useEffect(() => renderBodyCount(body, setBodyCounter), [body]);
   useEffect(() => renderThumbnails(images, setThumbnails), [images]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -146,7 +151,7 @@ function ResponseForm() {
                     id="default-checkbox"
                     label="I recommend this item"
                     value={recommend}
-                    onChange={() => handleOnChangeInfo(!recommend, setRecommend)}
+                    onChange={() => setRecommend(!recommend)}
                   />
                 </div>
               </Form.Row>
@@ -157,16 +162,31 @@ function ResponseForm() {
                       Name
                     </div>
                   </Form.Label>
-                  <Form.Control value={name} onChange={(e) => handleOnChangeInfo(e.target.value, setName)} type="name" placeholder="tobiasaf" />
+                  <Form.Control
+                    placeholder="jackson11!"
+                    value={name}
+                    onChange={(e) => checkChar(e.target.value, 60, setName)}
+                    type="name"
+                  />
+                  <Form.Text id="summaryHelpBlock" muted>
+                    For privacy reasons, do not use your full name or email address
+                  </Form.Text>
                 </Form.Group>
-
                 <Form.Group as={Col} controlId="formGridEmail">
                   <Form.Label>
                     <div style={{ marginTop: '20px' }}>
                       Email
                     </div>
                   </Form.Label>
-                  <Form.Control value={email} onChange={(e) => handleOnChangeInfo(e.target.value, setEmail)} type="email" placeholder="example@example.com" />
+                  <Form.Control
+                    placeholder="jackson11@email.com"
+                    value={email}
+                    onChange={(e) => checkChar(e.target.value, 60, setEmail)}
+                    type="email"
+                  />
+                  <Form.Text id="summaryHelpBlock" muted>
+                    For authentication reasons, you will not be emailed
+                  </Form.Text>
                 </Form.Group>
               </Form.Row>
 
@@ -177,7 +197,7 @@ function ResponseForm() {
                   </div>
                 </Form.Label>
                 <Form.Control
-                  placeholder="Review summary..."
+                  placeholder="Example: Best purchase ever!"
                   onChange={(e) => checkChar(e.target.value, 60, setSummary)}
                   value={summary}
                 />
@@ -194,12 +214,12 @@ function ResponseForm() {
                 </Form.Label>
                 <Form.Control
                   as="textarea"
-                  placeholder="Write your review here..."
+                  placeholder="Why did you like the product or not?"
                   onChange={(e) => checkChar(e.target.value, 1000, setBody)}
                   value={body}
                 />
                 <Form.Text id="bodyHelpBlock" muted>
-                  Your review must be 50-1000 characters long.
+                  {bodyCounter}
                 </Form.Text>
               </Form.Group>
               <Form.Group>
