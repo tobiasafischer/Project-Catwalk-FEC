@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Card,
   Collapse,
   Button,
   Container,
-  Row,
-  Col,
   Image,
+  Modal,
 } from 'react-bootstrap';
 import Rating from 'react-rating';
 
@@ -132,11 +131,16 @@ function ReviewTile(props) {
     return res;
   }
 
-  function renderThumbnails(images) {
+  function handleThumbnailClick(image, setThumbnailModal, handleShow) {
+    handleShow();
+    setThumbnailModal(image);
+  }
+
+  function renderThumbnails(images, setThumbnailModal, handleShow) {
     if (images.length > 0) {
       const thumbnails = images.map((image) => (
         <div>
-          <Image style={{ width: '100px', height: 'auto' }} src={image} rounded thumbnail="true" />
+          <Image onClick={() => handleThumbnailClick(image, setThumbnailModal, handleShow)} style={{ width: '100px', height: 'auto' }} src={image} rounded thumbnail="true" />
         </div>
       ));
 
@@ -160,7 +164,7 @@ function ReviewTile(props) {
   const [doesRecommend] = useState(true);
   const [purchased] = useState(false);
   const [ownerResponse] = useState('aosfijaoisfjoasfasf');
-
+  const [show, setShow] = useState(false);
   const images = [
     'blob:http://localhost:3000/3665fc09-d99a-4347-bbe5-3534c5368f21',
     'blob:http://localhost:3000/15e44ee2-2643-4320-b991-7985b0fc521c',
@@ -168,8 +172,12 @@ function ReviewTile(props) {
     'blob:http://localhost:3000/7fa65aed-0128-4af0-9c32-5001870d8788',
     'blob:http://localhost:3000/dd1a1bbd-f608-4e3a-a998-dde9c4fa1da1',
   ];
+  const [thumbnailModal, setThumbnailModal] = useState(null);
 
-  const [thumbnails] = useState(renderThumbnails(images));
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [thumbnails] = useState(renderThumbnails(images, setThumbnailModal, handleShow));
 
   // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
   const bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
@@ -177,6 +185,16 @@ function ReviewTile(props) {
   const other = 'Helly name is tobias fischer and i am here to talk to you about this really cool review product that i have to share with you';
   return (
     <div className="review-tile">
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+        dialogClassName="modal-90w"
+        aria-labelledby="example-custom-modal-styling-title"
+      >
+        <Image style={{ width: '100%', height: 'auto' }} src={thumbnailModal} rounded thumbnail="true" />
+      </Modal>
       {/* think of this as a container with special bootstrap options */}
       <Card style={{ color: '#525252' }}>
         <div id="star" className="">

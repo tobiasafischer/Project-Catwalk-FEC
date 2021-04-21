@@ -739,6 +739,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Button.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Image.js");
 /* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Container.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
 /* harmony import */ var react_rating__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-rating */ "./node_modules/react-rating/lib/react-rating.esm.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -911,10 +912,18 @@ function ReviewTile(props) {
     return res;
   }
 
-  function renderThumbnails(images) {
+  function handleThumbnailClick(image, setThumbnailModal, handleShow) {
+    handleShow();
+    setThumbnailModal(image);
+  }
+
+  function renderThumbnails(images, setThumbnailModal, handleShow) {
     if (images.length > 0) {
       var _thumbnails = images.map(function (image) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
+          onClick: function onClick() {
+            return handleThumbnailClick(image, setThumbnailModal, handleShow);
+          },
           style: {
             width: '100px',
             height: 'auto'
@@ -994,11 +1003,29 @@ function ReviewTile(props) {
       _useState24 = _slicedToArray(_useState23, 1),
       ownerResponse = _useState24[0];
 
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState26 = _slicedToArray(_useState25, 2),
+      show = _useState26[0],
+      setShow = _useState26[1];
+
   var images = ['blob:http://localhost:3000/3665fc09-d99a-4347-bbe5-3534c5368f21', 'blob:http://localhost:3000/15e44ee2-2643-4320-b991-7985b0fc521c', 'blob:http://localhost:3000/f5a66d00-8668-43fc-a0be-d3eb0fe0e6b2', 'blob:http://localhost:3000/7fa65aed-0128-4af0-9c32-5001870d8788', 'blob:http://localhost:3000/dd1a1bbd-f608-4e3a-a998-dde9c4fa1da1'];
 
-  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(renderThumbnails(images)),
-      _useState26 = _slicedToArray(_useState25, 1),
-      thumbnails = _useState26[0]; // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState28 = _slicedToArray(_useState27, 2),
+      thumbnailModal = _useState28[0],
+      setThumbnailModal = _useState28[1];
+
+  var handleClose = function handleClose() {
+    return setShow(false);
+  };
+
+  var handleShow = function handleShow() {
+    return setShow(true);
+  };
+
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(renderThumbnails(images, setThumbnailModal, handleShow)),
+      _useState30 = _slicedToArray(_useState29, 1),
+      thumbnails = _useState30[0]; // const text = 'gajsasdasdasddgopiajsdgoijsadopgijopasidgjopsidagjopsiadjgoisadjgoias...';
 
 
   var bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.'; // const bodyText = 'ahjssajdvopjsdaviopjsdpovijsdopiavjsdpoiavjopsidvjopisdajvpoijsadopivjsdoip';
@@ -1006,7 +1033,22 @@ function ReviewTile(props) {
   var other = 'Helly name is tobias fischer and i am here to talk to you about this really cool review product that i have to share with you';
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "review-tile"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
+    show: show,
+    onHide: handleClose,
+    backdrop: "static",
+    keyboard: false,
+    dialogClassName: "modal-90w",
+    "aria-labelledby": "example-custom-modal-styling-title"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
+    style: {
+      width: '100%',
+      height: 'auto'
+    },
+    src: thumbnailModal,
+    rounded: true,
+    thumbnail: "true"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
     style: {
       color: '#525252'
     }
