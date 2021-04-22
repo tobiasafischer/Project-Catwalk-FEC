@@ -69,6 +69,7 @@
   "dependencies": {
     "@material/textfield": "^11.0.0",
     "autoprefixer": "^10.2.5",
+    "axios": "^0.21.1",
     "babel": "^6.23.0",
     "babel-loader": "^8.2.2",
     "bootstrap": "^5.0.0-beta3",
