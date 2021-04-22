@@ -1,23 +1,18 @@
 import React from 'react';
-const Carouse = (props)=>{
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
+
+const Carouse = (props) => {
   return (
-    <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-      <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img src='https://images.unsplash.com/photo-1614349164218-1e05fe55b825?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1005&q=80' className="d-block w-100" alt="..."></img>
-        </div>›
-            {
-          props.data.map((pic, index) => {
-            return (
-              <div className="carousel-item" key={index}>
-                <img src={pic} className="d-block w-100" alt="..."></img>
-              </div>
-            )
-          })
-        }
-      </div>
+    <div className='carousel'>
+      <img className='carousel_pic' src={props.data[props.currentInd]}></img>
+      <button className={props.nextdisplay} onClick={props.goToNext}><FontAwesomeIcon icon={faChevronRight} /></button>
+      <button id='previous' className={props.predisplay} onClick={props.goToPrevious}><FontAwesomeIcon icon={faChevronLeft} /></button>
     </div>
   )
+
 }
 
 export default Carouse;

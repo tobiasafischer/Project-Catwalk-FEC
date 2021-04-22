@@ -10,16 +10,32 @@
   vertical-align: center;
   position: relative;
   color: gray;
-  padding-left: 5%
+  padding-left: 5%;
 }
-#img{
+#img {
   width: 100%;
   position: relative;
 }
-.carousel-control-next, .carousel-control-prev {
-  width: 5%;
+#img .carousel_pic {
+  width: 100%;
 }
-#img .expand{
+#img .carousel .button {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  color: rgb(173, 170, 170);
+}
+#img .carousel #previous{
+  position: absolute;
+  left: 5%;
+}
+#img .hidden{
+  display: none;
+}
+#img .expand {
   margin: 0 auto;
   position: absolute;
   top: 8%;
@@ -55,9 +71,9 @@
 }
 #detail .star {
   vertical-align: bottom;
-  color: black
+  color: black;
 }
-#detail a{
+#detail a {
   color: grey;
   vertical-align: bottom;
   margin-left: 2%;
@@ -72,14 +88,14 @@
   font-weight: normal;
 }
 
-#detail .price{
-  margin: 3% auto
+#detail .price {
+  margin: 3% auto;
 }
-#detail .style span{
+#detail .style span {
   font-weight: 300;
 }
 
-#detail .sizeSelector{
+#detail .sizeSelector {
   width: 10rem;
   height: 3rem;
   padding: 0.4rem;
@@ -90,7 +106,7 @@
   text-align: center;
 }
 
-#detail .quantitySelector{
+#detail .quantitySelector {
   width: 6rem;
   height: 3rem;
   padding: 0.4rem;
@@ -101,7 +117,7 @@
   text-align: center;
 }
 
-#detail .addtoCart{
+#detail .addtoCart {
   width: 12rem;
   height: 3rem;
   font-size: 1rem;
@@ -113,7 +129,7 @@
   background-color: white;
 }
 
-#detail .save{
+#detail .save {
   width: 4rem;
   height: 3rem;
   padding: 0.2em;
@@ -126,11 +142,11 @@
   background-color: white;
 }
 
-#detail .styleOpt span{
+#detail .styleOpt span {
   width: 4rem;
   height: 4rem;
   border: 1px solid pink;
   border-radius: 2rem;
   display: inline-block;
-  margin: 0.5rem
+  margin: 0.5rem;
 }
