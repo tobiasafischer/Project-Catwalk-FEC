@@ -28,11 +28,14 @@
   font-size: 1.2rem;
   color: rgb(173, 170, 170);
 }
-#img .carousel #previous{
+#img .carousel #previous {
   position: absolute;
   left: 5%;
 }
-#img .hidden{
+#img .carousel .button:hover{
+  color: black
+}
+#img .hidden {
   display: none;
 }
 #img .expand {
@@ -45,6 +48,36 @@
   font-size: 1.2rem;
   color: gray;
 }
+#img .expand:hover {
+  color: black;
+}
+#img #thumbnail {
+  list-style: none;
+  position: absolute;
+  left: 15%;
+  bottom: 5%;
+  text-align: center;
+  width: 70%;
+}
+
+#thumbnail #thumbnail-container {
+  padding: 0;
+  display: inline-block;
+  width: 20%;
+  margin-left: 1em;
+}
+
+#thumbnail img {
+  width: 100%;
+  height: auto;
+  text-align: center;
+  border-bottom: 0.16em solid transparent;
+}
+
+#thumbnail img:hover {
+  border-bottom: 0.16em solid gray;
+}
+
 #descrip .row {
   width: 95%;
   margin: 0 auto;
