@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
 import {
   Modal,
@@ -8,7 +7,7 @@ import {
 import Rating from 'react-rating';
 import { DropzoneAreaBase } from 'material-ui-dropzone';
 
-function ResponseForm() {
+const ResponseForm = () => {
   const [stars, setStars] = useState(20);
   const [name, setName] = useState('');
   const [summary, setSummary] = useState('');
@@ -21,7 +20,8 @@ function ResponseForm() {
   const [bodyCounter, setBodyCounter] = useState([]);
 
   const getDate = (date) => {
-    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December',
     ];
     const month = monthNames[date.getMonth() + 1];
@@ -50,7 +50,6 @@ function ResponseForm() {
     console.log(data);
   };
 
-  // eslint-disable-next-line max-len
   const reset = () => {
     setStars(20);
     setName('');
@@ -75,7 +74,13 @@ function ResponseForm() {
 
   return (
     <div id="responseForm">
-      <button type="button" onClick={handleShow} id="review-button">ADD A REVIEW +</button>
+      <button
+        type="button"
+        onClick={handleShow}
+        id="review-button"
+      >
+        ADD A REVIEW +
+      </button>
       <div id="review-form">
         <Modal
           show={show}
@@ -86,7 +91,9 @@ function ResponseForm() {
           aria-labelledby="example-custom-modal-styling-title"
         >
           <Modal.Header>
-            <Modal.Title>Write your review</Modal.Title>
+            <Modal.Title>
+              Write your review
+            </Modal.Title>
           </Modal.Header>
           <Modal.Body className="show-grid">
             <h5>
@@ -100,8 +107,18 @@ function ResponseForm() {
                 step={4}
                 fractions={4}
                 initialRating={stars}
-                emptySymbol={<i id="star-icon" className="bi bi-star" />}
-                fullSymbol={<i id="star-icon" className="bi bi-star-fill" />}
+                emptySymbol={(
+                  <i
+                    id="star-icon"
+                    className="bi bi-star"
+                  />
+                )}
+                fullSymbol={(
+                  <i
+                    id="star-icon"
+                    className="bi bi-star-fill"
+                  />
+                )}
                 onClick={(e) => setStars(e)}
               />
             </div>
@@ -118,7 +135,11 @@ function ResponseForm() {
                 </div>
               </Form.Row>
               <Form.Row>
-                <Form.Group as={Col} controlId="formGridName">
+
+                <Form.Group
+                  as={Col}
+                  controlId="formGridName"
+                >
                   <Form.Label>
                     <div style={{ marginTop: '20px' }}>
                       Name
@@ -134,7 +155,11 @@ function ResponseForm() {
                     For privacy reasons, do not use your full name or email address
                   </Form.Text>
                 </Form.Group>
-                <Form.Group as={Col} controlId="formGridEmail">
+
+                <Form.Group
+                  as={Col}
+                  controlId="formGridEmail"
+                >
                   <Form.Label>
                     <div style={{ marginTop: '20px' }}>
                       Email
@@ -150,6 +175,7 @@ function ResponseForm() {
                     For authentication reasons, you will not be emailed
                   </Form.Text>
                 </Form.Group>
+
               </Form.Row>
 
               <Form.Group controlId="formGridSummary">
@@ -184,6 +210,7 @@ function ResponseForm() {
                   {bodyCounter}
                 </Form.Text>
               </Form.Group>
+
               <Form.Group>
                 <DropzoneAreaBase
                   acceptedFiles={['image/*']}
@@ -195,10 +222,17 @@ function ResponseForm() {
                   showFileNames="true"
                 />
               </Form.Group>
+
             </Form>
           </Modal.Body>
           <Modal.Footer>
-            <button type="button" onClick={handleClose} id="review-button">Close</button>
+            <button
+              type="button"
+              onClick={handleClose}
+              id="review-button"
+            >
+              Close
+            </button>
             <button
               type="submit"
               onClick={() => {
@@ -216,6 +250,6 @@ function ResponseForm() {
     </div>
 
   );
-}
+};
 
 export default ResponseForm;
