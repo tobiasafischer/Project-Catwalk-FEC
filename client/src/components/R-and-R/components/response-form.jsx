@@ -4,100 +4,11 @@ import {
   Modal,
   Form,
   Col,
-  Image,
-  Row,
-  Container,
 } from 'react-bootstrap';
 import Rating from 'react-rating';
-import ImageUploader from 'react-images-upload';
-
-function getDate(date) {
-  const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December',
-  ];
-  const month = monthNames[date.getMonth() + 1];
-  const day = date.getDate();
-  const year = date.getFullYear();
-  return (`${month} ${day}, ${year}`);
-}
-
-function checkChar(str, max, callback) {
-  callback(str.slice(0, max));
-}
-
-function checkFiles(images, files) {
-  for (let i = 0; i < files.length; i += 1) {
-    if (images.includes(files[i])) {
-      files.slice(i, 1);
-    }
-  }
-  return files;
-}
-
-function formatThumbnail(image) {
-  return (
-    <Col id="thumbnail-col-container" xs={3} md={2}>
-      <Image style={{ width: '175px', height: 'auto' }} src={image} rounded />
-    </Col>
-  );
-}
-
-function renderThumbnails(images, thumbnailCb) {
-  const arr = [];
-  images.forEach((image) => {
-    arr.push(formatThumbnail(image));
-  });
-  thumbnailCb(arr);
-}
-
-function handleChange(event, images, imageCb) {
-  if (images.length < 5) {
-    let arrOfImages = [];
-    for (let i = 0; i < event.target.files.length; i += 1) {
-      arrOfImages.push(URL.createObjectURL(event.target.files[i]));
-    }
-    arrOfImages = checkFiles(images, arrOfImages);
-    imageCb(images.concat(arrOfImages));
-  }
-}
-
-function handleSubmit(stars, name, summary, body, email, recommend, images, date) {
-  const data = {
-    date,
-    stars,
-    recommend,
-    name,
-    email,
-    summary,
-    body,
-    images,
-  };
-  // eslint-disable-next-line no-console
-  console.log(data);
-}
-
-// eslint-disable-next-line max-len
-function reset(setStars, setName, setSummary, setBody, setEmail, setRecommend, setImages, setThumbnails) {
-  setStars(20);
-  setName('');
-  setSummary('');
-  setBody('');
-  setEmail('');
-  setRecommend(false);
-  setImages([]);
-  setThumbnails([]);
-}
-
-function renderBodyCount(body, cb) {
-  if (body.length >= 50) {
-    cb('Minimum reached');
-  } else {
-    cb(`Minimum required characters left: ${50 - body.length}`);
-  }
-}
+import { DropzoneAreaBase } from 'material-ui-dropzone';
 
 function ResponseForm() {
-  const [date] = useState(getDate(new Date()));
   const [stars, setStars] = useState(20);
   const [name, setName] = useState('');
   const [summary, setSummary] = useState('');
@@ -107,22 +18,61 @@ function ResponseForm() {
   const [product] = useState('tshirtlol');
   const [show, setShow] = useState(false);
   const [images, setImages] = useState([]);
-  const [thumbnails, setThumbnails] = useState([]);
   const [bodyCounter, setBodyCounter] = useState([]);
-  const [canUpload, setCanUpload] = useState(false);
 
-  useEffect(() => {
-    if (images.length >= 5) {
-      setImages(images.slice(0, 5));
-      setCanUpload(true);
+  const getDate = (date) => {
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December',
+    ];
+    const month = monthNames[date.getMonth() + 1];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return (`${month} ${day}, ${year}`);
+  };
+  const [date] = useState(getDate(new Date()));
+
+  const checkChar = (str, max, callback) => {
+    callback(str.slice(0, max));
+  };
+
+  const handleSubmit = () => {
+    const data = {
+      date,
+      stars,
+      recommend,
+      name,
+      email,
+      summary,
+      body,
+      images,
+    };
+    // eslint-disable-next-line no-console
+    console.log(data);
+  };
+
+  // eslint-disable-next-line max-len
+  const reset = () => {
+    setStars(20);
+    setName('');
+    setSummary('');
+    setBody('');
+    setEmail('');
+    setRecommend(false);
+    setImages([]);
+  };
+
+  const renderBodyCount = () => {
+    if (body.length >= 50) {
+      setBodyCounter('Minimum reached');
     } else {
-      setCanUpload(false);
+      setBodyCounter(`Minimum required characters left: ${50 - body.length}`);
     }
-  }, [images]);
-  useEffect(() => renderBodyCount(body, setBodyCounter), [body]);
-  useEffect(() => renderThumbnails(images, setThumbnails), [images]);
+  };
+
+  useEffect(() => renderBodyCount(), [body]);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
   return (
     <div id="responseForm">
       <button type="button" onClick={handleShow} id="review-button">ADD A REVIEW +</button>
@@ -235,30 +185,14 @@ function ResponseForm() {
                 </Form.Text>
               </Form.Group>
               <Form.Group>
-                <Form.Label>
-                  <div style={{ marginTop: '20px' }}>
-                    Upload up to (5) images
-                  </div>
-                </Form.Label>
-                <Container id="thumbnail-container" className="d-inline-flex justify-content-end">
-                  <Row>
-                    {thumbnails}
-                  </Row>
-                </Container>
-                <Form.File
-                  id="imageFileUpload"
-                  onChange={(e) => {
-                    handleChange(e, images, setImages);
-                  }}
-                  disabled={canUpload}
-                  multiple
-                />
-                <ImageUploader
-                  withIcon="true"
-                  buttonText="Choose images"
-                  onChange={(e) => handleChange(e, images, setImages)}
-                  imgExtension={['.jpg', '.png']}
-                  maxFileSize={5242880}
+                <DropzoneAreaBase
+                  acceptedFiles={['image/*']}
+                  filesLimit={5}
+                  fileObjects={images}
+                  onAdd={(image) => setImages([].concat(images, image))}
+                  onDelete={(image) => setImages(images.filter((item) => item.data !== image.data))}
+                  dropzoneText="Upload up to (5) images"
+                  showFileNames="true"
                 />
               </Form.Group>
             </Form>
@@ -269,9 +203,8 @@ function ResponseForm() {
               type="submit"
               onClick={() => {
                 handleClose();
-                handleSubmit(stars, name, summary, body, email, recommend, images, date);
-                // eslint-disable-next-line max-len
-                reset(setStars, setName, setSummary, setBody, setEmail, setRecommend, setImages, setThumbnails);
+                handleSubmit();
+                reset();
               }}
               id="review-button"
             >
