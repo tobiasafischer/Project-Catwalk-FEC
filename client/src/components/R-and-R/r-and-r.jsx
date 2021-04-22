@@ -6,7 +6,7 @@ import ReviewsList from './components/reviews-list';
 const Review = () => {
   const [count, setCount] = useState();
   const [page, setPage] = useState();
-  const [sort, setSort] = useState('helpful');
+  const [sort] = useState('helpful');
   const [productId, setProductId] = useState(16056);
   const [reviews, setReviews] = useState([]);
   const getReviews = () => {
@@ -27,21 +27,23 @@ const Review = () => {
         throw err;
       });
   };
+  const validate = () => {
+    if (reviews.length > 0) {
+      return (
+        <ReviewsList
+          reviews={reviews}
+        />
+      );
+    }
+    return <></>;
+  };
 
   useEffect(() => getReviews(), []);
-  console.log(count, page, sort, productId, reviews);
   return (
     <div className="review">
       <p>RATINGS & REVIEWS</p>
       <div id="reviews-list">
-        <ReviewsList
-          stars={[
-            { stars: 1 },
-            { stars: 6 },
-            { stars: 2 },
-            { stars: 4 },
-          ]}
-        />
+        {validate()}
       </div>
     </div>
   );

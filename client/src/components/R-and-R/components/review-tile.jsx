@@ -34,6 +34,7 @@ const ReviewTile = (props) => {
   const [thumbnailModal, setThumbnailModal] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  console.log(props);
 
   const handleThumbnailClick = (image) => {
     handleShow();

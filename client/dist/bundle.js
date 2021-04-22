@@ -14265,6 +14265,8 @@ var ReviewTile = function ReviewTile(props) {
     return setShow(true);
   };
 
+  console.log(props);
+
   var handleThumbnailClick = function handleThumbnailClick(image) {
     handleShow();
     setThumbnailModal(image);
@@ -14574,7 +14576,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReviewsList = function ReviewsList(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState2 = _slicedToArray(_useState, 1),
-      stars = _useState2[0].stars;
+      reviews = _useState2[0].reviews;
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -14584,14 +14586,22 @@ var ReviewsList = function ReviewsList(props) {
   var getTiles = function getTiles() {
     var arr = [];
 
-    if (stars.length >= currentRender.length) {
+    if (reviews.length >= currentRender.length) {
       for (var i = currentRender.length; i < currentRender.length + 2; i += 1) {
-        if (stars[i]) {
+        if (reviews[i]) {
           arr.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_review_tile__WEBPACK_IMPORTED_MODULE_1__.default, {
             key: Math.random().toString(36).substr(2, 9),
-            stars: stars[i].stars,
-            yesDidClick: false,
-            reportDidClick: false
+            body: reviews[i].body,
+            date: reviews[i].date,
+            helpfulness: reviews[i].helpfulness,
+            photos: reviews[i].photos,
+            rating: reviews[i].rating,
+            recommended: reviews[i].recommended,
+            response: reviews[i].response,
+            reviewId: reviews[i].review_id,
+            reviewerName: reviews[i].reviewer_name,
+            summary: reviews[i].summary,
+            yesClicked: false
           }));
         }
       }
@@ -14668,9 +14678,8 @@ var Review = function Review() {
       setPage = _useState4[1];
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('helpful'),
-      _useState6 = _slicedToArray(_useState5, 2),
-      sort = _useState6[0],
-      setSort = _useState6[1];
+      _useState6 = _slicedToArray(_useState5, 1),
+      sort = _useState6[0];
 
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(16056),
       _useState8 = _slicedToArray(_useState7, 2),
@@ -14702,25 +14711,24 @@ var Review = function Review() {
     });
   };
 
+  var validate = function validate() {
+    if (reviews.length > 0) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_reviews_list__WEBPACK_IMPORTED_MODULE_2__.default, {
+        reviews: reviews
+      });
+    }
+
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null);
+  };
+
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     return getReviews();
   }, []);
-  console.log(count, page, sort, productId, reviews);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "review"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "RATINGS & REVIEWS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "reviews-list"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_reviews_list__WEBPACK_IMPORTED_MODULE_2__.default, {
-    stars: [{
-      stars: 1
-    }, {
-      stars: 6
-    }, {
-      stars: 2
-    }, {
-      stars: 4
-    }]
-  })));
+  }, validate()));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Review);
