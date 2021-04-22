@@ -1,11 +1,17 @@
-import React from 'react';
-import ReviewsList from './components/reviews-list';
+import React, { useState } from 'react';
 import axios from 'axios';
+
+import ReviewsList from './components/reviews-list';
 
 const Review = () => {
   const getReviews = () => {
-
+    axios.get('http://localhost:3000/reviews')
+      .then((res) => {
+        const reviews = res.results;
+        console.log(reviews);
+      });
   };
+  const [reviews, setReviews] = useState(getReviews);
   return (
     <div className="review">
       <p>RATINGS & REVIEWS</p>
