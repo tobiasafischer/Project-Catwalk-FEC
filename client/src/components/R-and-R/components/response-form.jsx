@@ -9,6 +9,7 @@ import {
   Container,
 } from 'react-bootstrap';
 import Rating from 'react-rating';
+import ImageUploader from 'react-images-upload';
 
 function getDate(date) {
   const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
@@ -251,6 +252,13 @@ function ResponseForm() {
                   }}
                   disabled={canUpload}
                   multiple
+                />
+                <ImageUploader
+                  withIcon="true"
+                  buttonText="Choose images"
+                  onChange={(e) => handleChange(e, images, setImages)}
+                  imgExtension={['.jpg', '.png']}
+                  maxFileSize={5242880}
                 />
               </Form.Group>
             </Form>
