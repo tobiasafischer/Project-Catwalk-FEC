@@ -11,34 +11,29 @@ import {
 import Rating from 'react-rating';
 
 const ReviewTile = (props) => {
-  const [{ stars }] = useState(props); // initial rating
-  // const [{ title }] = useState(props); // review card title
-  // const [{ body }] = useState(props); // review card body text
-  const [name] = useState('Tobias Fischer'); // name of reviewer
-  const [date] = useState('January 29, 2019'); // date reviewed
-  const [positiveReviews, setPositiveReviews] = useState(0); // # of positive reviews (Yes (#))
-  const [yesDidClick, setYesDidClick] = useState(false); // if the user clicked Yes -> disable
+  const [{ body }] = useState(props); // review card body text
+  const [{ date }] = useState(props); // date reviewed
+  const [{
+    helpfulness,
+    setHelpfulness,
+  }] = useState(props); // # of positive reviews (Yes (#))
+  const [{ photos }] = useState(props);
+  const [{ rating }] = useState(props); // initial rating
+  const [ratingsRounded] = useState(() => Math.floor(rating * 4)); // rounding to nearest .25
+  const [{ recommend }] = useState(props);
+  const [{ response }] = useState(props);
+  // eslint-disable-next-line no-unused-vars
+  const [{ reviewId }] = useState(props);
+  const [{ reviewerName }] = useState(props);
+  const [{ summary }] = useState(props); // review card summary
+  const [yesClicked, setYesClicked] = useState(false); // if the user clicked Yes -> disable
   // const [reportCount, setReportCount] = useState(0); // # of reports
   // const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
-  const [doesRecommend] = useState(true);
   const [purchased] = useState(false);
-  const [ownerResponse] = useState('aosfijaoisfjoasfasf');
   const [show, setShow] = useState(false);
-  const images = [
-    'blob:http://localhost:3000/3665fc09-d99a-4347-bbe5-3534c5368f21',
-    'blob:http://localhost:3000/15e44ee2-2643-4320-b991-7985b0fc521c',
-    'blob:http://localhost:3000/f5a66d00-8668-43fc-a0be-d3eb0fe0e6b2',
-    'blob:http://localhost:3000/7fa65aed-0128-4af0-9c32-5001870d8788',
-    'blob:http://localhost:3000/dd1a1bbd-f608-4e3a-a998-dde9c4fa1da1',
-  ];
   const [thumbnailModal, setThumbnailModal] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  const bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
-  const title = 'yo whats up pimp';
-  const roundStars = (star) => Math.floor(star * 4);
-  const [starsRounded] = useState(() => roundStars(stars)); // rounding to nearest .25
 
   const handleThumbnailClick = (image) => {
     handleShow();
@@ -46,8 +41,8 @@ const ReviewTile = (props) => {
   };
 
   const renderThumbnails = () => {
-    if (images.length > 0) {
-      const thumbnails = images.map((image) => (
+    if (photos.length > 0) {
+      const thumbnails = photos.map((image) => (
         <div>
           <Image
             onClick={() => handleThumbnailClick(image)}
@@ -76,9 +71,9 @@ const ReviewTile = (props) => {
   const [thumbnails] = useState(renderThumbnails());
 
   const handleHelpfulClick = () => {
-    if (!yesDidClick) {
-      setPositiveReviews(positiveReviews + 1);
-      setYesDidClick(true);
+    if (!yesClicked) {
+      setHelpfulness(helpfulness + 1);
+      setYesClicked(true);
     }
   };
 
@@ -97,10 +92,10 @@ const ReviewTile = (props) => {
     return [textStr, remainingStr];
   };
 
-  const validateTitle = () => {
-    if (title.length > 60) {
-      const [titleStr, remainingStr] = getStrings(title, 59);
-      const sub = (<strong>{`${titleStr}...`}</strong>);
+  const validateSummary = () => {
+    if (summary.length > 60) {
+      const [summaryStr, remainingStr] = getStrings(summary, 59);
+      const sub = (<strong>{`${summaryStr}...`}</strong>);
       const remaining = (
         <div
           style={({
@@ -115,13 +110,13 @@ const ReviewTile = (props) => {
       );
       return [sub, remaining];
     }
-    return [<div><strong>{title}</strong></div>];
+    return [<div><strong>{summary}</strong></div>];
   };
 
   const validateBody = () => {
     const [open, setOpen] = useState(false);
-    if (bodyText.length >= 250) {
-      const [bodyStr, remainingStr] = getStrings(bodyText, 249);
+    if (body.length >= 250) {
+      const [bodyStr, remainingStr] = getStrings(body, 249);
       return (
         <div>
           <div style={{ color: '#949494' }}>
@@ -151,11 +146,11 @@ const ReviewTile = (props) => {
         </div>
       );
     }
-    return bodyText;
+    return body;
   };
 
   const validateRecommend = () => {
-    if (doesRecommend) {
+    if (recommend) {
       return (
         <div id="recommends">
           <i
@@ -188,9 +183,9 @@ const ReviewTile = (props) => {
     return <></>;
   };
 
-  const validateOwnerResponse = () => {
+  const validateresponse = () => {
     const res = [];
-    if (ownerResponse) {
+    if (response) {
       res.push(
         <div
           className="mt2"
@@ -204,7 +199,7 @@ const ReviewTile = (props) => {
             className="mt-2"
             style={{ fontSize: '15px' }}
           >
-            {ownerResponse}
+            {response}
           </div>
         </div>,
       );
@@ -253,7 +248,7 @@ const ReviewTile = (props) => {
             stop={20}
             step={4}
             fractions={4}
-            initialRating={starsRounded}
+            initialRating={ratingsRounded}
             readonly="true"
             quiet="false"
             emptySymbol={(
@@ -278,7 +273,7 @@ const ReviewTile = (props) => {
             id="user-container-item"
             className="ml-3"
           >
-            {name}
+            {reviewerName}
           </div>
           ,
           <div
@@ -294,11 +289,11 @@ const ReviewTile = (props) => {
           id="review-text-container"
         >
           <Card.Title>
-            {validateTitle()}
+            {validateSummary()}
           </Card.Title>
           { validateBody() }
         </div>
-        { validateOwnerResponse() }
+        { validateresponse() }
         { validateRecommend() }
         {thumbnails}
         <div
@@ -319,7 +314,7 @@ const ReviewTile = (props) => {
           </a>
           <div className="mt-2">
             (
-            {positiveReviews}
+            {helpfulness}
             )
           </div>
           <div className="ml-auto p-2">

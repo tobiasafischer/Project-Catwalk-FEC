@@ -14182,58 +14182,80 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var ReviewTile = function ReviewTile(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState2 = _slicedToArray(_useState, 1),
-      stars = _useState2[0].stars; // initial rating
-  // const [{ title }] = useState(props); // review card title
-  // const [{ body }] = useState(props); // review card body text
+      body = _useState2[0].body; // review card body text
 
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('Tobias Fischer'),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState4 = _slicedToArray(_useState3, 1),
-      name = _useState4[0]; // name of reviewer
+      date = _useState4[0].date; // date reviewed
 
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('January 29, 2019'),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState6 = _slicedToArray(_useState5, 1),
-      date = _useState6[0]; // date reviewed
+      _useState6$ = _useState6[0],
+      helpfulness = _useState6$.helpfulness,
+      setHelpfulness = _useState6$.setHelpfulness; // # of positive reviews (Yes (#))
 
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
-      _useState8 = _slicedToArray(_useState7, 2),
-      positiveReviews = _useState8[0],
-      setPositiveReviews = _useState8[1]; // # of positive reviews (Yes (#))
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState8 = _slicedToArray(_useState7, 1),
+      photos = _useState8[0].photos;
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState10 = _slicedToArray(_useState9, 1),
+      rating = _useState10[0].rating; // initial rating
 
 
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState10 = _slicedToArray(_useState9, 2),
-      yesDidClick = _useState10[0],
-      setYesDidClick = _useState10[1]; // if the user clicked Yes -> disable
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+    return Math.floor(rating * 4);
+  }),
+      _useState12 = _slicedToArray(_useState11, 1),
+      ratingsRounded = _useState12[0]; // rounding to nearest .25
+
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState14 = _slicedToArray(_useState13, 1),
+      recommend = _useState14[0].recommend;
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState16 = _slicedToArray(_useState15, 1),
+      response = _useState16[0].response; // eslint-disable-next-line no-unused-vars
+
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState18 = _slicedToArray(_useState17, 1),
+      reviewId = _useState18[0].reviewId;
+
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState20 = _slicedToArray(_useState19, 1),
+      reviewerName = _useState20[0].reviewerName;
+
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState22 = _slicedToArray(_useState21, 1),
+      summary = _useState22[0].summary; // review card summary
+
+
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState24 = _slicedToArray(_useState23, 2),
+      yesClicked = _useState24[0],
+      setYesClicked = _useState24[1]; // if the user clicked Yes -> disable
   // const [reportCount, setReportCount] = useState(0); // # of reports
   // const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
 
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
-      _useState12 = _slicedToArray(_useState11, 1),
-      doesRecommend = _useState12[0];
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState26 = _slicedToArray(_useState25, 1),
+      purchased = _useState26[0];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState14 = _slicedToArray(_useState13, 1),
-      purchased = _useState14[0];
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState28 = _slicedToArray(_useState27, 2),
+      show = _useState28[0],
+      setShow = _useState28[1];
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('aosfijaoisfjoasfasf'),
-      _useState16 = _slicedToArray(_useState15, 1),
-      ownerResponse = _useState16[0];
-
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState18 = _slicedToArray(_useState17, 2),
-      show = _useState18[0],
-      setShow = _useState18[1];
-
-  var images = ['blob:http://localhost:3000/3665fc09-d99a-4347-bbe5-3534c5368f21', 'blob:http://localhost:3000/15e44ee2-2643-4320-b991-7985b0fc521c', 'blob:http://localhost:3000/f5a66d00-8668-43fc-a0be-d3eb0fe0e6b2', 'blob:http://localhost:3000/7fa65aed-0128-4af0-9c32-5001870d8788', 'blob:http://localhost:3000/dd1a1bbd-f608-4e3a-a998-dde9c4fa1da1'];
-
-  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState20 = _slicedToArray(_useState19, 2),
-      thumbnailModal = _useState20[0],
-      setThumbnailModal = _useState20[1];
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState30 = _slicedToArray(_useState29, 2),
+      thumbnailModal = _useState30[0],
+      setThumbnailModal = _useState30[1];
 
   var handleClose = function handleClose() {
     return setShow(false);
@@ -14243,28 +14265,14 @@ var ReviewTile = function ReviewTile(props) {
     return setShow(true);
   };
 
-  var bodyText = '6ij5rt6i5rt6i5r6tik5t6i5 this is the text of my review. and this is the texthe ndthis is the text of my gdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoijsdaopvijgdsagfhadsgiopsadjvbpoisdjavbopisjdavbopijsvpoij xdtr667yikdty.';
-  var title = 'yo whats up pimp';
-
-  var roundStars = function roundStars(star) {
-    return Math.floor(star * 4);
-  };
-
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
-    return roundStars(stars);
-  }),
-      _useState22 = _slicedToArray(_useState21, 1),
-      starsRounded = _useState22[0]; // rounding to nearest .25
-
-
   var handleThumbnailClick = function handleThumbnailClick(image) {
     handleShow();
     setThumbnailModal(image);
   };
 
   var renderThumbnails = function renderThumbnails() {
-    if (images.length > 0) {
-      var _thumbnails = images.map(function (image) {
+    if (photos.length > 0) {
+      var _thumbnails = photos.map(function (image) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, {
           onClick: function onClick() {
             return handleThumbnailClick(image);
@@ -14290,14 +14298,14 @@ var ReviewTile = function ReviewTile(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null);
   };
 
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(renderThumbnails()),
-      _useState24 = _slicedToArray(_useState23, 1),
-      thumbnails = _useState24[0];
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(renderThumbnails()),
+      _useState32 = _slicedToArray(_useState31, 1),
+      thumbnails = _useState32[0];
 
   var handleHelpfulClick = function handleHelpfulClick() {
-    if (!yesDidClick) {
-      setPositiveReviews(positiveReviews + 1);
-      setYesDidClick(true);
+    if (!yesClicked) {
+      setHelpfulness(helpfulness + 1);
+      setYesClicked(true);
     }
   };
 
@@ -14318,14 +14326,14 @@ var ReviewTile = function ReviewTile(props) {
     return [textStr, remainingStr];
   };
 
-  var validateTitle = function validateTitle() {
-    if (title.length > 60) {
-      var _getStrings = getStrings(title, 59),
+  var validateSummary = function validateSummary() {
+    if (summary.length > 60) {
+      var _getStrings = getStrings(summary, 59),
           _getStrings2 = _slicedToArray(_getStrings, 2),
-          titleStr = _getStrings2[0],
+          summaryStr = _getStrings2[0],
           remainingStr = _getStrings2[1];
 
-      var sub = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("strong", null, "".concat(titleStr, "..."));
+      var sub = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("strong", null, "".concat(summaryStr, "..."));
       var remaining = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: {
           color: '#949494',
@@ -14337,17 +14345,17 @@ var ReviewTile = function ReviewTile(props) {
       return [sub, remaining];
     }
 
-    return [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("strong", null, title))];
+    return [/*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("strong", null, summary))];
   };
 
   var validateBody = function validateBody() {
-    var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-        _useState26 = _slicedToArray(_useState25, 2),
-        open = _useState26[0],
-        setOpen = _useState26[1];
+    var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+        _useState34 = _slicedToArray(_useState33, 2),
+        open = _useState34[0],
+        setOpen = _useState34[1];
 
-    if (bodyText.length >= 250) {
-      var _getStrings3 = getStrings(bodyText, 249),
+    if (body.length >= 250) {
+      var _getStrings3 = getStrings(body, 249),
           _getStrings4 = _slicedToArray(_getStrings3, 2),
           bodyStr = _getStrings4[0],
           remainingStr = _getStrings4[1];
@@ -14378,11 +14386,11 @@ var ReviewTile = function ReviewTile(props) {
       }, "Show More"));
     }
 
-    return bodyText;
+    return body;
   };
 
   var validateRecommend = function validateRecommend() {
-    if (doesRecommend) {
+    if (recommend) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         id: "recommends"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
@@ -14411,10 +14419,10 @@ var ReviewTile = function ReviewTile(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null);
   };
 
-  var validateOwnerResponse = function validateOwnerResponse() {
+  var validateresponse = function validateresponse() {
     var res = [];
 
-    if (ownerResponse) {
+    if (response) {
       res.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "mt2",
         style: {
@@ -14430,7 +14438,7 @@ var ReviewTile = function ReviewTile(props) {
         style: {
           fontSize: '15px'
         }
-      }, ownerResponse)));
+      }, response)));
     }
 
     return res;
@@ -14477,7 +14485,7 @@ var ReviewTile = function ReviewTile(props) {
     stop: 20,
     step: 4,
     fractions: 4,
-    initialRating: starsRounded,
+    initialRating: ratingsRounded,
     readonly: "true",
     quiet: "false",
     emptySymbol: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
@@ -14494,13 +14502,13 @@ var ReviewTile = function ReviewTile(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "user-container-item",
     className: "ml-3"
-  }, name), ",", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, reviewerName), ",", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "user-container-item",
     className: "ml-3"
   }, date), verifiedPurchaser()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "mt-3",
     id: "review-text-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, validateTitle()), validateBody()), validateOwnerResponse(), validateRecommend(), thumbnails, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, validateSummary()), validateBody()), validateresponse(), validateRecommend(), thumbnails, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       color: '#949494'
     },
@@ -14517,7 +14525,7 @@ var ReviewTile = function ReviewTile(props) {
     "aria-hidden": "true"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Yes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "mt-2"
-  }, "(", positiveReviews, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, "(", helpfulness, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "ml-auto p-2"
   }, "|"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     style: {
@@ -14649,18 +14657,55 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 var Review = function Review() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState2 = _slicedToArray(_useState, 2),
+      count = _useState2[0],
+      setCount = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState4 = _slicedToArray(_useState3, 2),
+      page = _useState4[0],
+      setPage = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('helpful'),
+      _useState6 = _slicedToArray(_useState5, 2),
+      sort = _useState6[0],
+      setSort = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(16056),
+      _useState8 = _slicedToArray(_useState7, 2),
+      productId = _useState8[0],
+      setProductId = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState10 = _slicedToArray(_useState9, 2),
+      reviews = _useState10[0],
+      setReviews = _useState10[1];
+
   var getReviews = function getReviews() {
-    axios__WEBPACK_IMPORTED_MODULE_1___default().get('http://localhost:3000/reviews').then(function (res) {
-      var reviews = res.results;
-      console.log(reviews);
+    var params = {
+      page: page,
+      count: count,
+      sort: sort,
+      product_id: productId
+    };
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get('http://localhost:3000/reviews', {
+      params: params
+    }).then(function (_ref) {
+      var data = _ref.data;
+      setCount(data.response.count);
+      setPage(data.response.page);
+      setProductId(data.response.product);
+      setReviews(data.response.results);
+    })["catch"](function (err) {
+      throw err;
     });
   };
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(getReviews),
-      _useState2 = _slicedToArray(_useState, 2),
-      reviews = _useState2[0],
-      setReviews = _useState2[1];
-
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    return getReviews();
+  }, []);
+  console.log(count, page, sort, productId, reviews);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "review"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "RATINGS & REVIEWS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

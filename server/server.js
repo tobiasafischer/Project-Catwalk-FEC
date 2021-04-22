@@ -6,21 +6,7 @@ const bodyParser = require('body-parser');
 
 const { API_KEY } = require('../config.js');
 
-const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax43/';
-const reviewHeader = {
-  headers: {
-    Authorization: API_KEY,
-  },
-  params: {
-    product_id: 0,
-  },
-};
-
-const productHeader = {
-  headers: {
-    Authorization: API_KEY,
-  },
-};
+const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
 
 const app = express();
 
@@ -39,17 +25,34 @@ app.post('/', (req, res) => {
 });
 
 app.get('/reviews', (req, res) => {
+  const reviewHeader = {
+    headers: {
+      Authorization: API_KEY,
+    },
+    params: {
+      page: req.query.page || 1,
+      count: req.query.count || 5,
+      sort: req.query.sort || 'helpful',
+      product_id: req.query.product_id || 16056,
+    },
+  };
   axios.get(`${apiUrl}reviews/`, reviewHeader)
-    .then((data) => {
-      console.log(data.data);
-      res.sendStatus(201);
+    .then((response) => {
+      console.log(response.data);
+      res.json({ response: response.data });
     })
     .catch(() => {
-      res.sendStatus(500);
+      // res.sendStatus(500);
+      // res.end();
     });
 });
 
 app.get('/products', (req, res) => {
+  const productHeader = {
+    headers: {
+      Authorization: API_KEY,
+    },
+  };
   axios.get(`${apiUrl}products/`, productHeader)
     .then((data) => {
       console.log(data.data);
