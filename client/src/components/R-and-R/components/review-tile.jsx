@@ -34,7 +34,6 @@ const ReviewTile = (props) => {
   const [thumbnailModal, setThumbnailModal] = useState(null);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  console.log(props);
 
   const handleThumbnailClick = (image) => {
     handleShow();
@@ -46,12 +45,13 @@ const ReviewTile = (props) => {
       const thumbnails = photos.map((image) => (
         <div>
           <Image
-            onClick={() => handleThumbnailClick(image)}
+            onClick={() => handleThumbnailClick(image.url)}
             style={{
               width: '100px',
               height: 'auto',
+              marginTop: '10px',
             }}
-            src={image}
+            src={image.url}
             rounded
             thumbnail="true"
           />

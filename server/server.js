@@ -38,10 +38,28 @@ app.get('/reviews', (req, res) => {
   };
   axios.get(`${apiUrl}reviews/`, reviewHeader)
     .then((response) => {
-      console.log(response.data);
       res.json({ response: response.data });
     })
     .catch(() => {
+      // res.sendStatus(500);
+      // res.end();
+    });
+});
+
+app.get('/productById', (req, res) => {
+  const reviewHeader = {
+    headers: {
+      Authorization: API_KEY,
+    },
+    params: {
+      product_id: req.query.product_id || 16056,
+    },
+  };
+  axios.get(`${apiUrl}products/${req.query.product_id}`, reviewHeader)
+    .then((response) => {
+      res.json({ response: response.data });
+    })
+    .catch((err) => {
       // res.sendStatus(500);
       // res.end();
     });

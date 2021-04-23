@@ -5,6 +5,7 @@ import ResponseForm from './response-form';
 
 const ReviewsList = (props) => {
   const [{ reviews }] = useState(props);
+  const [{ product }] = useState(props);
   const [currentRender, setCurrentRender] = useState([]);
 
   const getTiles = () => {
@@ -34,7 +35,7 @@ const ReviewsList = (props) => {
     }
   };
   useEffect(() => getTiles(), []);
-
+  product
   const showMoreButton = () => (
     <div>
       <a href="#review-button" onClick={() => getTiles()} id="review-button">SHOW MORE</a>
@@ -46,7 +47,9 @@ const ReviewsList = (props) => {
       {currentRender}
       <div className="d-inline-flex mt-5">
         {showMoreButton()}
-        <ResponseForm />
+        <ResponseForm
+          product={product}
+        />
       </div>
     </div>
   );

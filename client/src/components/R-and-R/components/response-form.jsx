@@ -7,14 +7,14 @@ import {
 import Rating from 'react-rating';
 import { DropzoneAreaBase } from 'material-ui-dropzone';
 
-const ResponseForm = () => {
+const ResponseForm = (props) => {
   const [stars, setStars] = useState(20);
   const [name, setName] = useState('');
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [email, setEmail] = useState('');
   const [recommend, setRecommend] = useState(false);
-  const [product] = useState('tshirtlol');
+  const [{ product }] = useState(props);
   const [show, setShow] = useState(false);
   const [images, setImages] = useState([]);
   const [bodyCounter, setBodyCounter] = useState([]);
