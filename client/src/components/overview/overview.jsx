@@ -4,6 +4,7 @@ import Description from './description.jsx';
 import ProductDetail from './productDetail.jsx';
 import API_KEY from '../../../../config.js';
 import axios from 'axios';
+import Example from './example.jsx'
 
 // export default function Overview() {
 //   const [item, getItem] = useState({});
