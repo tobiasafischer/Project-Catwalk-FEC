@@ -9,14 +9,13 @@ import {
   Modal,
 } from 'react-bootstrap';
 import Rating from 'react-rating';
+import axios from 'axios';
 
 const ReviewTile = (props) => {
   const [{ body }] = useState(props); // review card body text
   const [{ date }] = useState(props); // date reviewed
-  const [{
-    helpfulness,
-    setHelpfulness,
-  }] = useState(props); // # of positive reviews (Yes (#))
+  const [{ helpfulness }] = useState(props); // # of positive reviews (Yes (#))
+  const [helpful, setHelpful] = useState(helpfulness);
   const [{ photos }] = useState(props);
   const [{ rating }] = useState(props); // initial rating
   const [ratingsRounded] = useState(() => Math.floor(rating * 4)); // rounding to nearest .25
@@ -27,8 +26,7 @@ const ReviewTile = (props) => {
   const [{ reviewerName }] = useState(props);
   const [{ summary }] = useState(props); // review card summary
   const [yesClicked, setYesClicked] = useState(false); // if the user clicked Yes -> disable
-  // const [reportCount, setReportCount] = useState(0); // # of reports
-  // const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
+  const [reportClicked, setReportClicked] = useState(false); // ^^ disable report
   const [purchased] = useState(false);
   const [show, setShow] = useState(false);
   const [thumbnailModal, setThumbnailModal] = useState(null);
@@ -71,8 +69,32 @@ const ReviewTile = (props) => {
 
   const handleHelpfulClick = () => {
     if (!yesClicked) {
-      setHelpfulness(helpfulness + 1);
+      setHelpful(helpful + 1);
       setYesClicked(true);
+      const params = {
+        reviewId,
+      };
+      axios.get('http://localhost:3000/reviews/helpfulness', { params })
+        .then(() => {
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
+  };
+
+  const handleReport = () => {
+    if (!reportClicked) {
+      const params = {
+        reviewId,
+      };
+      axios.get('http://localhost:3000/reviews/report', { params })
+        .then(() => {
+        })
+        .catch((err) => {
+          throw err;
+        });
+      setReportClicked(true);
     }
   };
 
@@ -313,7 +335,7 @@ const ReviewTile = (props) => {
           </a>
           <div className="mt-2">
             (
-            {helpfulness}
+            {helpful}
             )
           </div>
           <div className="ml-auto p-2">
@@ -324,6 +346,7 @@ const ReviewTile = (props) => {
             id="helpful-yes"
             className="ml-auto p-2"
             aria-hidden="true"
+            onClick={handleReport}
           >
             <u>Report</u>
           </a>

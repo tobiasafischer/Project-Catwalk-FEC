@@ -14151,13 +14151,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Image.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Container.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Collapse.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Card.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Button.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Image.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Container.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Collapse.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Button.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
 /* harmony import */ var react_rating__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-rating */ "./node_modules/react-rating/lib/react-rating.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -14175,6 +14177,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var ReviewTile = function ReviewTile(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState2 = _slicedToArray(_useState, 1),
@@ -14188,70 +14191,77 @@ var ReviewTile = function ReviewTile(props) {
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState6 = _slicedToArray(_useState5, 1),
-      _useState6$ = _useState6[0],
-      helpfulness = _useState6$.helpfulness,
-      setHelpfulness = _useState6$.setHelpfulness; // # of positive reviews (Yes (#))
+      helpfulness = _useState6[0].helpfulness; // # of positive reviews (Yes (#))
 
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
-      _useState8 = _slicedToArray(_useState7, 1),
-      photos = _useState8[0].photos;
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(helpfulness),
+      _useState8 = _slicedToArray(_useState7, 2),
+      helpful = _useState8[0],
+      setHelpful = _useState8[1];
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState10 = _slicedToArray(_useState9, 1),
-      rating = _useState10[0].rating; // initial rating
+      photos = _useState10[0].photos;
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState12 = _slicedToArray(_useState11, 1),
+      rating = _useState12[0].rating; // initial rating
 
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(function () {
     return Math.floor(rating * 4);
   }),
-      _useState12 = _slicedToArray(_useState11, 1),
-      ratingsRounded = _useState12[0]; // rounding to nearest .25
-
-
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState14 = _slicedToArray(_useState13, 1),
-      recommend = _useState14[0].recommend;
+      ratingsRounded = _useState14[0]; // rounding to nearest .25
+
 
   var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState16 = _slicedToArray(_useState15, 1),
-      response = _useState16[0].response; // eslint-disable-next-line no-unused-vars
-
+      recommend = _useState16[0].recommend;
 
   var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState18 = _slicedToArray(_useState17, 1),
-      reviewId = _useState18[0].reviewId;
+      response = _useState18[0].response; // eslint-disable-next-line no-unused-vars
+
 
   var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState20 = _slicedToArray(_useState19, 1),
-      reviewerName = _useState20[0].reviewerName;
+      reviewId = _useState20[0].reviewId;
 
   var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState22 = _slicedToArray(_useState21, 1),
-      summary = _useState22[0].summary; // review card summary
+      reviewerName = _useState22[0].reviewerName;
 
-
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState24 = _slicedToArray(_useState23, 2),
-      yesClicked = _useState24[0],
-      setYesClicked = _useState24[1]; // if the user clicked Yes -> disable
-  // const [reportCount, setReportCount] = useState(0); // # of reports
-  // const [reportDidClick, setReportDidClick] = useState(false); // ^^ disable report
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState24 = _slicedToArray(_useState23, 1),
+      summary = _useState24[0].summary; // review card summary
 
 
   var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState26 = _slicedToArray(_useState25, 1),
-      purchased = _useState26[0];
+      _useState26 = _slicedToArray(_useState25, 2),
+      yesClicked = _useState26[0],
+      setYesClicked = _useState26[1]; // if the user clicked Yes -> disable
+
 
   var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState28 = _slicedToArray(_useState27, 2),
-      show = _useState28[0],
-      setShow = _useState28[1];
+      reportClicked = _useState28[0],
+      setReportClicked = _useState28[1]; // ^^ disable report
 
-  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
-      _useState30 = _slicedToArray(_useState29, 2),
-      thumbnailModal = _useState30[0],
-      setThumbnailModal = _useState30[1];
+
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState30 = _slicedToArray(_useState29, 1),
+      purchased = _useState30[0];
+
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState32 = _slicedToArray(_useState31, 2),
+      show = _useState32[0],
+      setShow = _useState32[1];
+
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(null),
+      _useState34 = _slicedToArray(_useState33, 2),
+      thumbnailModal = _useState34[0],
+      setThumbnailModal = _useState34[1];
 
   var handleClose = function handleClose() {
     return setShow(false);
@@ -14269,7 +14279,7 @@ var ReviewTile = function ReviewTile(props) {
   var renderThumbnails = function renderThumbnails() {
     if (photos.length > 0) {
       var _thumbnails = photos.map(function (image) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
           onClick: function onClick() {
             return handleThumbnailClick(image.url);
           },
@@ -14284,7 +14294,7 @@ var ReviewTile = function ReviewTile(props) {
         });
       });
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
         style: {
           height: '150px'
         },
@@ -14295,14 +14305,36 @@ var ReviewTile = function ReviewTile(props) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null);
   };
 
-  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(renderThumbnails()),
-      _useState32 = _slicedToArray(_useState31, 1),
-      thumbnails = _useState32[0];
+  var _useState35 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(renderThumbnails()),
+      _useState36 = _slicedToArray(_useState35, 1),
+      thumbnails = _useState36[0];
 
   var handleHelpfulClick = function handleHelpfulClick() {
     if (!yesClicked) {
-      setHelpfulness(helpfulness + 1);
+      setHelpful(helpful + 1);
       setYesClicked(true);
+      var params = {
+        reviewId: reviewId
+      };
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://localhost:3000/reviews/helpfulness', {
+        params: params
+      }).then(function () {})["catch"](function (err) {
+        throw err;
+      });
+    }
+  };
+
+  var handleReport = function handleReport() {
+    if (!reportClicked) {
+      var params = {
+        reviewId: reviewId
+      };
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://localhost:3000/reviews/report', {
+        params: params
+      }).then(function () {})["catch"](function (err) {
+        throw err;
+      });
+      setReportClicked(true);
     }
   };
 
@@ -14346,10 +14378,10 @@ var ReviewTile = function ReviewTile(props) {
   };
 
   var validateBody = function validateBody() {
-    var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-        _useState34 = _slicedToArray(_useState33, 2),
-        open = _useState34[0],
-        setOpen = _useState34[1];
+    var _useState37 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+        _useState38 = _slicedToArray(_useState37, 2),
+        open = _useState38[0],
+        setOpen = _useState38[1];
 
     if (body.length >= 250) {
       var _getStrings3 = getStrings(body, 249),
@@ -14361,14 +14393,14 @@ var ReviewTile = function ReviewTile(props) {
         style: {
           color: '#949494'
         }
-      }, "".concat(bodyStr, "...")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
+      }, "".concat(bodyStr, "...")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
         "in": open
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Text, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Text, {
         id: "collapse-text",
         style: {
           color: '#949494'
         }
-      }, remainingStr))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+      }, remainingStr))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
         block: "true",
         size: "sm",
         style: {
@@ -14443,7 +14475,7 @@ var ReviewTile = function ReviewTile(props) {
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "review-tile"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__.default, {
     show: show,
     onHide: handleClose,
     backdrop: "static",
@@ -14454,7 +14486,7 @@ var ReviewTile = function ReviewTile(props) {
     style: {
       justifyContent: 'center'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
     style: {
       width: '100%',
       height: 'auto'
@@ -14472,7 +14504,7 @@ var ReviewTile = function ReviewTile(props) {
     type: "button",
     onClick: handleClose,
     id: "review-button"
-  }, "Close"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
+  }, "Close"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
     style: {
       color: '#525252'
     }
@@ -14505,7 +14537,7 @@ var ReviewTile = function ReviewTile(props) {
   }, date), verifiedPurchaser()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "mt-3",
     id: "review-text-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, validateSummary()), validateBody()), validateresponse(), validateRecommend(), thumbnails, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Title, null, validateSummary()), validateBody()), validateresponse(), validateRecommend(), thumbnails, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       color: '#949494'
     },
@@ -14522,7 +14554,7 @@ var ReviewTile = function ReviewTile(props) {
     "aria-hidden": "true"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Yes")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "mt-2"
-  }, "(", helpfulness, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, "(", helpful, ")"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "ml-auto p-2"
   }, "|"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
     style: {
@@ -14530,7 +14562,8 @@ var ReviewTile = function ReviewTile(props) {
     },
     id: "helpful-yes",
     className: "ml-auto p-2",
-    "aria-hidden": "true"
+    "aria-hidden": "true",
+    onClick: handleReport
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Report")))));
 };
 
@@ -14691,7 +14724,7 @@ var Review = function Review() {
       _useState6 = _slicedToArray(_useState5, 1),
       sort = _useState6[0];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(16059),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(16060),
       _useState8 = _slicedToArray(_useState7, 2),
       productId = _useState8[0],
       setProductId = _useState8[1];

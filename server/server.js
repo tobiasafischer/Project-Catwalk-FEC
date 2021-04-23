@@ -41,8 +41,37 @@ app.get('/reviews', (req, res) => {
       res.json({ response: response.data });
     })
     .catch(() => {
-      // res.sendStatus(500);
-      // res.end();
+      res.sendStatus(500);
+    });
+});
+
+app.get('/reviews/report', (req, res) => {
+  const reviewHeader = {
+    headers: {
+      Authorization: API_KEY,
+    },
+  };
+  axios.put(`${apiUrl}reviews/${req.query.reviewId}/report`, req.query.reviewId, reviewHeader)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(() => {
+      res.sendStatus(401);
+    });
+});
+
+app.get('/reviews/helpfulness', (req, res) => {
+  const reviewHeader = {
+    headers: {
+      Authorization: API_KEY,
+    },
+  };
+  axios.put(`${apiUrl}reviews/${req.query.reviewId}/helpful`, req.query.reviewId, reviewHeader)
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch(() => {
+      res.sendStatus(401);
     });
 });
 
@@ -58,23 +87,6 @@ app.get('/productById', (req, res) => {
   axios.get(`${apiUrl}products/${req.query.product_id}`, reviewHeader)
     .then((response) => {
       res.json({ response: response.data });
-    })
-    .catch(() => {
-      // res.sendStatus(500);
-      // res.end();
-    });
-});
-
-app.get('/products', (req, res) => {
-  const productHeader = {
-    headers: {
-      Authorization: API_KEY,
-    },
-  };
-  axios.get(`${apiUrl}products/`, productHeader)
-    .then((data) => {
-      console.log(data.data);
-      res.sendStatus(201);
     })
     .catch(() => {
       res.sendStatus(500);
