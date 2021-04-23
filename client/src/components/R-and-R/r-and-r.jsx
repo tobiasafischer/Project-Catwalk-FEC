@@ -7,7 +7,7 @@ const Review = () => {
   const [count, setCount] = useState();
   const [page, setPage] = useState();
   const [sort] = useState('helpful');
-  const [productId, setProductId] = useState(16060);
+  const [productId, setProductId] = useState(16059);
   const [reviews, setReviews] = useState([]);
   const [product, setProduct] = useState('');
   const getReviews = () => {

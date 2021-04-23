@@ -13934,17 +13934,13 @@ var ResponseForm = function ResponseForm(props) {
       bodyCounter = _useState20[0],
       setBodyCounter = _useState20[1];
 
-  var getDate = function getDate(date) {
-    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var month = monthNames[date.getMonth() + 1];
-    var day = date.getDate();
-    var year = date.getFullYear();
-    return "".concat(month, " ").concat(day, ", ").concat(year);
-  };
-
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(getDate(new Date())),
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState22 = _slicedToArray(_useState21, 1),
-      date = _useState22[0];
+      getDate = _useState22[0].getDate;
+
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(getDate(new Date())),
+      _useState24 = _slicedToArray(_useState23, 1),
+      date = _useState24[0];
 
   var checkChar = function checkChar(str, max, callback) {
     callback(str.slice(0, max));
@@ -14273,7 +14269,7 @@ var ReviewTile = function ReviewTile(props) {
   var renderThumbnails = function renderThumbnails() {
     if (photos.length > 0) {
       var _thumbnails = photos.map(function (image) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, {
           onClick: function onClick() {
             return handleThumbnailClick(image.url);
           },
@@ -14285,14 +14281,14 @@ var ReviewTile = function ReviewTile(props) {
           src: image.url,
           rounded: true,
           thumbnail: "true"
-        }));
+        });
       });
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
         style: {
           height: '150px'
         },
-        className: "d-inline-flex"
+        className: "d-flex bd-highlight mb-3"
       }, _thumbnails);
     }
 
@@ -14586,6 +14582,14 @@ var ReviewsList = function ReviewsList(props) {
       currentRender = _useState6[0],
       setCurrentRender = _useState6[1];
 
+  var getDate = function getDate(date) {
+    var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var month = monthNames[date.getMonth() + 1];
+    var day = date.getDate();
+    var year = date.getFullYear();
+    return "".concat(month, " ").concat(day, ", ").concat(year);
+  };
+
   var getTiles = function getTiles() {
     var arr = [];
 
@@ -14595,7 +14599,7 @@ var ReviewsList = function ReviewsList(props) {
           arr.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_review_tile__WEBPACK_IMPORTED_MODULE_1__.default, {
             key: Math.random().toString(36).substr(2, 9),
             body: reviews[i].body,
-            date: reviews[i].date,
+            date: getDate(new Date(reviews[i].date)),
             helpfulness: reviews[i].helpfulness,
             photos: reviews[i].photos,
             rating: reviews[i].rating,
@@ -14616,7 +14620,6 @@ var ReviewsList = function ReviewsList(props) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     return getTiles();
   }, []);
-  product;
 
   var showMoreButton = function showMoreButton() {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
@@ -14633,7 +14636,8 @@ var ReviewsList = function ReviewsList(props) {
   }, currentRender, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "d-inline-flex mt-5"
   }, showMoreButton(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_response_form__WEBPACK_IMPORTED_MODULE_2__.default, {
-    product: product
+    product: product,
+    getDate: getDate
   })));
 };
 
@@ -14687,7 +14691,7 @@ var Review = function Review() {
       _useState6 = _slicedToArray(_useState5, 1),
       sort = _useState6[0];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(16060),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(16059),
       _useState8 = _slicedToArray(_useState7, 2),
       productId = _useState8[0],
       setProductId = _useState8[1];

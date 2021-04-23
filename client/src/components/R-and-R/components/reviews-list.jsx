@@ -8,6 +8,17 @@ const ReviewsList = (props) => {
   const [{ product }] = useState(props);
   const [currentRender, setCurrentRender] = useState([]);
 
+  const getDate = (date) => {
+    const monthNames = [
+      'January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December',
+    ];
+    const month = monthNames[date.getMonth() + 1];
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return (`${month} ${day}, ${year}`);
+  };
+
   const getTiles = () => {
     const arr = [];
     if (reviews.length >= currentRender.length) {
@@ -17,7 +28,7 @@ const ReviewsList = (props) => {
             <ReviewTile
               key={Math.random().toString(36).substr(2, 9)}
               body={reviews[i].body}
-              date={reviews[i].date}
+              date={getDate(new Date(reviews[i].date))}
               helpfulness={reviews[i].helpfulness}
               photos={reviews[i].photos}
               rating={reviews[i].rating}
@@ -35,7 +46,7 @@ const ReviewsList = (props) => {
     }
   };
   useEffect(() => getTiles(), []);
-  product
+
   const showMoreButton = () => (
     <div>
       <a href="#review-button" onClick={() => getTiles()} id="review-button">SHOW MORE</a>
@@ -49,6 +60,7 @@ const ReviewsList = (props) => {
         {showMoreButton()}
         <ResponseForm
           product={product}
+          getDate={getDate}
         />
       </div>
     </div>

@@ -18,17 +18,8 @@ const ResponseForm = (props) => {
   const [show, setShow] = useState(false);
   const [images, setImages] = useState([]);
   const [bodyCounter, setBodyCounter] = useState([]);
+  const [{ getDate }] = useState(props);
 
-  const getDate = (date) => {
-    const monthNames = [
-      'January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December',
-    ];
-    const month = monthNames[date.getMonth() + 1];
-    const day = date.getDate();
-    const year = date.getFullYear();
-    return (`${month} ${day}, ${year}`);
-  };
   const [date] = useState(getDate(new Date()));
 
   const checkChar = (str, max, callback) => {

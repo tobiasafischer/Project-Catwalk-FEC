@@ -43,25 +43,23 @@ const ReviewTile = (props) => {
   const renderThumbnails = () => {
     if (photos.length > 0) {
       const thumbnails = photos.map((image) => (
-        <div>
-          <Image
-            onClick={() => handleThumbnailClick(image.url)}
-            style={{
-              width: '100px',
-              height: 'auto',
-              marginTop: '10px',
-            }}
-            src={image.url}
-            rounded
-            thumbnail="true"
-          />
-        </div>
+        <Image
+          onClick={() => handleThumbnailClick(image.url)}
+          style={{
+            width: '100px',
+            height: 'auto',
+            marginTop: '10px',
+          }}
+          src={image.url}
+          rounded
+          thumbnail="true"
+        />
       ));
 
       return (
         <Container
           style={{ height: '150px' }}
-          className="d-inline-flex"
+          className="d-flex bd-highlight mb-3"
         >
           {thumbnails}
         </Container>
