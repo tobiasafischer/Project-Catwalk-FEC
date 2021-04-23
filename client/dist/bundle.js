@@ -13946,10 +13946,6 @@ var ResponseForm = function ResponseForm(props) {
       bodyCounter = _useState24[0],
       setBodyCounter = _useState24[1];
 
-  var checkChar = function checkChar(str, max, callback) {
-    callback(str.slice(0, max));
-  };
-
   var handleSubmit = function handleSubmit() {
     var params = {
       product_id: productId,

@@ -23,10 +23,6 @@ const ResponseForm = (props) => {
   const [unformat, setUnformat] = useState([]);
   const [bodyCounter, setBodyCounter] = useState([]);
 
-  const checkChar = (str, max, callback) => {
-    callback(str.slice(0, max));
-  };
-
   const handleSubmit = () => {
     const params = {
       product_id: productId,
