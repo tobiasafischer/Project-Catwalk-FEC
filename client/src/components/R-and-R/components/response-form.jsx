@@ -142,11 +142,18 @@ const ResponseForm = (props) => {
                     </div>
                   </Form.Label>
                   <Form.Control
+                    required
                     placeholder="jackson11!"
                     value={name}
                     onChange={(e) => checkChar(e.target.value, 60, setName)}
                     type="name"
                   />
+                  <Form.Control.Feedback type="valid">
+                    Looks good!
+                  </Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    Please input your name.
+                  </Form.Control.Feedback>
                   <Form.Text id="summaryHelpBlock" muted>
                     For privacy reasons, do not use your full name or email address
                   </Form.Text>
@@ -162,11 +169,18 @@ const ResponseForm = (props) => {
                     </div>
                   </Form.Label>
                   <Form.Control
+                    required
                     placeholder="jackson11@email.com"
                     value={email}
                     onChange={(e) => checkChar(e.target.value, 60, setEmail)}
                     type="email"
                   />
+                  <Form.Control.Feedback type="valid">
+                    Looks good!
+                  </Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    Please input your email.
+                  </Form.Control.Feedback>
                   <Form.Text id="summaryHelpBlock" muted>
                     For authentication reasons, you will not be emailed
                   </Form.Text>
@@ -181,10 +195,17 @@ const ResponseForm = (props) => {
                   </div>
                 </Form.Label>
                 <Form.Control
+                  required
                   placeholder="Example: Best purchase ever!"
                   onChange={(e) => checkChar(e.target.value, 60, setSummary)}
                   value={summary}
                 />
+                <Form.Control.Feedback type="valid">
+                  Looks good!
+                </Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please input a valid summary.
+                </Form.Control.Feedback>
                 <Form.Text id="summaryHelpBlock" muted>
                   Your summary must be 1-60 characters long.
                 </Form.Text>
@@ -197,11 +218,18 @@ const ResponseForm = (props) => {
                   </div>
                 </Form.Label>
                 <Form.Control
+                  required
                   as="textarea"
                   placeholder="Why did you like the product or not?"
                   onChange={(e) => checkChar(e.target.value, 1000, setBody)}
                   value={body}
                 />
+                <Form.Control.Feedback type="valid">
+                  Looks good!
+                </Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  Please input a valid review body.
+                </Form.Control.Feedback>
                 <Form.Text id="bodyHelpBlock" muted>
                   {bodyCounter}
                 </Form.Text>
