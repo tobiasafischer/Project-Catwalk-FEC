@@ -1,7 +1,7 @@
 const path = require("path");
 const express = require("express");
 const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax';
-// const API_KEY = require('../config.js');
+const API_KEY = require('../config.js');
 const bodyparser = require('body-parser');
 const axios = require('axios');
 
