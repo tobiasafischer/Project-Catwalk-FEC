@@ -20057,8 +20057,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_material_ui_form_validator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-material-ui-form-validator */ "./node_modules/react-material-ui-form-validator/lib/index.js");
-var _this = undefined;
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -20133,18 +20131,24 @@ var ReviewForm = function ReviewForm(props) {
       bodyCounter = _useState24[0],
       setBodyCounter = _useState24[1];
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_material_ui_form_validator__WEBPACK_IMPORTED_MODULE_1__.ValidatorForm, {
-    onSubmit: _this.handleSubmit
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Simple form"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_material_ui_form_validator__WEBPACK_IMPORTED_MODULE_1__.TextValidator, {
+  var checkChar = function checkChar(str, max, callback) {
+    callback(str.slice(0, max));
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_material_ui_form_validator__WEBPACK_IMPORTED_MODULE_1__.ValidatorForm, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h2", null, "Simple form"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_material_ui_form_validator__WEBPACK_IMPORTED_MODULE_1__.TextValidator, {
     label: "name",
-    onChange: _this.handleChange,
+    onChange: function onChange(e) {
+      return checkChar(e.target.value, 1000, setBody);
+    },
     name: "name",
     value: name,
     validators: ['required'],
     errorMessages: ['this field is required']
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_material_ui_form_validator__WEBPACK_IMPORTED_MODULE_1__.TextValidator, {
     label: "Email",
-    onChange: _this.handleChange,
+    onChange: function onChange(e) {
+      return checkChar(e.target.value, 1000, setBody);
+    },
     name: "email",
     value: email,
     validators: ['required', 'isEmail'],
@@ -20251,10 +20255,6 @@ var ResponseForm = function ResponseForm(props) {
       _useState24 = _slicedToArray(_useState23, 2),
       bodyCounter = _useState24[0],
       setBodyCounter = _useState24[1];
-
-  var checkChar = function checkChar(str, max, callback) {
-    callback(str.slice(0, max));
-  };
 
   var handleSubmit = function handleSubmit() {
     var params = {
