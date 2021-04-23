@@ -32,8 +32,8 @@
   position: absolute;
   left: 5%;
 }
-#img .carousel .button:hover{
-  color: black
+#img .carousel .button:hover {
+  color: black;
 }
 #img .hidden {
   display: none;
@@ -182,4 +182,8 @@
   border-radius: 2rem;
   display: inline-block;
   margin: 0.5rem;
+}
+#detail .style span img {
+  width: 100%;
+  height: 100%;
 }

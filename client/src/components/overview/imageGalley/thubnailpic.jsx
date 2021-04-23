@@ -7,7 +7,7 @@ const ThumbnailPic = (props) => {
         props.data.map((pic, index) => {
           return (
             <li id='thumbnail-container' key={index}>
-              <img id={index} src={pic} onClick={props.handleClick} />
+              <img id={index} src={pic.thumbnail_url} onClick={props.handleClick} />
             </li>
           )
         })

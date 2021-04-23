@@ -1,3 +1,3 @@
 module.exports = {
-  Authorization: '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'
+  Authorization: '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'
 }

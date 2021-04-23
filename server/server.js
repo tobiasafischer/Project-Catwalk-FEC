@@ -10,19 +10,17 @@ app.use(bodyparser.json());
 
 app.use(express.static(path.join(__dirname, "../client/dist")));
 
-app.listen(3000);
+app.listen(3000, () => console.log('Listening on ' + 3000));
 
-axios.get(apiUrl + '/products', {
-  headers: {
-    'Authorization': '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'
-  }
-})
-  .then(res => {
-    console.log(res.data)
-  })
-  .catch(err => {
-    console.log(err)
-  })
+// axios.get(apiUrl + '/products/16056/styles', {
+//   headers: API_KEY
+// })
+//   .then(res => {
+//     console.log(res.data)
+//   })
+//   .catch(err => {
+//     console.log(err)
+//   })
 
 app.get('/products', (req, res) => {
   res.status(200).send(res);

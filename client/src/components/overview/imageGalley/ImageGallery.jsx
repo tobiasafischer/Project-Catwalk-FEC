@@ -14,11 +14,21 @@ class ImageGallery extends React.Component {
       data: pics,
       currentInd: 0,
       predisplay: 'button',
-      nextdisplay: 'button'
+      nextdisplay: 'button',
+      newdata: props.images,
     }
     this.goToNext = this.goToNext.bind(this);
     this.goToPrevious = this.goToPrevious.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.handlechange = this.handlechange.bind(this);
+  }
+  componentDidMount() {
+    this.handlechange()
+  }
+  handlechange() {
+    this.setState({
+      data: this.props.images
+    })
   }
   goToNext() {
     if (this.state.currentInd < this.state.data.length - 1) {
@@ -56,8 +66,8 @@ class ImageGallery extends React.Component {
   render() {
     return (
       <div id='img'>
-        <Carouse data={this.state.data} currentInd={this.state.currentInd} goToNext={this.goToNext} goToPrevious={this.goToPrevious} predisplay={this.state.predisplay} nextdisplay={this.state.nextdisplay} />
-        <ThumbnailPic data={this.state.data} handleClick={this.handleClick} />
+        <Carouse data={this.props.images} currentInd={this.state.currentInd} goToNext={this.goToNext} goToPrevious={this.goToPrevious} predisplay={this.state.predisplay} nextdisplay={this.state.nextdisplay} />
+        <ThumbnailPic data={this.props.images} handleClick={this.handleClick} />
         <button className='expand' onClick={this.props.toggleExpand}><FontAwesomeIcon icon={faExpand} /></button>
       </div>
     )
