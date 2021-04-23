@@ -6,8 +6,8 @@ import ResponseForm from './response-form';
 const ReviewsList = (props) => {
   const [{ reviews }] = useState(props);
   const [{ product }] = useState(props);
+  const [{ productId }] = useState(props);
   const [currentRender, setCurrentRender] = useState([]);
-
   const getDate = (date) => {
     const monthNames = [
       'January', 'February', 'March', 'April', 'May', 'June',
@@ -60,6 +60,7 @@ const ReviewsList = (props) => {
         {showMoreButton()}
         <ResponseForm
           product={product}
+          productId={productId}
           getDate={getDate}
         />
       </div>

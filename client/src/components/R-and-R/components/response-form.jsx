@@ -5,50 +5,55 @@ import {
   Col,
 } from 'react-bootstrap';
 import Rating from 'react-rating';
+import axios from 'axios';
 import { DropzoneAreaBase } from 'material-ui-dropzone';
 
 const ResponseForm = (props) => {
-  const [stars, setStars] = useState(20);
+  const [rating, setRating] = useState(20);
   const [name, setName] = useState('');
   const [summary, setSummary] = useState('');
   const [body, setBody] = useState('');
   const [email, setEmail] = useState('');
   const [recommend, setRecommend] = useState(false);
   const [{ product }] = useState(props);
+  const [{ productId }] = useState(props);
   const [show, setShow] = useState(false);
-  const [images, setImages] = useState([]);
+  const [photos, setPhotos] = useState([]);
+  const [unformat, setUnformat] = useState([]);
   const [bodyCounter, setBodyCounter] = useState([]);
-  const [{ getDate }] = useState(props);
-
-  const [date] = useState(getDate(new Date()));
 
   const checkChar = (str, max, callback) => {
     callback(str.slice(0, max));
   };
 
   const handleSubmit = () => {
-    const data = {
-      date,
-      stars,
-      recommend,
-      name,
-      email,
+    const params = {
+      product_id: productId,
+      rating: rating / 4,
       summary,
       body,
-      images,
+      recommend: Boolean(recommend),
+      name,
+      email,
+      photos,
+      characteristics: {},
     };
-    // eslint-disable-next-line no-console
-    console.log(data);
+    axios.post('http://localhost:3000/reviews/', params)
+      .then(() => {
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
   const reset = () => {
-    setStars(20);
+    setRating(20);
     setName('');
     setSummary('');
     setBody('');
     setEmail('');
     setRecommend(false);
-    setImages([]);
+    setPhotos([]);
   };
 
   const renderBodyCount = () => {
@@ -97,7 +102,7 @@ const ResponseForm = (props) => {
                 stop={20}
                 step={4}
                 fractions={4}
-                initialRating={stars}
+                initialRating={rating}
                 emptySymbol={(
                   <i
                     id="star-icon"
@@ -110,7 +115,7 @@ const ResponseForm = (props) => {
                     className="bi bi-star-fill"
                   />
                 )}
-                onClick={(e) => setStars(e)}
+                onClick={(e) => setRating(e)}
               />
             </div>
             <Form>
@@ -206,9 +211,12 @@ const ResponseForm = (props) => {
                 <DropzoneAreaBase
                   acceptedFiles={['image/*']}
                   filesLimit={5}
-                  fileObjects={images}
-                  onAdd={(image) => setImages([].concat(images, image))}
-                  onDelete={(image) => setImages(images.filter((item) => item.data !== image.data))}
+                  fileObjects={unformat}
+                  onAdd={(photo) => {
+                    setPhotos([].concat(photos, photo[0].data));
+                    setUnformat([].concat(unformat, photo));
+                  }}
+                  onDelete={(photo) => setPhotos(photos.filter((item) => item.data !== photo.data))}
                   dropzoneText="Upload up to (5) images"
                   showFileNames="true"
                 />

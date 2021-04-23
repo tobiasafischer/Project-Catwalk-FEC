@@ -13862,11 +13862,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Form.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Col.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Form.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Col.js");
 /* harmony import */ var react_rating__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-rating */ "./node_modules/react-rating/lib/react-rating.esm.js");
-/* harmony import */ var material_ui_dropzone__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! material-ui-dropzone */ "./node_modules/material-ui-dropzone/dist/index.es.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var material_ui_dropzone__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! material-ui-dropzone */ "./node_modules/material-ui-dropzone/dist/index.es.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -13884,11 +13886,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
 var ResponseForm = function ResponseForm(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(20),
       _useState2 = _slicedToArray(_useState, 2),
-      stars = _useState2[0],
-      setStars = _useState2[1];
+      rating = _useState2[0],
+      setRating = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
@@ -13919,56 +13922,59 @@ var ResponseForm = function ResponseForm(props) {
       _useState14 = _slicedToArray(_useState13, 1),
       product = _useState14[0].product;
 
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState16 = _slicedToArray(_useState15, 2),
-      show = _useState16[0],
-      setShow = _useState16[1];
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState16 = _slicedToArray(_useState15, 1),
+      productId = _useState16[0].productId;
 
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState18 = _slicedToArray(_useState17, 2),
-      images = _useState18[0],
-      setImages = _useState18[1];
+      show = _useState18[0],
+      setShow = _useState18[1];
 
   var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState20 = _slicedToArray(_useState19, 2),
-      bodyCounter = _useState20[0],
-      setBodyCounter = _useState20[1];
+      photos = _useState20[0],
+      setPhotos = _useState20[1];
 
-  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
-      _useState22 = _slicedToArray(_useState21, 1),
-      getDate = _useState22[0].getDate;
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState22 = _slicedToArray(_useState21, 2),
+      unformat = _useState22[0],
+      setUnformat = _useState22[1];
 
-  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(getDate(new Date())),
-      _useState24 = _slicedToArray(_useState23, 1),
-      date = _useState24[0];
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState24 = _slicedToArray(_useState23, 2),
+      bodyCounter = _useState24[0],
+      setBodyCounter = _useState24[1];
 
   var checkChar = function checkChar(str, max, callback) {
     callback(str.slice(0, max));
   };
 
   var handleSubmit = function handleSubmit() {
-    var data = {
-      date: date,
-      stars: stars,
-      recommend: recommend,
-      name: name,
-      email: email,
+    var params = {
+      product_id: productId,
+      rating: rating / 4,
       summary: summary,
       body: body,
-      images: images
-    }; // eslint-disable-next-line no-console
-
-    console.log(data);
+      recommend: Boolean(recommend),
+      name: name,
+      email: email,
+      photos: photos,
+      characteristics: {}
+    };
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post('http://localhost:3000/reviews/', params).then(function () {})["catch"](function (err) {
+      throw err;
+    });
   };
 
   var reset = function reset() {
-    setStars(20);
+    setRating(20);
     setName('');
     setSummary('');
     setBody('');
     setEmail('');
     setRecommend(false);
-    setImages([]);
+    setPhotos([]);
   };
 
   var renderBodyCount = function renderBodyCount() {
@@ -13999,14 +14005,14 @@ var ResponseForm = function ResponseForm(props) {
     id: "review-button"
   }, "ADD A REVIEW +"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "review-form"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
     show: show,
     onHide: handleClose,
     backdrop: "static",
     keyboard: false,
     dialogClassName: "modal-90w",
     "aria-labelledby": "example-custom-modal-styling-title"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Header, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Title, null, "Write your review")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Body, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Header, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Title, null, "Write your review")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Body, {
     className: "show-grid"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "About the", " ".concat(product)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
@@ -14017,7 +14023,7 @@ var ResponseForm = function ResponseForm(props) {
     stop: 20,
     step: 4,
     fractions: 4,
-    initialRating: stars,
+    initialRating: rating,
     emptySymbol: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
       id: "star-icon",
       className: "bi bi-star"
@@ -14027,13 +14033,13 @@ var ResponseForm = function ResponseForm(props) {
       className: "bi bi-star-fill"
     }),
     onClick: function onClick(e) {
-      return setStars(e);
+      return setRating(e);
     }
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       marginTop: '10px'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Check, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Check, {
     type: "checkbox",
     id: "default-checkbox",
     label: "I recommend this item",
@@ -14041,86 +14047,87 @@ var ResponseForm = function ResponseForm(props) {
     onChange: function onChange() {
       return setRecommend(!recommend);
     }
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Group, {
-    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default,
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Row, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Group, {
+    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default,
     controlId: "formGridName"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Label, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Label, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       marginTop: '20px'
     }
-  }, "Name")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Control, {
+  }, "Name")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Control, {
     placeholder: "jackson11!",
     value: name,
     onChange: function onChange(e) {
       return checkChar(e.target.value, 60, setName);
     },
     type: "name"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Text, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Text, {
     id: "summaryHelpBlock",
     muted: true
-  }, "For privacy reasons, do not use your full name or email address")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Group, {
-    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default,
+  }, "For privacy reasons, do not use your full name or email address")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Group, {
+    as: react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default,
     controlId: "formGridEmail"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Label, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Label, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       marginTop: '20px'
     }
-  }, "Email")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Control, {
+  }, "Email")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Control, {
     placeholder: "jackson11@email.com",
     value: email,
     onChange: function onChange(e) {
       return checkChar(e.target.value, 60, setEmail);
     },
     type: "email"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Text, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Text, {
     id: "summaryHelpBlock",
     muted: true
-  }, "For authentication reasons, you will not be emailed"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Group, {
+  }, "For authentication reasons, you will not be emailed"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Group, {
     controlId: "formGridSummary"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Label, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Label, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       marginTop: '20px'
     }
-  }, "Summary")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Control, {
+  }, "Summary")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Control, {
     placeholder: "Example: Best purchase ever!",
     onChange: function onChange(e) {
       return checkChar(e.target.value, 60, setSummary);
     },
     value: summary
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Text, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Text, {
     id: "summaryHelpBlock",
     muted: true
-  }, "Your summary must be 1-60 characters long.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Group, {
+  }, "Your summary must be 1-60 characters long.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Group, {
     controlId: "formGridBody"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Label, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Label, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       marginTop: '20px'
     }
-  }, "Review")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Control, {
+  }, "Review")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Control, {
     as: "textarea",
     placeholder: "Why did you like the product or not?",
     onChange: function onChange(e) {
       return checkChar(e.target.value, 1000, setBody);
     },
     value: body
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Text, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Text, {
     id: "bodyHelpBlock",
     muted: true
-  }, bodyCounter)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(material_ui_dropzone__WEBPACK_IMPORTED_MODULE_2__.DropzoneAreaBase, {
+  }, bodyCounter)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Group, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(material_ui_dropzone__WEBPACK_IMPORTED_MODULE_3__.DropzoneAreaBase, {
     acceptedFiles: ['image/*'],
     filesLimit: 5,
-    fileObjects: images,
-    onAdd: function onAdd(image) {
-      return setImages([].concat(images, image));
+    fileObjects: unformat,
+    onAdd: function onAdd(photo) {
+      setPhotos([].concat(photos, photo[0].data));
+      setUnformat([].concat(unformat, photo));
     },
-    onDelete: function onDelete(image) {
-      return setImages(images.filter(function (item) {
-        return item.data !== image.data;
+    onDelete: function onDelete(photo) {
+      return setPhotos(photos.filter(function (item) {
+        return item.data !== photo.data;
       }));
     },
     dropzoneText: "Upload up to (5) images",
     showFileNames: "true"
-  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Footer, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     type: "button",
     onClick: handleClose,
     id: "review-button"
@@ -14610,10 +14617,14 @@ var ReviewsList = function ReviewsList(props) {
       _useState4 = _slicedToArray(_useState3, 1),
       product = _useState4[0].product;
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
-      _useState6 = _slicedToArray(_useState5, 2),
-      currentRender = _useState6[0],
-      setCurrentRender = _useState6[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState6 = _slicedToArray(_useState5, 1),
+      productId = _useState6[0].productId;
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState8 = _slicedToArray(_useState7, 2),
+      currentRender = _useState8[0],
+      setCurrentRender = _useState8[1];
 
   var getDate = function getDate(date) {
     var monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -14670,6 +14681,7 @@ var ReviewsList = function ReviewsList(props) {
     className: "d-inline-flex mt-5"
   }, showMoreButton(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_response_form__WEBPACK_IMPORTED_MODULE_2__.default, {
     product: product,
+    productId: productId,
     getDate: getDate
   })));
 };
@@ -14752,7 +14764,7 @@ var Review = function Review() {
       var data = _ref.data;
       setCount(data.response.count);
       setPage(data.response.page);
-      setProductId(data.response.product);
+      setProductId(parseInt(data.response.product, 10));
       setReviews(data.response.results);
     })["catch"](function (err) {
       throw err;
@@ -14777,7 +14789,8 @@ var Review = function Review() {
     if (reviews.length > 0) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_reviews_list__WEBPACK_IMPORTED_MODULE_2__.default, {
         reviews: reviews,
-        product: product
+        product: product,
+        productId: productId
       });
     }
 

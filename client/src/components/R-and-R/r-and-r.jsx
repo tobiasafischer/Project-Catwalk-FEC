@@ -21,7 +21,7 @@ const Review = () => {
       .then(({ data }) => {
         setCount(data.response.count);
         setPage(data.response.page);
-        setProductId(data.response.product);
+        setProductId(parseInt(data.response.product, 10));
         setReviews(data.response.results);
       })
       .catch((err) => {
@@ -48,6 +48,7 @@ const Review = () => {
         <ReviewsList
           reviews={reviews}
           product={product}
+          productId={productId}
         />
       );
     }

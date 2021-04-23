@@ -2,8 +2,6 @@ const path = require('path');
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
-const bodyParser = require('body-parser');
-
 const { API_KEY } = require('../config.js');
 
 const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
@@ -12,8 +10,8 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use(cors());
-app.use(bodyParser.json());
-
+app.use(express.json({ limit: '50mb', extended: true }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.listen(3000);
 
 app.get('/', (req, res) => {
@@ -41,6 +39,22 @@ app.get('/reviews', (req, res) => {
       res.json({ response: response.data });
     })
     .catch(() => {
+      res.sendStatus(500);
+    });
+});
+
+app.post('/reviews', (req, res) => {
+  axios.post(`${apiUrl}reviews/`, JSON.stringify(req.body), {
+    headers: {
+      Authorization: API_KEY,
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(() => {
+      res.sendStatus(201);
+    })
+    .catch((err) => {
+      console.log(err);
       res.sendStatus(500);
     });
 });
