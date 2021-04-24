@@ -308,6 +308,7 @@ const ReviewTile = (props) => {
         <div
           className="mt-3"
           id="review-text-container"
+          key={JSON.stringify(photos)}
         >
           <Card.Title>
             {validateSummary()}

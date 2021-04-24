@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 import ReviewsList from './components/reviews-list';
@@ -10,6 +10,7 @@ const Review = () => {
   const [productId, setProductId] = useState(16060);
   const [reviews, setReviews] = useState([]);
   const [product, setProduct] = useState('');
+  const mounted = useRef(true);
   const getReviews = () => {
     const params = {
       page,
@@ -19,13 +20,17 @@ const Review = () => {
     };
     axios.get('http://localhost:3000/reviews', { params })
       .then(({ data }) => {
-        setCount(data.response.count);
-        setPage(data.response.page);
-        setProductId(parseInt(data.response.product, 10));
-        setReviews(data.response.results);
+        if (mounted.current) {
+          setCount(data.response.count);
+          setPage(data.response.page);
+          setProductId(parseInt(data.response.product, 10));
+          setReviews(data.response.results);
+        }
       })
       .catch((err) => {
-        throw err;
+        if (mounted.current) {
+          throw err;
+        }
       });
   };
 
@@ -35,10 +40,14 @@ const Review = () => {
     };
     axios.get('http://localhost:3000/productById', { params })
       .then(({ data }) => {
-        setProduct(data.response.name);
+        if (mounted.current) {
+          setProduct(data.response.name);
+        }
       })
       .catch((err) => {
-        throw err;
+        if (mounted.current) {
+          throw err;
+        }
       });
   };
 
@@ -55,8 +64,11 @@ const Review = () => {
     return <></>;
   };
 
-  useEffect(() => getReviews(), []);
-  useEffect(() => getProduct(), []);
+  useEffect(() => {
+    getReviews();
+    getProduct();
+    return () => { mounted.current = false; };
+  }, []);
   return (
     <div className="review">
       <p>RATINGS & REVIEWS</p>

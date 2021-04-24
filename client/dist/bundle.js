@@ -14642,7 +14642,8 @@ var ReviewTile = function ReviewTile(props) {
     className: "ml-3"
   }, date), verifiedPurchaser()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "mt-3",
-    id: "review-text-container"
+    id: "review-text-container",
+    key: JSON.stringify(photos)
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Title, null, validateSummary()), validateBody()), validateresponse(), validateRecommend(), thumbnails, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       color: '#949494'
@@ -14850,6 +14851,8 @@ var Review = function Review() {
       product = _useState12[0],
       setProduct = _useState12[1];
 
+  var mounted = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(true);
+
   var getReviews = function getReviews() {
     var params = {
       page: page,
@@ -14861,12 +14864,17 @@ var Review = function Review() {
       params: params
     }).then(function (_ref) {
       var data = _ref.data;
-      setCount(data.response.count);
-      setPage(data.response.page);
-      setProductId(parseInt(data.response.product, 10));
-      setReviews(data.response.results);
+
+      if (mounted.current) {
+        setCount(data.response.count);
+        setPage(data.response.page);
+        setProductId(parseInt(data.response.product, 10));
+        setReviews(data.response.results);
+      }
     })["catch"](function (err) {
-      throw err;
+      if (mounted.current) {
+        throw err;
+      }
     });
   };
 
@@ -14878,9 +14886,14 @@ var Review = function Review() {
       params: params
     }).then(function (_ref2) {
       var data = _ref2.data;
-      setProduct(data.response.name);
+
+      if (mounted.current) {
+        setProduct(data.response.name);
+      }
     })["catch"](function (err) {
-      throw err;
+      if (mounted.current) {
+        throw err;
+      }
     });
   };
 
@@ -14897,10 +14910,11 @@ var Review = function Review() {
   };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    return getReviews();
-  }, []);
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    return getProduct();
+    getReviews();
+    getProduct();
+    return function () {
+      mounted.current = false;
+    };
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     className: "review"
