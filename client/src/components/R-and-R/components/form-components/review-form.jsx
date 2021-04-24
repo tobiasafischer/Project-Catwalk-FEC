@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Modal,
   Form,
   Col,
 } from 'react-bootstrap';
@@ -52,6 +51,16 @@ const ReviewForm = (props) => {
     checkError(field);
   };
 
+  const reset = () => {
+    setRating(20);
+    setName('');
+    setSummary('');
+    setBody('');
+    setEmail('');
+    setRecommend(false);
+    setPhotos([]);
+  };
+
   const submitData = () => {
     const params = {
       product_id: productId,
@@ -66,20 +75,11 @@ const ReviewForm = (props) => {
     };
     axios.post('http://localhost:3000/reviews/', params)
       .then(() => {
+        reset();
       })
       .catch((err) => {
         throw err;
       });
-  };
-
-  const reset = () => {
-    setRating(20);
-    setName('');
-    setSummary('');
-    setBody('');
-    setEmail('');
-    setRecommend(false);
-    setPhotos([]);
   };
 
   const renderBodyCount = () => {
@@ -217,7 +217,7 @@ const ReviewForm = (props) => {
           }}
           onDelete={(photo) => setPhotos(photos.filter((item) => item.data !== photo.data))}
           dropzoneText="Upload up to (5) images"
-          showFileNames="true"
+          showFileNames
         />
       </Form.Group>
       <button

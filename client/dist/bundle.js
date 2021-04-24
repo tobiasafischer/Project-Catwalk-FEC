@@ -13974,6 +13974,16 @@ var ReviewForm = function ReviewForm(props) {
     checkError(field);
   };
 
+  var reset = function reset() {
+    setRating(20);
+    setName('');
+    setSummary('');
+    setBody('');
+    setEmail('');
+    setRecommend(false);
+    setPhotos([]);
+  };
+
   var submitData = function submitData() {
     var params = {
       product_id: productId,
@@ -13986,19 +13996,11 @@ var ReviewForm = function ReviewForm(props) {
       photos: photos,
       characteristics: {}
     };
-    axios__WEBPACK_IMPORTED_MODULE_2___default().post('http://localhost:3000/reviews/', params).then(function () {})["catch"](function (err) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post('http://localhost:3000/reviews/', params).then(function () {
+      reset();
+    })["catch"](function (err) {
       throw err;
     });
-  };
-
-  var reset = function reset() {
-    setRating(20);
-    setName('');
-    setSummary('');
-    setBody('');
-    setEmail('');
-    setRecommend(false);
-    setPhotos([]);
   };
 
   var renderBodyCount = function renderBodyCount() {
@@ -14125,7 +14127,7 @@ var ReviewForm = function ReviewForm(props) {
       }));
     },
     dropzoneText: "Upload up to (5) images",
-    showFileNames: "true"
+    showFileNames: true
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
     type: "button",
     id: "review-button",

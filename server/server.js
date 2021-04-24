@@ -44,7 +44,7 @@ app.get('/reviews', (req, res) => {
 });
 
 app.post('/reviews', (req, res) => {
-  axios.post(`${apiUrl}reviews/`, JSON.stringify(req.body), {
+  axios.post(`${apiUrl}reviews/`, req.body, {
     headers: {
       Authorization: API_KEY,
       'Content-Type': 'application/json',
