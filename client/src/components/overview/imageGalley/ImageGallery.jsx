@@ -8,9 +8,6 @@ import ThumbnailPic from './thubnailpic.jsx';
 
 
 const ImageGallery = (props) => {
-  // const [currentInd, setCurrentInd] = useState(0);
-  // const [predisplay, setPredisplay] = useState('button');
-  // const [nextdisplay, setNextdisplay] = useState('button');
 
   useEffect(() => { handlechange() })
 
@@ -52,7 +49,6 @@ const ImageGallery = (props) => {
 
     if (Number(target.id) > 0) {
       props.setPredisplay('button')
-      // props.setNextdisplay('button')
     } else {
       props.setPredisplay('hidden')
     }

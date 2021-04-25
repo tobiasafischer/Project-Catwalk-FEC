@@ -26,9 +26,6 @@ export default function Overview(props) {
         setItem(res.data[0]);
         handlegetStyles(res.data[0].id)
       })
-      // .then(res => {
-      //   handlegetStyles(res.data[0].id)
-      // })
       .catch(err => {
         console.log(err)
       })
@@ -48,22 +45,14 @@ export default function Overview(props) {
   useEffect(() => handlegetItems(), [])
 
   const handleSelector = ({ target }) => {
-    // if (currentInd < currentstyle.photos.length - 1 || currentInd > 0) {
-    //   setPredisplay('button')
-    //   setNextdisplay('button')
-    // }
+
     setCurrentstyle(styles[target.id])
     setCurrentInd(0);
 
     setNextdisplay('button')
     setPredisplay('hidden')
 
-    // if (currentInd === currentstyle.photos.length - 1) {
-    //   setNextdisplay('hidden')
-    // }
-    // if (currentInd === 0) {
-    //   setPredisplay('hidden')
-    // }
+
   }
 
   if (expand && styles.length !== 0) {
