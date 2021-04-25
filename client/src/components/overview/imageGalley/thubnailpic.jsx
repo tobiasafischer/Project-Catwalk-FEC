@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ThumbnailPic = (props) => {
+export default function ThumbnailPic(props) {
   return (
     <ul id='thumbnail'>
       {
@@ -15,4 +15,3 @@ const ThumbnailPic = (props) => {
     </ul>
   )
 }
-export default ThumbnailPic;

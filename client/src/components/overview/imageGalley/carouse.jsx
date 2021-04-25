@@ -7,9 +7,21 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 const Carouse = (props) => {
   return (
     <div className='carousel'>
-      <img className='carousel_pic' src={props.data[props.currentInd].url}></img>
-      <button className={props.nextdisplay} onClick={props.goToNext}><FontAwesomeIcon icon={faChevronRight} /></button>
-      <button id='previous' className={props.predisplay} onClick={props.goToPrevious}><FontAwesomeIcon icon={faChevronLeft} /></button>
+      <img
+        className='carousel_pic'
+        src={props.data[props.currentInd].url}
+      />
+      <button
+        className={props.nextdisplay}
+        onClick={props.goToNext}>
+        <FontAwesomeIcon icon={faChevronRight} />
+      </button>
+      <button
+        id='previous'
+        className={props.predisplay}
+        onClick={props.goToPrevious}>
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </button>
     </div>
   )
 
