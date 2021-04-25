@@ -44,11 +44,18 @@ const ImageGallery = (props) => {
   }
   const handleClick = ({ target }) => {
     props.setCurrentInd(Number(target.id))
-    if (target.id < props.images.length - 1 && target.id > 0) {
-      props.setPredisplay('button')
+    if (Number(target.id) < props.images.length - 1) {
       props.setNextdisplay('button')
+    } else {
+      props.setNextdisplay('hidden')
     }
 
+    if (Number(target.id) > 0) {
+      props.setPredisplay('button')
+      // props.setNextdisplay('button')
+    } else {
+      props.setPredisplay('hidden')
+    }
   }
 
   return (
