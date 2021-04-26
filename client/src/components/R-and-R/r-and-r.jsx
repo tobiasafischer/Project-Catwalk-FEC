@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import 'react-widgets/styles.css';
 import DropdownList from 'react-widgets/DropdownList';
-import ReviewsList from './components/reviews-list';
+import ReviewsList from './components/review-list/reviews-list';
+import OverallRating from './components/breakdown/overall-rating';
 
 const Review = () => {
   const [count, setCount] = useState(1);
@@ -21,13 +22,6 @@ const Review = () => {
   const [totalRatings, setTotalRatings] = useState(0);
   const mounted = useRef(true);
 
-  const compileRatings = () => {
-    reviews.forEach((item) => {
-      setRatings(...ratings, ratings[item] + 1);
-      setTotalRatings(totalRatings + item);
-    });
-  };
-
   const getReviews = () => {
     const params = {
       page,
@@ -37,17 +31,10 @@ const Review = () => {
     };
     axios.get('http://localhost:3000/reviews', { params })
       .then(({ data }) => {
-        console.log(mounted.current);
-        // if (mounted.current) {
-        console.log(reviews);
         setCount(data.response.count);
         setPage(data.response.page);
         setProductId(parseInt(data.response.product, 10));
         setReviews(data.response.results);
-        compileRatings();
-        console.log(reviews);
-
-        //  }
       })
       .catch((err) => {
         if (mounted.current) {
@@ -86,14 +73,32 @@ const Review = () => {
     return <></>;
   };
 
+  const compileRatings = () => {
+    const nextRatings = { ...ratings };
+    let nextTotal = totalRatings;
+    reviews.forEach((item) => {
+      nextRatings[item.rating] += 1;
+      nextTotal += item.rating;
+    });
+    setRatings(nextRatings);
+    setTotalRatings(nextTotal);
+  };
+
   useEffect(() => {
     getReviews();
     getProduct();
     return () => { mounted.current = false; };
   }, [sort]);
+
+  useEffect(() => {
+    if (reviews.length > 0) {
+      compileRatings();
+    }
+  }, [reviews]);
   return (
     <div className="review">
       <p>RATINGS & REVIEWS</p>
+      <OverallRating key={totalRatings} rating={totalRatings} />
       <div
         id="review-sort"
         style={{
