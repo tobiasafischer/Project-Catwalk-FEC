@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-
+import 'react-widgets/styles.css';
+import DropdownList from 'react-widgets/DropdownList';
 import ReviewsList from './components/reviews-list';
 
 const Review = () => {
   const [count, setCount] = useState();
   const [page, setPage] = useState();
-  const [sort] = useState('Relevant');
+  const [sort, setSort] = useState('Relevant');
   const [productId, setProductId] = useState(16060);
   const [reviews, setReviews] = useState([]);
   const [product, setProduct] = useState('');
@@ -68,10 +69,38 @@ const Review = () => {
     getReviews();
     getProduct();
     return () => { mounted.current = false; };
-  }, []);
+  }, [sort]);
   return (
     <div className="review">
       <p>RATINGS & REVIEWS</p>
+      <div
+        id="review-sort"
+        style={{
+          display: 'flex',
+        }}
+      >
+        <strong
+          style={{
+            marginTop: '5px',
+            marginLeft: '5px',
+          }}
+        >
+          Sort on
+        </strong>
+        <div
+          id="dropdown-list"
+          style={{
+            marginLeft: '5px',
+            marginBottom: '10px',
+          }}
+        >
+          <DropdownList
+            defaultValue="Relevant"
+            data={['Helpful', 'Newest', 'Relevant']}
+            onChange={(val) => setSort(val)}
+          />
+        </div>
+      </div>
       <div id="reviews-list">
         {validate()}
       </div>
