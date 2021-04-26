@@ -3,7 +3,7 @@ import {
   Modal,
 } from 'react-bootstrap';
 import Rating from 'react-rating';
-import ReviewForm from './form-components/review-form';
+import ReviewForm from './review-form';
 
 const ResponseForm = (props) => {
   const [rating, setRating] = useState(20);

@@ -40,6 +40,7 @@ const ReviewTile = (props) => {
 
   const renderThumbnails = () => {
     if (photos.length > 0) {
+      console.log(photos);
       const thumbnails = photos.map((image) => (
         <Image
           onClick={() => handleThumbnailClick(image.url)}
@@ -204,7 +205,7 @@ const ReviewTile = (props) => {
     return <></>;
   };
 
-  const validateresponse = () => {
+  const validateResponse = () => {
     const res = [];
     if (response) {
       res.push(
@@ -315,7 +316,7 @@ const ReviewTile = (props) => {
           </Card.Title>
           { validateBody() }
         </div>
-        { validateresponse() }
+        { validateResponse() }
         { validateRecommend() }
         {thumbnails}
         <div

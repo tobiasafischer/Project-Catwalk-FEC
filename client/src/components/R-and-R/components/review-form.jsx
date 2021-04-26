@@ -17,6 +17,7 @@ const ReviewForm = (props) => {
   const [recommend, setRecommend] = useState(false);
   const [{ productId }] = useState(props);
   const [photos, setPhotos] = useState([]);
+  const [formattedPhotos, setFormattedPhotos] = useState([]);
   const [bodyCounter, setBodyCounter] = useState([]);
   const [errors, setErrors] = useState({});
   const [{ handleClose }] = useState(props);
@@ -61,6 +62,7 @@ const ReviewForm = (props) => {
     setEmail('');
     setRecommend(false);
     setPhotos([]);
+    setFormattedPhotos([]);
   };
 
   const getDate = (date) => {
@@ -81,7 +83,7 @@ const ReviewForm = (props) => {
         body={body}
         date={getDate(new Date())}
         helpfulness={0}
-        photos={photos}
+        photos={formattedPhotos}
         rating={rating}
         recommended={recommend}
         reviewerName={name}
@@ -100,9 +102,10 @@ const ReviewForm = (props) => {
       recommend: Boolean(recommend),
       name,
       email,
-      photos,
+      formattedPhotos,
       characteristics: {},
     };
+
     renderNewTile();
     axios.post('http://localhost:3000/reviews/', params)
       .then(() => {
@@ -244,9 +247,15 @@ const ReviewForm = (props) => {
           filesLimit={5}
           fileObjects={photos}
           onAdd={(photo) => {
-            setPhotos([].concat(photos, photo));
+            setPhotos(photo);
+            setFormattedPhotos(photo.map((img) => ({
+              id: Math.random().toString(36).substr(2, 9),
+              url: URL.createObjectURL(img.file),
+            })));
           }}
-          onDelete={(photo) => setPhotos(photos.filter((item) => item.data !== photo.data))}
+          onDelete={(photo) => {
+            setPhotos(photos.filter((item) => item.data !== photo.data));
+          }}
           dropzoneText="Upload up to (5) images"
           showFileNames
         />

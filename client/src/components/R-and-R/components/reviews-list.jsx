@@ -55,6 +55,7 @@ const ReviewsList = (props) => {
 
   return (
     <div className="reviews-list">
+      <div id="new-review-div"></div>
       {currentRender}
       <div className="d-inline-flex mt-5">
         {showMoreButton()}

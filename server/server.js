@@ -44,7 +44,31 @@ app.get('/reviews', (req, res) => {
 });
 
 app.post('/reviews', (req, res) => {
-  axios.post(`${apiUrl}reviews/`, req.body, {
+  const dat = {
+    rating: 5,
+    summary: 'awsdasdasda',
+    body: 'asdasdasdasdfasfas fasfsedgdr gdarg dragdr gdrdrgh ar',
+    recommend: false,
+    name: 'asddasdawsdaw',
+    email: 'awdawd@ASdfasDF.egsfea',
+    photos: [],
+    characteristics: {
+      Size: {
+        id: 14,
+        value: '4.0000',
+      },
+      Width: {
+        id: 15,
+        value: '3.5000',
+      },
+      Comfort: {
+        id: 16,
+        value: '4.0000',
+      },
+    },
+  };
+
+  axios.post(`${apiUrl}reviews/`, dat, {
     headers: {
       Authorization: API_KEY,
       'Content-Type': 'application/json',
