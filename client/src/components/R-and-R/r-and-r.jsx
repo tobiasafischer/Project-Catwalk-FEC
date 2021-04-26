@@ -6,7 +6,7 @@ import ReviewsList from './components/reviews-list';
 const Review = () => {
   const [count, setCount] = useState();
   const [page, setPage] = useState();
-  const [sort] = useState('helpful');
+  const [sort] = useState('Relevant');
   const [productId, setProductId] = useState(16060);
   const [reviews, setReviews] = useState([]);
   const [product, setProduct] = useState('');

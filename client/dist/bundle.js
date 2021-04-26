@@ -14874,7 +14874,7 @@ var Review = function Review() {
       page = _useState4[0],
       setPage = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('helpful'),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('Relevant'),
       _useState6 = _slicedToArray(_useState5, 1),
       sort = _useState6[0];
 
