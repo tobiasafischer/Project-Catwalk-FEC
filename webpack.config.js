@@ -1,4 +1,5 @@
 const path = require('path');
+const autoprefixer = require('autoprefixer');
 
 const SRC_DIR = path.join(__dirname, '/client/src');
 const DIST_DIR = path.join(__dirname, '/client/dist');
@@ -32,17 +33,19 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
+        test: /\.(sass|css|scss)$/,
         use: [
+          'style-loader',
+          'css-loader',
           {
-            loader: 'style-loader',
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                autoprefixer(),
+              ],
+            },
           },
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'sass-loader',
-          },
+          'sass-loader',
         ],
       },
     ],
