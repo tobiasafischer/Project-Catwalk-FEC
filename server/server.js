@@ -32,7 +32,7 @@ app.get('/reviews', (req, res) => {
     params: {
       page: req.query.page || 1,
       count: req.query.count || 5,
-      sort: req.query.sort || 'helpful',
+      sort: req.query.sort || 'relevant',
       product_id: req.query.product_id || 16056,
     },
   };
@@ -40,7 +40,8 @@ app.get('/reviews', (req, res) => {
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       res.sendStatus(500);
     });
 });
@@ -124,6 +125,25 @@ app.get('/productById', (req, res) => {
     },
   };
   axios.get(`${apiUrl}products/${req.query.product_id}`, reviewHeader)
+    .then((response) => {
+      res.json({ response: response.data });
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    });
+});
+
+app.get('/products', (req, res) => {
+  const reviewHeader = {
+    headers: {
+      Authorization: API_KEY,
+    },
+    params: {
+      page: 1,
+      count: 125,
+    },
+  };
+  axios.get(`${apiUrl}products`, reviewHeader)
     .then((response) => {
       res.json({ response: response.data });
     })

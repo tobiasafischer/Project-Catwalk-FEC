@@ -5,13 +5,29 @@ import DropdownList from 'react-widgets/DropdownList';
 import ReviewsList from './components/reviews-list';
 
 const Review = () => {
-  const [count, setCount] = useState();
-  const [page, setPage] = useState();
-  const [sort, setSort] = useState('Relevant');
-  const [productId, setProductId] = useState(16060);
+  const [count, setCount] = useState(1);
+  const [page, setPage] = useState(5);
+  const [sort, setSort] = useState('relevant');
+  const [productId, setProductId] = useState(16153);
   const [reviews, setReviews] = useState([]);
   const [product, setProduct] = useState('');
+  const [ratings, setRatings] = useState({
+    1: 0,
+    2: 0,
+    3: 0,
+    4: 0,
+    5: 0,
+  });
+  const [totalRatings, setTotalRatings] = useState(0);
   const mounted = useRef(true);
+
+  const compileRatings = () => {
+    reviews.forEach((item) => {
+      setRatings(...ratings, ratings[item] + 1);
+      setTotalRatings(totalRatings + item);
+    });
+  };
+
   const getReviews = () => {
     const params = {
       page,
@@ -21,12 +37,17 @@ const Review = () => {
     };
     axios.get('http://localhost:3000/reviews', { params })
       .then(({ data }) => {
-        if (mounted.current) {
-          setCount(data.response.count);
-          setPage(data.response.page);
-          setProductId(parseInt(data.response.product, 10));
-          setReviews(data.response.results);
-        }
+        console.log(mounted.current);
+        // if (mounted.current) {
+        console.log(reviews);
+        setCount(data.response.count);
+        setPage(data.response.page);
+        setProductId(parseInt(data.response.product, 10));
+        setReviews(data.response.results);
+        compileRatings();
+        console.log(reviews);
+
+        //  }
       })
       .catch((err) => {
         if (mounted.current) {
@@ -97,7 +118,7 @@ const Review = () => {
           <DropdownList
             defaultValue="Relevant"
             data={['Helpful', 'Newest', 'Relevant']}
-            onChange={(val) => setSort(val)}
+            onChange={(val) => setSort(val.toLowerCase())}
           />
         </div>
       </div>
