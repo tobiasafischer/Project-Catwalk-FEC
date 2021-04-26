@@ -9,6 +9,8 @@ const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
 const app = express();
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
+app.use(express.static(path.join(__dirname, '../client/src/components')));
+
 app.use(cors());
 app.use(express.json({ limit: '50mb', extended: true }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
@@ -77,8 +79,7 @@ app.post('/reviews', (req, res) => {
     .then(() => {
       res.sendStatus(201);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       res.sendStatus(500);
     });
 });
