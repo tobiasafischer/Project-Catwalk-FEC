@@ -4,6 +4,7 @@ import 'react-widgets/styles.css';
 import DropdownList from 'react-widgets/DropdownList';
 import ReviewsList from './components/review-list/reviews-list';
 import OverallRating from './components/breakdown/overall-rating';
+import ReviewSpread from './components/breakdown/review-spread';
 
 const Review = () => {
   const [count, setCount] = useState(1);
@@ -108,6 +109,18 @@ const Review = () => {
             <OverallRating
               key={totalRatings}
               rating={Math.floor((totalRatings / reviews.length) * 4)}
+            />
+          </div>
+          <div>
+            <ReviewSpread
+              ratingBreakdown={{
+                5: 3.5,
+                4: 2,
+                3: 3,
+                2: 5,
+                1: 1,
+              }}
+              reccomendation={100}
             />
           </div>
         </div>

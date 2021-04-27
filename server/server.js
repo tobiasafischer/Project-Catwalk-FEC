@@ -48,6 +48,7 @@ app.get('/reviews', (req, res) => {
 
 app.post('/reviews', (req, res) => {
   const dat = {
+    product_id: 1,
     rating: 5,
     summary: 'awsdasdasda',
     body: 'asdasdasdasdfasfas fasfsedgdr gdarg dragdr gdrdrgh ar',
@@ -56,18 +57,12 @@ app.post('/reviews', (req, res) => {
     email: 'awdawd@ASdfasDF.egsfea',
     photos: [],
     characteristics: {
-      Size: {
-        id: 14,
-        value: '4.0000',
-      },
-      Width: {
-        id: 15,
-        value: '3.5000',
-      },
-      Comfort: {
-        id: 16,
-        value: '4.0000',
-      },
+      size: 1,
+      width: 2,
+      comfort: 3,
+      quality: 4,
+      length: 1,
+      fit: 2,
     },
   };
 
@@ -80,7 +75,8 @@ app.post('/reviews', (req, res) => {
     .then(() => {
       res.sendStatus(201);
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       res.sendStatus(500);
     });
 });

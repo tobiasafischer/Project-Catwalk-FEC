@@ -14471,6 +14471,77 @@ var OverallRating = function OverallRating(props) {
 
 /***/ }),
 
+/***/ "./client/src/components/R-and-R/components/breakdown/review-spread.jsx":
+/*!******************************************************************************!*\
+  !*** ./client/src/components/R-and-R/components/breakdown/review-spread.jsx ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+var ReviewSpread = function ReviewSpread(props) {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState2 = _slicedToArray(_useState, 1),
+      ratingBreakdown = _useState2[0].ratingBreakdown;
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
+      _useState4 = _slicedToArray(_useState3, 1),
+      recommendation = _useState4[0].recommendation;
+
+  var populateBar = function populateBar() {
+    var arr = [];
+
+    for (var i = 1; i < 6; i += 1) {
+      var emptyBar = {
+        height: 20,
+        width: '80%',
+        backgroundColor: '#959595'
+      };
+      var fillerBar = {
+        height: '100%',
+        backgroundColor: '#454545',
+        width: "".concat(ratingBreakdown[i] * 20, "%")
+      };
+      console.log(fillerBar);
+      arr.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        key: i
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, i, ' ', "Stars"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        style: emptyBar
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        style: fillerBar
+      }))));
+    }
+
+    return arr;
+  }; // className="d-inline-flex justify-content-end"
+
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, recommendation, "% of reviews recommend this product")), populateBar());
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ReviewSpread);
+
+/***/ }),
+
 /***/ "./client/src/components/R-and-R/components/review-list/response-form.jsx":
 /*!********************************************************************************!*\
   !*** ./client/src/components/R-and-R/components/review-list/response-form.jsx ***!
@@ -14723,7 +14794,8 @@ var ReviewForm = function ReviewForm(props) {
     var day = date.getDate();
     var year = date.getFullYear();
     return "".concat(month, " ").concat(day, ", ").concat(year);
-  };
+  }; // eslint-disable-next-line no-unused-vars
+
 
   var renderNewTile = function renderNewTile() {
     react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_review_tile__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -14751,8 +14823,8 @@ var ReviewForm = function ReviewForm(props) {
       email: email,
       formattedPhotos: formattedPhotos,
       characteristics: {}
-    };
-    renderNewTile();
+    }; // renderNewTile();
+
     axios__WEBPACK_IMPORTED_MODULE_3___default().post('http://localhost:3000/reviews/', params).then(function () {
       reset();
     })["catch"](function (err) {
@@ -15469,6 +15541,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_widgets_DropdownList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-widgets/DropdownList */ "./node_modules/react-widgets/esm/DropdownList.js");
 /* harmony import */ var _components_review_list_reviews_list__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/review-list/reviews-list */ "./client/src/components/R-and-R/components/review-list/reviews-list.jsx");
 /* harmony import */ var _components_breakdown_overall_rating__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/breakdown/overall-rating */ "./client/src/components/R-and-R/components/breakdown/overall-rating.jsx");
+/* harmony import */ var _components_breakdown_review_spread__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/breakdown/review-spread */ "./client/src/components/R-and-R/components/breakdown/review-spread.jsx");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -15486,6 +15559,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -15634,6 +15708,15 @@ var Review = function Review() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_breakdown_overall_rating__WEBPACK_IMPORTED_MODULE_5__.default, {
     key: totalRatings,
     rating: Math.floor(totalRatings / reviews.length * 4)
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_breakdown_review_spread__WEBPACK_IMPORTED_MODULE_6__.default, {
+    ratingBreakdown: {
+      5: 3.5,
+      4: 2,
+      3: 3,
+      2: 5,
+      1: 1
+    },
+    reccomendation: 100
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       marginLeft: '50px',

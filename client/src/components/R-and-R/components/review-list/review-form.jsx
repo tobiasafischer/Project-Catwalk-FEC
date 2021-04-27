@@ -76,6 +76,7 @@ const ReviewForm = (props) => {
     return (`${month} ${day}, ${year}`);
   };
 
+  // eslint-disable-next-line no-unused-vars
   const renderNewTile = () => {
     ReactDOM.render(
       <ReviewTile
@@ -106,7 +107,7 @@ const ReviewForm = (props) => {
       characteristics: {},
     };
 
-    renderNewTile();
+    // renderNewTile();
     axios.post('http://localhost:3000/reviews/', params)
       .then(() => {
         reset();
