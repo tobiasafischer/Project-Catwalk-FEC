@@ -7,7 +7,11 @@ const OverallRating = (props) => {
   return (
     <div className="d-inline-flex justify-content-end">
       <div id="overall-rating-average">
-        <strong style={{ fontSize: '60px' }}>
+        <strong style={{
+          fontSize: '60px',
+          marginRight: '15px',
+        }}
+        >
           {rating / 4}
         </strong>
       </div>

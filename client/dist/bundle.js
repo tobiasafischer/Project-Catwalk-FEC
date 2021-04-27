@@ -14442,7 +14442,8 @@ var OverallRating = function OverallRating(props) {
     id: "overall-rating-average"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("strong", {
     style: {
-      fontSize: '60px'
+      fontSize: '60px',
+      marginRight: '15px'
     }
   }, rating / 4)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
@@ -14497,7 +14498,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var ReviewSpread = function ReviewSpread(props) {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(props),
       _useState2 = _slicedToArray(_useState, 1),
@@ -14512,8 +14512,10 @@ var ReviewSpread = function ReviewSpread(props) {
 
     for (var i = 1; i < 6; i += 1) {
       var emptyBar = {
-        height: 20,
-        width: '80%',
+        marginLeft: '20px',
+        marginTop: '7px',
+        height: 10,
+        width: '70%',
         backgroundColor: '#959595'
       };
       var fillerBar = {
@@ -14521,10 +14523,18 @@ var ReviewSpread = function ReviewSpread(props) {
         backgroundColor: '#454545',
         width: "".concat(ratingBreakdown[i] * 20, "%")
       };
-      console.log(fillerBar);
       arr.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        key: i
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, i, ' ', "Stars"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        key: i,
+        style: {
+          display: 'flex',
+          marginTop: '30px'
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        style: {
+          position: 'relative',
+          fontSize: '15px'
+        }
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, i, ' ', "Stars")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: emptyBar
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: fillerBar
@@ -14535,7 +14545,20 @@ var ReviewSpread = function ReviewSpread(props) {
   }; // className="d-inline-flex justify-content-end"
 
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, recommendation, "% of reviews recommend this product")), populateBar());
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    style: {
+      width: '100%'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+    style: {
+      fontSize: '15px'
+    }
+  }, recommendation, "% of reviews recommend this product")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    style: {
+      height: '80%',
+      width: '100%'
+    }
+  }, populateBar()));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ReviewSpread);
@@ -15698,7 +15721,6 @@ var Review = function Review() {
     className: "d-inline-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
-      position: 'relative',
       marginLeft: '20px'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -15708,7 +15730,11 @@ var Review = function Review() {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_breakdown_overall_rating__WEBPACK_IMPORTED_MODULE_5__.default, {
     key: totalRatings,
     rating: Math.floor(totalRatings / reviews.length * 4)
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_breakdown_review_spread__WEBPACK_IMPORTED_MODULE_6__.default, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    style: {
+      width: '350px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_components_breakdown_review_spread__WEBPACK_IMPORTED_MODULE_6__.default, {
     ratingBreakdown: {
       5: 3.5,
       4: 2,
@@ -15716,11 +15742,11 @@ var Review = function Review() {
       2: 5,
       1: 1
     },
-    reccomendation: 100
+    recommendation: 95
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       marginLeft: '50px',
-      width: '80%',
+      width: '70%',
       marginTop: '20px'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

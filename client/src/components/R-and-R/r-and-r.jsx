@@ -100,18 +100,14 @@ const Review = () => {
     <div>
       <p>RATINGS & REVIEWS</p>
       <div className="d-inline-flex justify-content-end">
-        <div style={{
-          position: 'relative',
-          marginLeft: '20px',
-        }}
-        >
+        <div style={{ marginLeft: '20px' }}>
           <div style={{ margin: '5px auto' }}>
             <OverallRating
               key={totalRatings}
               rating={Math.floor((totalRatings / reviews.length) * 4)}
             />
           </div>
-          <div>
+          <div style={{ width: '350px' }}>
             <ReviewSpread
               ratingBreakdown={{
                 5: 3.5,
@@ -120,13 +116,13 @@ const Review = () => {
                 2: 5,
                 1: 1,
               }}
-              reccomendation={100}
+              recommendation={95}
             />
           </div>
         </div>
         <div style={{
           marginLeft: '50px',
-          width: '80%',
+          width: '70%',
           marginTop: '20px',
         }}
         >

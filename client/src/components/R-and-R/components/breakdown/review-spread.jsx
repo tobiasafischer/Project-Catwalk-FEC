@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ProgressBar } from 'react-bootstrap';
 
 const ReviewSpread = (props) => {
   const [{ ratingBreakdown }] = useState(props);
@@ -9,8 +8,10 @@ const ReviewSpread = (props) => {
     const arr = [];
     for (let i = 1; i < 6; i += 1) {
       const emptyBar = {
-        height: 20,
-        width: '80%',
+        marginLeft: '20px',
+        marginTop: '7px',
+        height: 10,
+        width: '70%',
         backgroundColor: '#959595',
       };
 
@@ -19,14 +20,25 @@ const ReviewSpread = (props) => {
         backgroundColor: '#454545',
         width: `${ratingBreakdown[i] * 20}%`,
       };
-      console.log(fillerBar);
       arr.push(
-        <div key={i}>
-          <p>
-            {i}
-            {' '}
-            Stars
-          </p>
+        <div
+          key={i}
+          style={{
+            display: 'flex',
+            marginTop: '30px',
+          }}
+        >
+          <div style={{
+            position: 'relative',
+            fontSize: '15px',
+          }}
+          >
+            <u>
+              {i}
+              {' '}
+              Stars
+            </u>
+          </div>
           <div style={emptyBar}>
             <div style={fillerBar} />
           </div>
@@ -38,13 +50,19 @@ const ReviewSpread = (props) => {
   // className="d-inline-flex justify-content-end"
   return (
     <div>
-      <div>
-        <p>
+      <div style={{ width: '100%' }}>
+        <p style={{ fontSize: '15px' }}>
           {recommendation}
           % of reviews recommend this product
         </p>
       </div>
-      {populateBar()}
+      <div style={{
+        height: '80%',
+        width: '100%',
+      }}
+      >
+        {populateBar()}
+      </div>
 
     </div>
   );
