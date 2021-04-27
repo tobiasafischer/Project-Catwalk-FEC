@@ -4,13 +4,17 @@ import Rating from 'react-rating';
 
 const OverallRating = (props) => {
   const [{ rating }] = useState(props);
-  console.log(rating);
   return (
-    <div>
+    <div className="d-inline-flex justify-content-end">
       <div id="overall-rating-average">
-        <strong>{rating}</strong>
+        <strong style={{ fontSize: '60px' }}>
+          {rating / 4}
+        </strong>
       </div>
-      <div id="overall-rating-star">
+      <div
+        style={{ marginTop: '10px' }}
+        id="overall-rating-star"
+      >
         <Rating
           start={0}
           stop={20}

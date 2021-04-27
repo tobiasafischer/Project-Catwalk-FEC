@@ -97,8 +97,19 @@ const Review = () => {
   }, [reviews]);
   return (
     <div className="review">
-      <p>RATINGS & REVIEWS</p>
-      <OverallRating key={totalRatings} rating={totalRatings} />
+
+      <div style={{ position: 'relative' }}>
+        <div style={{ margin: '5px auto' }}>
+          <p>RATINGS & REVIEWS</p>
+        </div>
+        <div style={{ margin: '5px auto' }}>
+          <OverallRating
+            key={totalRatings}
+            rating={Math.floor((totalRatings / reviews.length) * 4)}
+          />
+        </div>
+      </div>
+
       <div
         id="review-sort"
         style={{
