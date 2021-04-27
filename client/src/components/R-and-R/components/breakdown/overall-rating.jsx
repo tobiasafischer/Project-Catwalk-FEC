@@ -12,7 +12,7 @@ const OverallRating = (props) => {
         </strong>
       </div>
       <div
-        style={{ marginTop: '10px' }}
+        style={{ marginTop: '20px' }}
         id="overall-rating-star"
       >
         <Rating

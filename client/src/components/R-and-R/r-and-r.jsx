@@ -96,50 +96,59 @@ const Review = () => {
     }
   }, [reviews]);
   return (
-    <div className="review">
-
-      <div style={{ position: 'relative' }}>
-        <div style={{ margin: '5px auto' }}>
-          <p>RATINGS & REVIEWS</p>
-        </div>
-        <div style={{ margin: '5px auto' }}>
-          <OverallRating
-            key={totalRatings}
-            rating={Math.floor((totalRatings / reviews.length) * 4)}
-          />
-        </div>
-      </div>
-
-      <div
-        id="review-sort"
-        style={{
-          display: 'flex',
+    <div>
+      <p>RATINGS & REVIEWS</p>
+      <div className="d-inline-flex justify-content-end">
+        <div style={{
+          position: 'relative',
+          marginLeft: '20px',
         }}
-      >
-        <strong
-          style={{
-            marginTop: '5px',
-            marginLeft: '5px',
-          }}
         >
-          Sort on
-        </strong>
-        <div
-          id="dropdown-list"
-          style={{
-            marginLeft: '5px',
-            marginBottom: '10px',
-          }}
-        >
-          <DropdownList
-            defaultValue="Relevant"
-            data={['Helpful', 'Newest', 'Relevant']}
-            onChange={(val) => setSort(val.toLowerCase())}
-          />
+          <div style={{ margin: '5px auto' }}>
+            <OverallRating
+              key={totalRatings}
+              rating={Math.floor((totalRatings / reviews.length) * 4)}
+            />
+          </div>
         </div>
-      </div>
-      <div id="reviews-list">
-        {validate()}
+        <div style={{
+          marginLeft: '50px',
+          width: '80%',
+          marginTop: '20px',
+        }}
+        >
+          <div
+            id="review-sort"
+            style={{
+              display: 'flex',
+            }}
+          >
+            <strong
+              style={{
+                marginTop: '5px',
+                marginLeft: '5px',
+              }}
+            >
+              Sort on
+            </strong>
+            <div
+              id="dropdown-list"
+              style={{
+                marginLeft: '5px',
+                marginBottom: '10px',
+              }}
+            >
+              <DropdownList
+                defaultValue="Relevant"
+                data={['Helpful', 'Newest', 'Relevant']}
+                onChange={(val) => setSort(val.toLowerCase())}
+              />
+            </div>
+          </div>
+          <div id="reviews-list">
+            {validate()}
+          </div>
+        </div>
       </div>
     </div>
   );

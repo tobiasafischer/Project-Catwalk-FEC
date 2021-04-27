@@ -14446,7 +14446,7 @@ var OverallRating = function OverallRating(props) {
     }
   }, rating / 4)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
-      marginTop: '10px'
+      marginTop: '20px'
     },
     id: "overall-rating-star"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_rating__WEBPACK_IMPORTED_MODULE_1__.default, {
@@ -15620,17 +15620,14 @@ var Review = function Review() {
       compileRatings();
     }
   }, [reviews]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    className: "review"
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "RATINGS & REVIEWS"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    className: "d-inline-flex justify-content-end"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
-      position: 'relative'
+      position: 'relative',
+      marginLeft: '20px'
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-    style: {
-      margin: '5px auto'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "RATINGS & REVIEWS")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     style: {
       margin: '5px auto'
     }
@@ -15638,6 +15635,12 @@ var Review = function Review() {
     key: totalRatings,
     rating: Math.floor(totalRatings / reviews.length * 4)
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+    style: {
+      marginLeft: '50px',
+      width: '80%',
+      marginTop: '20px'
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "review-sort",
     style: {
       display: 'flex'
@@ -15661,7 +15664,7 @@ var Review = function Review() {
     }
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "reviews-list"
-  }, validate()));
+  }, validate()))));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Review);
