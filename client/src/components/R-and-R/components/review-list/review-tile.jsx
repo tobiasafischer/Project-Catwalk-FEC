@@ -40,6 +40,7 @@ const ReviewTile = (props) => {
 
   const renderThumbnails = () => {
     if (photos.length > 0) {
+      console.log(photos);
       const thumbnails = photos.map((image) => (
         <Image
           onClick={() => handleThumbnailClick(image.url)}

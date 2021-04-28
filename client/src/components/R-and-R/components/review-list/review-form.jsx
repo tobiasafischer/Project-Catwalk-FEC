@@ -7,6 +7,7 @@ import {
 import { DropzoneAreaBase } from 'material-ui-dropzone';
 import axios from 'axios';
 import ReviewTile from './review-tile';
+import { storage } from '../../../../../../firebase/index';
 
 const ReviewForm = (props) => {
   const [rating, setRating] = useState(20);
@@ -17,7 +18,6 @@ const ReviewForm = (props) => {
   const [recommend, setRecommend] = useState(false);
   const [{ productId }] = useState(props);
   const [photos, setPhotos] = useState([]);
-  const [formattedPhotos, setFormattedPhotos] = useState([]);
   const [bodyCounter, setBodyCounter] = useState([]);
   const [errors, setErrors] = useState({});
   const [{ handleClose }] = useState(props);
@@ -63,7 +63,6 @@ const ReviewForm = (props) => {
     setEmail('');
     setRecommend(false);
     setPhotos([]);
-    setFormattedPhotos([]);
   };
 
   const getDate = (date) => {
@@ -85,7 +84,6 @@ const ReviewForm = (props) => {
         body={body}
         date={getDate(new Date())}
         helpfulness={0}
-        photos={formattedPhotos}
         rating={rating}
         recommended={recommend}
         reviewerName={name}
@@ -95,7 +93,8 @@ const ReviewForm = (props) => {
       document.getElementById('new-review-div'),
     );
   };
-  const submitData = () => {
+
+  const submitData = (formattedPhotos) => {
     const params = {
       product_id: productId,
       rating: rating / 4,
@@ -112,7 +111,7 @@ const ReviewForm = (props) => {
         53849: 3,
       },
     };
-
+    console.log(params);
     // renderNewTile();
     axios.post('http://localhost:3000/reviews/', params)
       .then(() => {
@@ -123,13 +122,53 @@ const ReviewForm = (props) => {
       });
   };
 
+  const uploadImage = () => {
+    const promises = [];
+    const newPhotos = [];
+    for (let i = 0; i < photos.length; i += 1) {
+      const uploadTask = storage.ref(`images/${photos[i].file.name}`).put(photos[i].file);
+      console.log(photos[i].file);
+      promises.push(
+        new Promise((resolve, reject) => {
+          uploadTask.on(
+            'state_changed',
+            (snapshot) => {},
+            (error) => {
+              console.log(error);
+              reject(error);
+            },
+            () => {
+              storage
+                .ref('images')
+                .child(photos[i].file.name)
+                .getDownloadURL()
+                .then((url) => {
+                  newPhotos.push(url);
+                  resolve(url);
+                });
+            },
+          );
+        }),
+      );
+    }
+    console.log(newPhotos);
+    Promise.all(promises)
+      .then(() => {
+        console.log(newPhotos);
+        submitData(newPhotos);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = findFormErrors();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      submitData();
+      uploadImage();
     }
   };
 
@@ -255,7 +294,6 @@ const ReviewForm = (props) => {
           fileObjects={photos}
           onAdd={(photo) => {
             setPhotos(photo);
-            setFormattedPhotos(photo.map((img) => URL.createObjectURL(img.file)));
           }}
           onDelete={(photo) => {
             setPhotos(photos.filter((item) => item.data !== photo.data));
