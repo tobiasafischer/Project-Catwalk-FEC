@@ -111,7 +111,6 @@ const ReviewForm = (props) => {
         53849: 3,
       },
     };
-    console.log(params);
     // renderNewTile();
     axios.post('http://localhost:3000/reviews/', params)
       .then(() => {
@@ -127,14 +126,12 @@ const ReviewForm = (props) => {
     const newPhotos = [];
     for (let i = 0; i < photos.length; i += 1) {
       const uploadTask = storage.ref(`images/${photos[i].file.name}`).put(photos[i].file);
-      console.log(photos[i].file);
       promises.push(
         new Promise((resolve, reject) => {
           uploadTask.on(
             'state_changed',
-            (snapshot) => {},
+            () => {},
             (error) => {
-              console.log(error);
               reject(error);
             },
             () => {
@@ -151,14 +148,12 @@ const ReviewForm = (props) => {
         }),
       );
     }
-    console.log(newPhotos);
     Promise.all(promises)
       .then(() => {
-        console.log(newPhotos);
         submitData(newPhotos);
       })
       .catch((err) => {
-        console.log(err);
+        throw err;
       });
   };
 
