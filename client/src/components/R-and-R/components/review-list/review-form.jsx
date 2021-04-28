@@ -49,6 +49,7 @@ const ReviewForm = (props) => {
       }
     }
   };
+
   const checkChar = (str, max, callback, field) => {
     callback(str.slice(0, max));
     checkError(field);
@@ -103,9 +104,16 @@ const ReviewForm = (props) => {
       recommend: Boolean(recommend),
       name,
       email,
-      formattedPhotos,
-      characteristics: {},
+      photos: formattedPhotos,
+      characteristics: {
+        53846: 5,
+        53847: 5,
+        53848: 3,
+        53849: 3,
+      },
     };
+
+    console.log(params);
 
     // renderNewTile();
     axios.post('http://localhost:3000/reviews/', params)
@@ -117,14 +125,6 @@ const ReviewForm = (props) => {
       });
   };
 
-  const renderBodyCount = () => {
-    if (body.length >= 50) {
-      setBodyCounter('Minimum reached');
-    } else {
-      setBodyCounter(`Minimum required characters left: ${50 - body.length}`);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const newErrors = findFormErrors();
@@ -132,6 +132,14 @@ const ReviewForm = (props) => {
       setErrors(newErrors);
     } else {
       submitData();
+    }
+  };
+
+  const renderBodyCount = () => {
+    if (body.length >= 50) {
+      setBodyCounter('Minimum reached');
+    } else {
+      setBodyCounter(`Minimum required characters left: ${50 - body.length}`);
     }
   };
 
@@ -249,10 +257,7 @@ const ReviewForm = (props) => {
           fileObjects={photos}
           onAdd={(photo) => {
             setPhotos(photo);
-            setFormattedPhotos(photo.map((img) => ({
-              id: Math.random().toString(36).substr(2, 9),
-              url: URL.createObjectURL(img.file),
-            })));
+            setFormattedPhotos(photo.map((img) => URL.createObjectURL(img.file)));
           }}
           onDelete={(photo) => {
             setPhotos(photos.filter((item) => item.data !== photo.data));

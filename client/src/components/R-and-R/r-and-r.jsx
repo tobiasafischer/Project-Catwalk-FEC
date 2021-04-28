@@ -7,8 +7,8 @@ import OverallRating from './components/breakdown/overall-rating';
 import ReviewSpread from './components/breakdown/review-spread';
 
 const Review = () => {
-  const [count, setCount] = useState(1);
-  const [page, setPage] = useState(5);
+  const [count, setCount] = useState(5);
+  const [page, setPage] = useState(1);
   const [sort, setSort] = useState('relevant');
   const [productId, setProductId] = useState(16153);
   const [reviews, setReviews] = useState([]);
@@ -32,6 +32,7 @@ const Review = () => {
     };
     axios.get('http://localhost:3000/reviews', { params })
       .then(({ data }) => {
+        console.log(data);
         setCount(data.response.count);
         setPage(data.response.page);
         setProductId(parseInt(data.response.product, 10));

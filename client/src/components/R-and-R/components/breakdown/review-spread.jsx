@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const ReviewSpread = (props) => {
   const [{ ratingBreakdown }] = useState(props);
   const [{ recommendation }] = useState(props);
-  const [color, setColor] = useState('#454545');
 
   const populateBar = () => {
     const arr = [];
@@ -16,11 +16,15 @@ const ReviewSpread = (props) => {
         backgroundColor: '#959595',
       };
 
-      const fillerBar = {
-        height: '100%',
-        backgroundColor: color,
-        width: `${ratingBreakdown[i] * 20}%`,
-      };
+      const FillerBar = styled.div`
+        height: 100%;
+        background-color: #454545;
+        width: ${ratingBreakdown[i] * 20}%;
+        &:hover {
+          background-color: green;
+          width: ${(ratingBreakdown[i] * 20) + 2}%;
+        }
+      `;
       arr.push(
         <div
           key={i}
@@ -41,18 +45,13 @@ const ReviewSpread = (props) => {
             </u>
           </div>
           <div style={emptyBar}>
-            <div
-              style={fillerBar}
-              onMouseEnter={() => setColor('green')}
-              onMouseLeave={() => setColor('#454545')}
-            />
+            <FillerBar />
           </div>
         </div>,
       );
     }
     return arr;
   };
-  // className="d-inline-flex justify-content-end"
   return (
     <div>
       <div style={{ width: '100%' }}>

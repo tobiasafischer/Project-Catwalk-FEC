@@ -8,6 +8,7 @@ import ReviewForm from './review-form';
 const ResponseForm = (props) => {
   const [rating, setRating] = useState(20);
   const [{ product }] = useState(props);
+  const [{ productId }] = useState(props);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -63,7 +64,7 @@ const ResponseForm = (props) => {
                 onClick={(e) => setRating(e)}
               />
             </div>
-            <ReviewForm handleClose={handleClose} />
+            <ReviewForm productId={productId} handleClose={handleClose} />
           </Modal.Body>
         </Modal>
       </div>

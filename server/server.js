@@ -40,39 +40,20 @@ app.get('/reviews', (req, res) => {
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       res.sendStatus(500);
     });
 });
 
 app.post('/reviews', (req, res) => {
-  const dat = {
-    product_id: 1,
-    rating: 5,
-    summary: 'awsdasdasda',
-    body: 'asdasdasdasdfasfas fasfsedgdr gdarg dragdr gdrdrgh ar',
-    recommend: false,
-    name: 'asddasdawsdaw',
-    email: 'awdawd@ASdfasDF.egsfea',
-    photos: [],
-    characteristics: {
-      size: 1,
-      width: 2,
-      comfort: 3,
-      quality: 4,
-      length: 1,
-      fit: 2,
-    },
-  };
-
-  axios.post(`${apiUrl}reviews/`, dat, {
+  axios.post(`${apiUrl}reviews/`, req.body, {
     headers: {
       Authorization: API_KEY,
       'Content-Type': 'application/json',
     },
   })
-    .then(() => {
+    .then((ssss) => {
+      console.log(ssss);
       res.sendStatus(201);
     })
     .catch((err) => {
