@@ -15605,8 +15605,7 @@ var ReviewForm = function ReviewForm(props) {
         53848: 3,
         53849: 3
       }
-    };
-    console.log(params); // renderNewTile();
+    }; // renderNewTile();
 
     axios__WEBPACK_IMPORTED_MODULE_3___default().post('http://localhost:3000/reviews/', params).then(function () {
       reset();
@@ -15897,8 +15896,6 @@ var ReviewTile = function ReviewTile(props) {
 
   var renderThumbnails = function renderThumbnails() {
     if (photos.length > 0) {
-      console.log(photos);
-
       var _thumbnails = photos.map(function (image) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
           onClick: function onClick() {
@@ -16415,7 +16412,6 @@ var Review = function Review() {
       params: params
     }).then(function (_ref) {
       var data = _ref.data;
-      console.log(data);
       setCount(data.response.count);
       setPage(data.response.page);
       setProductId(parseInt(data.response.product, 10));

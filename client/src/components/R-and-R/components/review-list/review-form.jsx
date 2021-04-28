@@ -113,8 +113,6 @@ const ReviewForm = (props) => {
       },
     };
 
-    console.log(params);
-
     // renderNewTile();
     axios.post('http://localhost:3000/reviews/', params)
       .then(() => {

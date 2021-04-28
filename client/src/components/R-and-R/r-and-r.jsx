@@ -32,7 +32,6 @@ const Review = () => {
     };
     axios.get('http://localhost:3000/reviews', { params })
       .then(({ data }) => {
-        console.log(data);
         setCount(data.response.count);
         setPage(data.response.page);
         setProductId(parseInt(data.response.product, 10));
