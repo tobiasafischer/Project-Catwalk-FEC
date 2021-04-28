@@ -106,3 +106,7 @@ body {
   height: 200px;
   margin-right: 50px;
 }
+
+#fill-bar:hover {
+  background: tomato;
+}

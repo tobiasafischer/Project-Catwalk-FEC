@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const ReviewSpread = (props) => {
   const [{ ratingBreakdown }] = useState(props);
   const [{ recommendation }] = useState(props);
+  const [color, setColor] = useState('#454545');
 
   const populateBar = () => {
     const arr = [];
@@ -17,7 +18,7 @@ const ReviewSpread = (props) => {
 
       const fillerBar = {
         height: '100%',
-        backgroundColor: '#454545',
+        backgroundColor: color,
         width: `${ratingBreakdown[i] * 20}%`,
       };
       arr.push(
@@ -40,7 +41,11 @@ const ReviewSpread = (props) => {
             </u>
           </div>
           <div style={emptyBar}>
-            <div style={fillerBar} />
+            <div
+              style={fillerBar}
+              onMouseEnter={() => setColor('green')}
+              onMouseLeave={() => setColor('#454545')}
+            />
           </div>
         </div>,
       );

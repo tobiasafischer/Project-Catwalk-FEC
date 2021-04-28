@@ -138,7 +138,9 @@ const Review = () => {
                 marginLeft: '5px',
               }}
             >
-              Sort on
+              {reviews.length}
+              {' '}
+              reviews, sorted by
             </strong>
             <div
               id="dropdown-list"

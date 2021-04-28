@@ -263,7 +263,10 @@ const ReviewTile = (props) => {
           </button>
         </div>
       </Modal>
-      <Card style={{ color: '#525252' }}>
+      <Card
+        style={{ color: '#525252' }}
+        border="0"
+      >
         <div id="star">
           <Rating
             stop={20}
@@ -353,6 +356,7 @@ const ReviewTile = (props) => {
           </a>
         </div>
       </Card>
+      <hr style={{ border: '1px solid black' }} />
     </div>
   );
 };

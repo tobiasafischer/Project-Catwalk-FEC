@@ -14507,6 +14507,11 @@ var ReviewSpread = function ReviewSpread(props) {
       _useState4 = _slicedToArray(_useState3, 1),
       recommendation = _useState4[0].recommendation;
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)('#454545'),
+      _useState6 = _slicedToArray(_useState5, 2),
+      color = _useState6[0],
+      setColor = _useState6[1];
+
   var populateBar = function populateBar() {
     var arr = [];
 
@@ -14520,7 +14525,7 @@ var ReviewSpread = function ReviewSpread(props) {
       };
       var fillerBar = {
         height: '100%',
-        backgroundColor: '#454545',
+        backgroundColor: color,
         width: "".concat(ratingBreakdown[i] * 20, "%")
       };
       arr.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -14537,7 +14542,13 @@ var ReviewSpread = function ReviewSpread(props) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, i, ' ', "Stars")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         style: emptyBar
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        style: fillerBar
+        style: fillerBar,
+        onMouseEnter: function onMouseEnter() {
+          return setColor('green');
+        },
+        onMouseLeave: function onMouseLeave() {
+          return setColor('#454545');
+        }
       }))));
     }
 
@@ -15369,7 +15380,8 @@ var ReviewTile = function ReviewTile(props) {
   }, "Close"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
     style: {
       color: '#525252'
-    }
+    },
+    border: "0"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "star"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_rating__WEBPACK_IMPORTED_MODULE_1__.default, {
@@ -15427,7 +15439,11 @@ var ReviewTile = function ReviewTile(props) {
     className: "ml-auto p-2",
     "aria-hidden": "true",
     onClick: handleReport
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Report")))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("u", null, "Report")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", {
+    style: {
+      border: '1px solid black'
+    }
+  }));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ReviewTile);
@@ -15759,7 +15775,7 @@ var Review = function Review() {
       marginTop: '5px',
       marginLeft: '5px'
     }
-  }, "Sort on"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+  }, reviews.length, ' ', "reviews, sorted by"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
     id: "dropdown-list",
     style: {
       marginLeft: '5px',
