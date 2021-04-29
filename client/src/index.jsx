@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Overview from './components/overview/overview.jsx'
 
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <Overview />,
   document.getElementById('app')
 );
+
