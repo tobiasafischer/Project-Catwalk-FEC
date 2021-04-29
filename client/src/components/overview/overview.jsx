@@ -26,6 +26,7 @@ export default function Overview(props) {
         setItem(res.data[0]);
         handlegetStyles(res.data[0].id)
       })
+
       .catch(err => {
         console.log(err)
       })
@@ -48,6 +49,7 @@ export default function Overview(props) {
 
     setCurrentstyle(styles[target.id])
     setCurrentInd(0);
+    setStyleId(Number(target.id))
 
     setNextdisplay('button')
     setPredisplay('hidden')
@@ -57,57 +59,71 @@ export default function Overview(props) {
 
   if (expand && styles.length !== 0) {
     return (
-      <div id='overview' className='container'>
-        <div className='row'>
-          <div className='col-12'>
-            <ImageGallery
-              currentInd={currentInd}
-              setNextdisplay={setNextdisplay}
-              nextdisplay={nextdisplay}
-              predisplay={predisplay}
-              setPredisplay={setPredisplay}
-              setCurrentInd={setCurrentInd}
-              toggleExpand={toggleExpand}
-              images={currentstyle.photos}
-            />
+      <div id='overview' >
+        <div className='container'>
+          <div className='row'>
+            <div className='col-sm-12'>
+              <div className='expanded'>
+                <ImageGallery
+                  currentInd={currentInd}
+                  setNextdisplay={setNextdisplay}
+                  nextdisplay={nextdisplay}
+                  predisplay={predisplay}
+                  setPredisplay={setPredisplay}
+                  setCurrentInd={setCurrentInd}
+                  toggleExpand={toggleExpand}
+                  images={currentstyle.photos}
+                  expand={expand}
+                />
+              </div>
+            </div>
           </div>
         </div>
-        <Description
-          id='descrip'
-          item={item} />
+        <div className='container'>
+          <Description
+            id='descrip'
+            item={item} />
+        </div>
       </div>
     )
 
   } else if (!expand && styles.length !== 0) {
     return (
-      <div id='overview' className='container'>
-        <div className='row'>
-          <div className='col-7'>
-            <ImageGallery
-              currentInd={currentInd}
-              setCurrentInd={setCurrentInd}
-              toggleExpand={toggleExpand}
-              images={currentstyle.photos}
-              setNextdisplay={setNextdisplay}
-              nextdisplay={nextdisplay}
-              predisplay={predisplay}
-              setPredisplay={setPredisplay}
-            />
-          </div>
-          <div className='col-5'>
-            <ProductDetail
-              id='detail'
-              className='col-5'
-              category={item.category}
-              name={item.name}
-              styles={styles}
-              handleSelector={handleSelector}
-              currentstyle={currentstyle} />
+      <div id='overview' >
+        <div className='container'>
+          <div className='row'>
+            <div className='col-sm-7'>
+              <div className='no-expanded'>
+                <ImageGallery
+                  currentInd={currentInd}
+                  setCurrentInd={setCurrentInd}
+                  toggleExpand={toggleExpand}
+                  images={currentstyle.photos}
+                  setNextdisplay={setNextdisplay}
+                  nextdisplay={nextdisplay}
+                  predisplay={predisplay}
+                  setPredisplay={setPredisplay}
+                />
+              </div>
+            </div>
+            <div className='col-sm-5' id='detail'>
+              <ProductDetail
+                className='col-5'
+                category={item.category}
+                name={item.name}
+                styles={styles}
+                styleId={styleId}
+                handleSelector={handleSelector}
+                currentstyle={currentstyle}
+              />
+            </div>
           </div>
         </div>
-        <Description
-          id='descrip'
-          item={item} />
+        <div className='container'>
+          <Description
+            id='descrip'
+            item={item} />
+        </div>
       </div>
     )
   } else {

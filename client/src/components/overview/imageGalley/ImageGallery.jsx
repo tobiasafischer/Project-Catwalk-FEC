@@ -8,7 +8,7 @@ import ThumbnailPic from './thubnailpic.jsx';
 
 
 const ImageGallery = (props) => {
-
+  const [className, setClassname] = useState('')
   useEffect(() => { handlechange() })
 
   const handlechange = () => {
@@ -41,6 +41,7 @@ const ImageGallery = (props) => {
   }
   const handleClick = ({ target }) => {
     props.setCurrentInd(Number(target.id))
+
     if (Number(target.id) < props.images.length - 1) {
       props.setNextdisplay('button')
     } else {
@@ -55,7 +56,7 @@ const ImageGallery = (props) => {
   }
 
   return (
-    <div id='img'>
+    <div id='img' className='container'>
       <Carouse
         data={props.images}
         currentInd={props.currentInd}
@@ -65,8 +66,10 @@ const ImageGallery = (props) => {
         nextdisplay={props.nextdisplay}
       />
       <ThumbnailPic
+        currentInd={props.currentInd}
         data={props.images}
         handleClick={handleClick}
+        expand={props.expand}
       />
       <button
         className='expand'

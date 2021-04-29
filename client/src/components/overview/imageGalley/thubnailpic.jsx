@@ -1,17 +1,43 @@
 import React from 'react';
 
 export default function ThumbnailPic(props) {
-  return (
-    <ul id='thumbnail'>
-      {
-        props.data.map((pic, index) => {
-          return (
-            <li id='thumbnail-container' key={index}>
-              <img id={index} src={pic.thumbnail_url} onClick={props.handleClick} />
-            </li>
-          )
-        })
-      }
-    </ul>
-  )
+  if (props.expand) {
+    return (
+      <ul id='thumbnail-expand'>
+        {
+          props.data.map((pic, index) => {
+            return (
+              <li id='thumbnail-container' key={index}>
+                <a href='#' className='expandIcon'>*</a>
+              </li>
+            )
+          })
+        }
+      </ul>
+    )
+  } else {
+    return (
+      <ul id='thumbnail'>
+        {
+          props.data.map((pic, index) => {
+            let enlargeStyle = ''
+            if (index === props.currentInd) {
+              enlargeStyle = 'enlarge'
+            }
+            return (
+              <li id='thumbnail-container' key={index}>
+                <img
+                  id={index}
+                  src={pic.thumbnail_url}
+                  onClick={props.handleClick}
+                  className={enlargeStyle}
+                />
+              </li>
+            )
+          })
+        }
+      </ul>
+    )
+  }
+
 }
