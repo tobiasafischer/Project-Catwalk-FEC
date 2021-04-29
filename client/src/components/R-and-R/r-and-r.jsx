@@ -33,13 +33,11 @@ const Review = () => {
     axios.get('http://localhost:3000/reviews', { params })
       .then(({ data }) => {
         setCount(data.response.count);
-        setPage(data.response.page);
-        setProductId(parseInt(data.response.product, 10));
-        setReviews(data.response.results);
+        setReviews([...data.response.results]);
       })
       .catch((err) => {
         if (mounted.current) {
-          throw err;
+          console.log(err);
         }
       });
   };
@@ -56,7 +54,7 @@ const Review = () => {
       })
       .catch((err) => {
         if (mounted.current) {
-          throw err;
+          console.log(err);
         }
       });
   };
@@ -65,6 +63,7 @@ const Review = () => {
     if (reviews.length > 0) {
       return (
         <ReviewsList
+          key={JSON.stringify(reviews)}
           reviews={reviews}
           product={product}
           productId={productId}
@@ -75,8 +74,14 @@ const Review = () => {
   };
 
   const compileRatings = () => {
-    const nextRatings = { ...ratings };
-    let nextTotal = totalRatings;
+    const nextRatings = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+    };
+    let nextTotal = 0;
     reviews.forEach((item) => {
       nextRatings[item.rating] += 1;
       nextTotal += item.rating;

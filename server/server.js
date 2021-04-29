@@ -33,14 +33,15 @@ app.get('/reviews', (req, res) => {
       page: req.query.page || 1,
       count: req.query.count || 5,
       sort: req.query.sort || 'relevant',
-      product_id: req.query.product_id || 16056,
+      product_id: parseInt(req.query.product_id, 10) || 16056,
     },
   };
   axios.get(`${apiUrl}reviews/`, reviewHeader)
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       res.sendStatus(500);
     });
 });
