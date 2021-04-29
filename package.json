@@ -43,6 +43,7 @@
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@types/jest": "^26.0.22",
+    "@types/regenerator-runtime": "^0.13.0",
     "babel-jest": "^26.6.3",
     "css-loader": "^5.2.2",
     "eslint": "^7.24.0",
@@ -67,6 +68,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "regenerator-runtime": "^0.13.7",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
