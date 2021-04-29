@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Review from './components/R-and-R/r-and-r';
 import Overview from './components/overview/overview.jsx'
 
 class App extends React.Component {
@@ -18,11 +19,8 @@ class App extends React.Component {
 }
 
 ReactDOM.render(
-<<<<<<< HEAD
   <App />,
-=======
   <Overview />,
->>>>>>> da9fcbbefdfae5bc9599ae6474c418c4f7eecf66
-  document.getElementById('app')
+  <Review />,
+  document.getElementById('app'),
 );
-
