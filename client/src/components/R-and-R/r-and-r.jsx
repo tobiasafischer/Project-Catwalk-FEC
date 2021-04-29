@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import 'react-widgets/styles.css';
@@ -6,11 +7,11 @@ import ReviewsList from './components/review-list/reviews-list';
 import OverallRating from './components/breakdown/overall-rating';
 import ReviewSpread from './components/breakdown/review-spread';
 
-const Review = () => {
+const Review = (props) => {
   const [count, setCount] = useState(5);
   const [page, setPage] = useState(1);
   const [sort, setSort] = useState('relevant');
-  const [productId, setProductId] = useState(16153);
+  const [{ productId }] = useState(props);
   const [reviews, setReviews] = useState([]);
   const [product, setProduct] = useState('');
   const [ratings, setRatings] = useState({
@@ -37,24 +38,7 @@ const Review = () => {
       })
       .catch((err) => {
         if (mounted.current) {
-          console.log(err);
-        }
-      });
-  };
-
-  const getProduct = () => {
-    const params = {
-      product_id: productId,
-    };
-    axios.get('http://localhost:3000/productById', { params })
-      .then(({ data }) => {
-        if (mounted.current) {
-          setProduct(data.response.name);
-        }
-      })
-      .catch((err) => {
-        if (mounted.current) {
-          console.log(err);
+          throw err;
         }
       });
   };
@@ -95,7 +79,6 @@ const Review = () => {
 
   useEffect(() => {
     getReviews();
-    getProduct();
     return () => { mounted.current = false; };
   }, [sort]);
 
