@@ -1,22 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Review from './components/R-and-R/r-and-r';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: []
-    };
-  }
-
-  render() {
-    return (
-      <h1>This is our app</h1>
-    )
-  }
-}
+const App = () => (
+  <div>
+    <h1>This is our app</h1>
+    <Review />
+  </div>
+);
 
 ReactDOM.render(
   <App />,
-  document.getElementById('app')
+  document.getElementById('app'),
 );
