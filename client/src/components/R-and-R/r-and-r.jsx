@@ -81,7 +81,10 @@ const Review = () => {
       nextRatings[item.rating] += 1;
       nextTotal += item.rating;
     });
-    setRatings(nextRatings);
+    setRatings({
+      ...ratings,
+      ...nextRatings,
+    });
     setTotalRatings(nextTotal);
   };
 
@@ -96,6 +99,7 @@ const Review = () => {
       compileRatings();
     }
   }, [reviews]);
+
   return (
     <div>
       <p>RATINGS & REVIEWS</p>
@@ -109,13 +113,8 @@ const Review = () => {
           </div>
           <div style={{ width: '350px' }}>
             <ReviewSpread
-              ratingBreakdown={{
-                5: 3.5,
-                4: 2,
-                3: 3,
-                2: 5,
-                1: 1,
-              }}
+              key={JSON.stringify(ratings)}
+              ratingBreakdown={ratings}
               recommendation={95}
             />
           </div>

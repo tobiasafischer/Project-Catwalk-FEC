@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const ReviewSpread = (props) => {
   const [{ ratingBreakdown }] = useState(props);
   const [{ recommendation }] = useState(props);
-
   const populateBar = () => {
     const arr = [];
     for (let i = 1; i < 6; i += 1) {

@@ -55,7 +55,7 @@ const ReviewsList = (props) => {
 
   return (
     <div className="reviews-list">
-      <div className="reviews-tiles">
+      <div id="reviews-tiles">
         {currentRender}
       </div>
       <div className="d-inline-flex mt-5">

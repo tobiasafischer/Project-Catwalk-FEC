@@ -77,7 +77,7 @@ const ReviewForm = (props) => {
   };
 
   const renderNewTile = (formattedPhotos) => {
-    const newPhotos = formattedPhotos.map((image) => ({ url: image }))
+    const newPhotos = formattedPhotos.map((image) => ({ url: image }));
     const tile = (
       <ReviewTile
         key={Math.random().toString(36).substr(2, 9)}
@@ -92,14 +92,12 @@ const ReviewForm = (props) => {
         yesClicked={false}
       />
     );
-    const divs = document.getElementsByClassName('reviews-tiles');
-    for (let i = 0; i < divs.length; i += 1) {
-      const id = Math.random();
-      const d = document.createElement('div');
-      d.id = id;
-      divs[i].appendChild(d);
-      ReactDOM.render(tile, document.getElementById(id));
-    }
+    const div = document.getElementById('reviews-tiles');
+    const id = Math.random();
+    const d = document.createElement('div');
+    d.id = id;
+    div.prepend(d);
+    ReactDOM.render(tile, document.getElementById(id));
   };
 
   const submitData = (formattedPhotos) => {
@@ -123,6 +121,7 @@ const ReviewForm = (props) => {
     axios.post('http://localhost:3000/reviews/', params)
       .then(() => {
         reset();
+        handleClose();
       })
       .catch((err) => {
         throw err;
