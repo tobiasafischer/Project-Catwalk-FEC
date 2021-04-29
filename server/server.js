@@ -52,12 +52,10 @@ app.post('/reviews', (req, res) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((ssss) => {
-      console.log(ssss);
+    .then(() => {
       res.sendStatus(201);
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       res.sendStatus(500);
     });
 });

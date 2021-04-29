@@ -39,7 +39,7 @@ const ReviewTile = (props) => {
   };
 
   const renderThumbnails = () => {
-    if (photos.length > 0) {
+     if (photos.length > 0) {
       const thumbnails = photos.map((image) => (
         <Image
           onClick={() => handleThumbnailClick(image.url)}
@@ -53,7 +53,6 @@ const ReviewTile = (props) => {
           thumbnail="true"
         />
       ));
-
       return (
         <Container
           style={{ height: '150px' }}

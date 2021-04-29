@@ -76,22 +76,30 @@ const ReviewForm = (props) => {
     return (`${month} ${day}, ${year}`);
   };
 
-  // eslint-disable-next-line no-unused-vars
-  const renderNewTile = () => {
-    ReactDOM.render(
+  const renderNewTile = (formattedPhotos) => {
+    const newPhotos = formattedPhotos.map((image) => ({ url: image }))
+    const tile = (
       <ReviewTile
         key={Math.random().toString(36).substr(2, 9)}
         body={body}
         date={getDate(new Date())}
         helpfulness={0}
         rating={rating}
+        photos={newPhotos}
         recommended={recommend}
         reviewerName={name}
         summary={summary}
         yesClicked={false}
-      />,
-      document.getElementById('new-review-div'),
+      />
     );
+    const divs = document.getElementsByClassName('reviews-tiles');
+    for (let i = 0; i < divs.length; i += 1) {
+      const id = Math.random();
+      const d = document.createElement('div');
+      d.id = id;
+      divs[i].appendChild(d);
+      ReactDOM.render(tile, document.getElementById(id));
+    }
   };
 
   const submitData = (formattedPhotos) => {
@@ -111,7 +119,7 @@ const ReviewForm = (props) => {
         53849: 3,
       },
     };
-    // renderNewTile();
+    renderNewTile(formattedPhotos);
     axios.post('http://localhost:3000/reviews/', params)
       .then(() => {
         reset();
