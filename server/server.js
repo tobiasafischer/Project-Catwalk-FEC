@@ -1,10 +1,10 @@
-
 const bodyparser = require('body-parser');
 const axios = require('axios');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
 const { API_KEY } = require('../config.js');
+
 const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, '../client/src/components')));
 app.use(cors());
 app.use(express.json({ limit: '50mb', extended: true }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
-app.listen(3000, () => console.log('Listening on ' + 3000));
+app.listen(3000);
 
 app.get('/', (req, res) => {
   res.sendStatus(200);
@@ -42,8 +42,7 @@ app.get('/reviews', (req, res) => {
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       res.sendStatus(500);
     });
 });
@@ -106,7 +105,8 @@ app.get('/productById', (req, res) => {
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       res.sendStatus(500);
     });
 });
@@ -116,12 +116,23 @@ app.get('/products', (req, res) => {
     headers: {
       Authorization: API_KEY,
     },
-    params: {
-      page: 1,
-      count: 125,
-    },
   };
   axios.get(`${apiUrl}products`, reviewHeader)
+    .then((response) => {
+      res.json({ response: response.data });
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    });
+});
+
+app.get('/styles', (req, res) => {
+  const reviewHeader = {
+    headers: {
+      Authorization: API_KEY,
+    },
+  };
+  axios.get(`${apiUrl}products/${req.query.id}/styles`, reviewHeader)
     .then((response) => {
       res.json({ response: response.data });
     })
