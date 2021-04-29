@@ -1,0 +1,304 @@
+.container {
+  display: grid;
+  grid-template-columns: 100%;
+}
+#overview > .container {
+  width: 85%;
+}
+
+#overview #img {
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#overview .col-sm-7 {
+  height: 700px;
+  max-height: fit-content;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  object-position: 50% 50%;
+  position: relative;
+}
+#overview .col-sm-12 {
+  height: 700px;
+  max-height: fit-content;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  object-position: 50% 50%;
+  position: relative;
+}
+#overview .col-sm-7 .no-expanded {
+  width: 500px;
+  max-width: 500px;
+  height: 500px;
+  display: flex;
+  /* position: static; */
+}
+#overview .col-sm-12 .expanded {
+  width: 800px;
+  max-width: 800px;
+  height: 600px;
+  max-height: 600px;
+  display: flex;
+}
+#overview #img .carousel {
+  position: static;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  object-position: 50% 50%;
+}
+
+
+#overview #img .carousel_pic {
+  display: flex;
+  width: auto;
+  /* max-width: 500px; */
+  height: 90%;
+  max-height: 700px;
+}
+#overview #img .carousel .button {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  color: rgb(173, 170, 170);
+}
+#overview #img #previous {
+  position: absolute;
+  left: 10%;
+}
+#overview #img .button:hover {
+  color: black;
+}
+#overview #img .hidden {
+  display: none;
+}
+#overview #img .expand {
+  margin: 0 auto;
+  top: 0;
+  right: 0;
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  color: gray;
+  position: absolute;
+}
+#overview #img .tools {
+  background-color: rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  display: flex;
+  width: 30%;
+  height: 40px;
+  position: absolute;
+  bottom: 0;
+  /* right: 3%; */
+  border: none;
+  font-size: 1.2rem;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  align-content: flex-end;
+  border-radius: 20px;
+}
+#overview #img .tools button {
+  border: 0;
+  background: transparent;
+  color: white;
+}
+#overview #img .expand:hover {
+  color: black;
+}
+
+/* --------thumbnail image --------- */
+#overview #img #thumbnail,
+#overview #img #thumbnail-expand {
+  list-style: none;
+  position: absolute;
+  /* left: 15%; */
+  top: 20%;
+  left: 0;
+  text-align: center;
+  width: 50px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0;
+}
+#overview #img #thumbnail-expand .expandIcon {
+  text-decoration: none;
+}
+
+#overview #thumbnail #thumbnail-container {
+  padding-left: 0;
+  width: 50px;
+  height: 50px;
+  max-height: 50px;
+  margin-top: 1em;
+  margin-left: 0.5em;
+}
+
+#thumbnail-container .enlarge {
+  transform: scale(1.5);
+  transition: transform 0.25s ease;
+}
+
+#overview #thumbnail img {
+  width: 80%;
+  height: 100%;
+  text-align: center;
+  border-bottom: 3px solid transparent;
+  border-radius: 1rem;
+}
+
+#overview #thumbnail img:hover {
+  border-bottom: 3px solid gray;
+}
+
+/* -------- description ----------- */
+#overview #descrip .row {
+  width: 95%;
+  margin: 0 auto;
+  text-align: center;
+}
+#overview #descrip p {
+  /* background-color: purple; */
+  width: 97%;
+  margin: 1em auto 0 auto;
+  display: inline-block;
+  text-align: left;
+  padding-left: 5%;
+}
+#overview #descrip .left p {
+  width: 101%;
+  padding-left: 0%;
+}
+
+/* ---------- detail ---------- */
+#overview #detail {
+  /* margin: 0 auto; */
+  padding-left: 20px;
+  display: flex;
+  text-align: left;
+  height: 95%;
+  position: relative;
+  color: gray;
+  /* padding-bottom: 5%; */
+  justify-content: space-around;
+  /* align-content: space-around; */
+  flex-direction: column;
+}
+#overview #detail a {
+  color: grey;
+  vertical-align: bottom;
+  margin-left: 2%;
+  text-decoration: none;
+}
+#overview #detail a:hover {
+  text-decoration: underline;
+}
+#overview #detail .selectors{
+  display: flex;
+  justify-content: flex-start;
+}
+#overview #detail .sizeSelector {
+  width: 10rem;
+  height: 3rem;
+  padding: 0.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: gray;
+  margin-right: 1em;
+  text-align: center;
+}
+#overview #detail .sharebutton{
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  text-align: left;
+  font-size: 1rem;
+}
+#overview #detail .quantitySelector {
+  width: 6rem;
+  height: 3rem;
+  padding: 0.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: gray;
+  margin-right: 1em;
+  text-align: center;
+}
+#overview #detail .detailButtons{
+  display: flex;
+  justify-content: flex-start;
+}
+#overview #detail .addtoCart {
+  width: 12rem;
+  height: 3rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  margin-right: 1em;
+  margin-left: 0;
+  /* border: 0.3px solid dimgray; */
+  background-color: black;
+  display: inline-block;
+}
+
+#overview #detail .save {
+  width: 4rem;
+  height: 3rem;
+  padding: 0.2em;
+  font-size: 1rem;
+  font-weight: 400;
+  color: white;
+  margin-left: 0;
+  /* border: 0.3px solid dimgray; */
+  background-color: black;
+  display: inline-block;
+}
+
+#overview #detail .styleOpt {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+#overview #detail .styleOpt span {
+  width: 60px;
+  height: 60px;
+  border: 3px solid transparent;
+  border-radius: 2.5rem;
+  display: flex;
+  margin: 0.5rem;
+  overflow: hidden;
+}
+#overview #detail .styleOpt .enlarge {
+  transform: scale(1.25);
+  transition: transform 0.25s linear;
+}
+/* #overview #detail .styleOpt span:hover,
+#overview #detail .styleOpt span:active,
+#overview #detail .styleOpt span:focus {
+  border: 3px solid gray;
+} */
+
+#overview #detail .style span img {
+  width: 100%;
+  height: auto;
+}
