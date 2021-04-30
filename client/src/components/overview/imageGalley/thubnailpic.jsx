@@ -1,14 +1,20 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 export default function ThumbnailPic(props) {
   if (props.expand) {
     return (
       <ul id='thumbnail-expand'>
         {
-          props.data.map((pic, index) => {
+          props.data.map((item, index) => {
             return (
               <li id='thumbnail-container' key={index}>
-                <a href='#' className='expandIcon'>*</a>
+                <button
+                  id={index}
+                  className='expandIcon'
+                  onClick={props.handleClick}>
+                </button>
               </li>
             )
           })
