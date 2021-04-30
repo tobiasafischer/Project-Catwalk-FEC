@@ -1,6 +1,5 @@
 const path = require('path');
 const autoprefixer = require('autoprefixer');
-const webpack = require('webpack');
 
 const SRC_DIR = path.join(__dirname, '/client/src');
 const DIST_DIR = path.join(__dirname, '/client/dist');
@@ -8,13 +7,6 @@ module.exports = {
   mode: 'production',
   devtool: 'source-map',
   entry: `${SRC_DIR}/index.jsx`,
-  plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        API_URL: process.env.API_URL,
-      },
-    }),
-  ],
   output: {
     filename: 'bundle.js',
     path: DIST_DIR,
