@@ -3,7 +3,8 @@ const axios = require('axios');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const { API_KEY } = require('../config.js');
+
+const { API_KEY } = process.env.API_KEY;
 
 const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
 
@@ -105,8 +106,7 @@ app.get('/productById', (req, res) => {
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       res.sendStatus(500);
     });
 });
@@ -136,7 +136,28 @@ app.get('/styles', (req, res) => {
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       res.sendStatus(500);
     });
+});
+
+app.get('/related', (req, res) => {
+  const result = [];
+  axios.get(`${apiUrl}/products/${req.query.id}/related`, { headers: { Authorization: API_KEY } })
+    .then(((items) => {
+      // iterates through array and makes GET requests at the corresponding ids
+      items.data.forEach((id) => {
+        const info = axios.get(`${apiUrl}/products/${id}`, { headers: { Authorization: API_KEY } });
+        const styles = axios.get(`${apiUrl}/products/${id}/styles`, { headers: { Authorization: API_KEY } });
+        Promise.all([info, styles])
+          .then((ress) => {
+            result.push({ productInfo: ress[0].data, styleInfo: ress[1].data });
+          })
+          .catch((err) => {
+            throw err;
+          });
+      });
+    }));
+  res.send(result);
 });

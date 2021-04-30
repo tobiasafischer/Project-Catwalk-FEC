@@ -31,7 +31,7 @@ const Review = (props) => {
       sort,
       product_id: productId,
     };
-    axios.get('http://localhost:3000/reviews', { params })
+    axios.get('reviews', { params })
       .then(({ data }) => {
         setCount(data.response.count);
         setReviews([...data.response.results]);

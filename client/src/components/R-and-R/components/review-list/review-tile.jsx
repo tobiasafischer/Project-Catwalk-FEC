@@ -73,7 +73,7 @@ const ReviewTile = (props) => {
       const params = {
         reviewId,
       };
-      axios.get('http://localhost:3000/reviews/helpfulness', { params })
+      axios.get('reviews/helpfulness', { params })
         .then(() => {
         })
         .catch((err) => {
@@ -87,7 +87,7 @@ const ReviewTile = (props) => {
       const params = {
         reviewId,
       };
-      axios.get('http://localhost:3000/reviews/report', { params })
+      axios.get('reviews/report', { params })
         .then(() => {
         })
         .catch((err) => {
