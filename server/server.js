@@ -3,7 +3,8 @@ const axios = require('axios');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const API_KEY = require('../config');
+
+const { API_KEY } = process.env.API_KEY;
 
 const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
 
