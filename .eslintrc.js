@@ -20,5 +20,6 @@ module.exports = {
   ],
   ignorePatterns: ['./client/dist/bundle.js'],
   rules: {
+    'linebreak-style': 0,
   },
 };
