@@ -49,7 +49,7 @@ const RelatedItemsAndComparison = () => {
           result.push({ productInfo: res[0].data, styleInfo: res[1].data });
         })
         .catch((err) => {
-          console.log(err);
+          throw err;
         });
     });
     setOutfitData(result);

@@ -105,8 +105,7 @@ app.get('/productById', (req, res) => {
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       res.sendStatus(500);
     });
 });
