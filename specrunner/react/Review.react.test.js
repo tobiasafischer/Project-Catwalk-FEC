@@ -4,7 +4,7 @@ import { render, cleanup, waitFor, fireEvent } from '@testing-library/react';
 import ReviewTile from '../../client/src/components/R-and-R/components/review-tile';
 import ReviewList from '../../client/src/components/R-and-R/components/reviews-list';
 import Review from '../../client/src/components/R-and-R/r-and-r';
-import ResponseForm from '../../client/src/components/R-and-R/components/response-form';
+import ResponseForm from '../../client/src/components/R-and-R/components/review-list/response-form';
 
 afterEach(cleanup);
 

@@ -23,7 +23,7 @@ const Overview = (props) => {
     const params = {
       id: productId,
     };
-    axios.get('http://localhost:3000/styles', { params })
+    axios.get('styles', { params })
       .then(({ data }) => {
         const newStyle = data.response.results[0];
         const newStyles = data.response.results;

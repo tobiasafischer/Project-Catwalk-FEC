@@ -13,7 +13,7 @@ const App = () => {
     const params = {
       product_id: productId,
     };
-    return axios.get('http://localhost:3000/productById', { params })
+    return axios.get('productById', { params })
       .then(({ data }) => data.response)
       .catch((err) => {
         throw err;

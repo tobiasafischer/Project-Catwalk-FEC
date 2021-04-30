@@ -118,7 +118,7 @@ const ReviewForm = (props) => {
       },
     };
     renderNewTile(formattedPhotos);
-    axios.post('http://localhost:3000/reviews/', params)
+    axios.post('reviews', params)
       .then(() => {
         reset();
         handleClose();
