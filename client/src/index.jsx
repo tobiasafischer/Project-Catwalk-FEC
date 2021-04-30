@@ -34,9 +34,9 @@ const App = () => {
           item={product}
         />
       </div>
-      <div>
+      {/*<div>
         <RelatedItemsAndComparison />
-      </div>
+      </div>*/}
       <div>
         <Review
           productId={productId}
