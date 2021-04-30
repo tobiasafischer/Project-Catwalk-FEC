@@ -25,20 +25,27 @@ const App = () => {
         setProduct(data);
       });
   }, []);
+
   useEffect(() => setProductId(product.id), [product]);
   return (
     <div>
       <div>
         <Overview
+          key={productId}
           productId={productId}
           item={product}
         />
       </div>
-      {/*<div>
-        <RelatedItemsAndComparison />
-      </div>*/}
+      <div>
+        <RelatedItemsAndComparison
+          key={productId}
+          productId={productId}
+          setProductId={setProductId}
+        />
+      </div>
       <div>
         <Review
+          key={productId}
           productId={productId}
         />
       </div>

@@ -8,32 +8,65 @@ const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax';
 
 const apiFunc = {
 
-  getProductData: (array) => {
-    const promises = [];
+  getRelatedData: async (currentId, dataFunc) => {
+    // container for data
+    const result = [];
+    // gets an array of ids that are related to current item
+    let response = await axios.get(`${apiURL}/products/${currentId}/related`, { headers: { Authorization: API_KEY } });
+    const relatedIDs = response.data;
+
+    const productInfo = {};
+    const styleInfo = {};
+
+    // for each id in relateIDs, call this endpoint in parallel
+    await Promise.all([
+
+      Promise.all(relatedIDs.map(async (id, index) => {
+        let response = await axios.get(`${apiURL}/products/${id}`, { headers: { Authorization: API_KEY } });
+        productInfo[id] = response.data;
+      })),
+      Promise.all(relatedIDs.map(async (id, index) => {
+        let response = await axios.get(`${apiURL}/products/${id}/styles`, { headers: { Authorization: API_KEY } });
+        styleInfo[id] = response.data;
+      })),
+
+    ]);
+
+    relatedIDs.forEach((id) => {
+      result.push({ productInfo: productInfo[id], styleInfo: styleInfo[id] });
+    });
+
+    dataFunc(result);
+  },
+
+  getProductData: async (array, dataFunc) => {
+    // container for data
+    const result = [];
+
+    const productInfo = {};
+    const styleInfo = {};
+
+    // for each id in relateIDs, call this endpoint in parallel
+    await Promise.all([
+
+      Promise.all(array.map(async (id, index) => {
+        const response = await axios.get(`${apiURL}/products/${id}`, { headers: { Authorization: API_KEY } });
+        productInfo[id] = response.data;
+      })),
+      Promise.all(array.map(async (id, index) => {
+        const response = await axios.get(`${apiURL}/products/${id}/styles`, { headers: { Authorization: API_KEY } });
+        styleInfo[id] = response.data;
+      })),
+
+    ]);
 
     array.forEach((id) => {
-      promises.push(new Promise((resolve, reject) => {
-        axios.get(`${apiURL}/products/${id}`, { headers: { Authorization: API_KEY } })
-          .then((info) => {
-            axios.get(`${apiURL}/products/${id}/styles`, { headers: { Authorization: API_KEY } })
-              .then((styles) => {
-                resolve({ info, styles });
-              })
-              .catch((err) => {
-                reject(err);
-              });
-          })
-          .catch((err) => {
-            reject(err);
-          });
-      }));
+      result.push({ productInfo: productInfo[id], styleInfo: styleInfo[id] });
     });
-    return Promise.all(promises)
-      .then((res) => res)
-      .catch((err) => {
-        throw err;
-      });
+
+    dataFunc(result);
   },
+
 };
 
 export default apiFunc;
