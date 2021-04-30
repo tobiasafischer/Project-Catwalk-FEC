@@ -9,12 +9,19 @@ import 'regenerator-runtime/runtime';
 
 const apiURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax';
 
-const RelatedItemsAndComparison = () => {
+const RelatedItemsAndComparison = (props) => {
+  const [{ productId }] = useState(props);
+  const [{ setProductId }] = useState(props);
 
   return (
     <div className="allComponents">
-      <RelatedItems/>
-      <YourOutfit />
+      <RelatedItems
+        currentId={productId}
+        setCurrentId={setProductId}
+      />
+      <YourOutfit
+        currentId={productId}
+      />
     </div>
   );
 };

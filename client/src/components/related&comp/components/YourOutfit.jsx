@@ -4,17 +4,16 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import { CardDeck, Card } from 'react-bootstrap';
-import apiFunc from './apiFunctions.jsx';
+import apiFunc from './apiFunctions';
 
-const YourOutfit = () => {
-
+const YourOutfit = (props) => {
   const [outfitArray, setOutfitArray] = useState([]);
   const [outfitData, setOutfitData] = useState([]);
-  const [currentId, setCurrentId] = useState(16057);
+  const [{ currentId }] = useState(props);
 
   useEffect(() => {
-    apiFunc.getProductData(outfitArray, setOutfitData)
-  }, [outfitArray])
+    apiFunc.getProductData(outfitArray, setOutfitData);
+  }, [outfitArray]);
 
   const [firstItem, setFirstItem] = useState(0);
   const secondItem = firstItem + 1;
@@ -45,30 +44,25 @@ const YourOutfit = () => {
   };
 
   const addItem = (array, clickId) => {
-
-    for (var i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
       if (array[i] === clickId) {
-        return
+        return;
       }
     }
-
-    setOutfitArray([...outfitArray, clickId])
-  }
-
+    console.log(clickId);
+    setOutfitArray([...outfitArray, clickId]);
+  };
 
   const deleteItem = (id) => {
-
-    console.log(id)
     const newArray = outfitArray.filter((item) => item.id !== id);
 
-    setOutfitArray(newArray)
+    setOutfitArray(newArray);
+  };
 
-  }
-
-// myItems.forEach((item) => (
-//     ...
-//     <button onClick={deleteItem(item.id)}>Delete</button>
-// ))
+  // myItems.forEach((item) => (
+  //     ...
+  //     <button onClick={deleteItem(item.id)}>Delete</button>
+  // ))
   return (
     <div className="yourOutfit">
       <h1>Your Outfit</h1>
@@ -81,27 +75,27 @@ const YourOutfit = () => {
           <Card.Body className="addOutfit">
             <Card.Title>Add to Outfit</Card.Title>
             <Card.Text>
-              <button onClick={()=>addItem(outfitArray, currentId)} className="plus-button" />
+              <button onClick={() => addItem(outfitArray, currentId)} className="plus-button" />
             </Card.Text>
           </Card.Body>
         </Card>
 
-          <div className="cardGroup">
-            {displayArray.map((item, index) => (
-              <Card key={index}>
-                <span id="item.productInfo.id" onClick={()=>deleteItem(item.id)} className="close hairline" />
-                <Card.Img className="h-50" variant="top" src={item.styleInfo.results[0].photos[0].thumbnail_url} />
-                <Card.Body>
-                  <Card.Title>{item.productInfo.name}</Card.Title>
-                  <Card.Text>
-                    <p className="card-text">{item.productInfo.category}</p>
-                    <p className="card-text">{item.productInfo.default_price}</p>
-                    <p className="card-text">☆☆☆☆☆</p>
-                  </Card.Text>
-                </Card.Body>
-              </Card>
-            ))}
-          </div>
+        <div className="cardGroup">
+          {displayArray.map((item, index) => (
+            <Card key={index}>
+              <span id="item.productInfo.id" onClick={() => deleteItem(item.id)} className="close hairline" />
+              <Card.Img className="h-50" variant="top" src={item.styleInfo.results[0].photos[0].thumbnail_url} />
+              <Card.Body>
+                <Card.Title>{item.productInfo.name}</Card.Title>
+                <Card.Text>
+                  <p className="card-text">{item.productInfo.category}</p>
+                  <p className="card-text">{item.productInfo.default_price}</p>
+                  <p className="card-text">☆☆☆☆☆</p>
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          ))}
+        </div>
 
         {fourthItem === outfitData.length - 1 ? (<li><span style={{ opacity: 0 }} onClick={rightClick} className="arrow arrow-right" /></li>) : (<li><span onClick={rightClick} className="arrow arrow-right" /></li>)}
 

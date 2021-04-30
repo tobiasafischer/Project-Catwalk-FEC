@@ -6,6 +6,9 @@ const DIST_DIR = path.join(__dirname, '/client/dist');
 module.exports = {
   mode: 'production',
   devtool: 'source-map',
+  watchOptions: {
+    ignored: /node_modules/,
+  },
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     filename: 'bundle.js',

@@ -4,10 +4,11 @@ const path = require('path');
 const express = require('express');
 const cors = require('cors');
 
-const { API_KEY } = process.env.API_KEY;
+// const { API_KEY } = process.env.API_KEY;
+const API_KEY = require('../config');
 
 const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
-
+const port = process.env.PORT || 3000;
 const app = express();
 app.use(bodyparser.json());
 
@@ -17,7 +18,7 @@ app.use(express.static(path.join(__dirname, '../client/src/components')));
 app.use(cors());
 app.use(express.json({ limit: '50mb', extended: true }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
-app.listen(3000);
+app.listen(port);
 
 app.get('/', (req, res) => {
   res.sendStatus(200);
