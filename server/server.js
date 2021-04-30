@@ -3,7 +3,7 @@ const axios = require('axios');
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
-const { API_KEY } = require('../config.js');
+const API_KEY = require('../config');
 
 const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
 
@@ -105,8 +105,7 @@ app.get('/productById', (req, res) => {
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       res.sendStatus(500);
     });
 });
@@ -136,7 +135,8 @@ app.get('/styles', (req, res) => {
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch(() => {
+    .catch((err) => {
+      console.log(err);
       res.sendStatus(500);
     });
 });
