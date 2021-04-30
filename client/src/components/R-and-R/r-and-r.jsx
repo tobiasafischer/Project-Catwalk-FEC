@@ -21,9 +21,17 @@ const Review = (props) => {
     4: 0,
     5: 0,
   });
+  const [percentRecommend, setPercentRecommend] = useState(0);
   const [totalRatings, setTotalRatings] = useState(0);
   const mounted = useRef(true);
 
+  const handleRecommendation = () => {
+    let recommend = 0;
+    reviews.forEach((review) => {
+      if (review.recommend) recommend += 1;
+    });
+    setPercentRecommend((recommend / reviews.length) * 100);
+  };
   const getReviews = () => {
     const params = {
       page,
@@ -31,7 +39,7 @@ const Review = (props) => {
       sort,
       product_id: productId,
     };
-    axios.get('http://localhost:3000/reviews', { params })
+    axios.get('reviews', { params })
       .then(({ data }) => {
         setCount(data.response.count);
         setReviews([...data.response.results]);
@@ -85,6 +93,7 @@ const Review = (props) => {
   useEffect(() => {
     if (reviews.length > 0) {
       compileRatings();
+      handleRecommendation();
     }
   }, [reviews]);
 
@@ -103,7 +112,7 @@ const Review = (props) => {
             <ReviewSpread
               key={JSON.stringify(ratings)}
               ratingBreakdown={ratings}
-              recommendation={95}
+              recommendation={percentRecommend}
             />
           </div>
         </div>

@@ -13,7 +13,7 @@ const App = () => {
     const params = {
       product_id: productId,
     };
-    return axios.get('http://localhost:3000/productById', { params })
+    return axios.get('productById', { params })
       .then(({ data }) => data.response)
       .catch((err) => {
         throw err;
@@ -25,20 +25,27 @@ const App = () => {
         setProduct(data);
       });
   }, []);
+
   useEffect(() => setProductId(product.id), [product]);
   return (
     <div>
       <div>
         <Overview
+          key={productId}
           productId={productId}
           item={product}
         />
       </div>
       <div>
-        <RelatedItemsAndComparison />
+        <RelatedItemsAndComparison
+          key={productId}
+          productId={productId}
+          setProductId={setProductId}
+        />
       </div>
       <div>
         <Review
+          key={productId}
           productId={productId}
         />
       </div>
