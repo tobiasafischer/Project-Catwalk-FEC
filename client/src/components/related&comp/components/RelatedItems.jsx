@@ -1,31 +1,38 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CardDeck, Card } from 'react-bootstrap';
 import ComparisonModal from './ComparisonModal';
+import apiFunc from './apiFunctions.jsx';
 
-function RelatedItems(props) {
-  const [{ relatedData }] = useState(props);
-  const [firstItem, setFirstItem] = useState(0);
+function RelatedItems() {
+  // const [{ productData }] = useState(props);
+  const [currentId, setCurrentId] = useState(16060);
+  const [productData, setProductData] = useState([]);
+
   const [modalShow, setModalShow] = useState(false);
-
+  const [firstItem, setFirstItem] = useState(0);
   const secondItem = firstItem + 1;
   const thirdItem = firstItem + 2;
   const fourthItem = firstItem + 3;
   const fifthItem = firstItem + 4;
 
+  useEffect(() => {
+    apiFunc.getRelatedData(currentId, setProductData)
+  }, [currentId])
+
   let displayArray = [
-    relatedData[firstItem],
-    relatedData[secondItem],
-    relatedData[thirdItem],
-    relatedData[fourthItem],
-    relatedData[fifthItem],
+    productData[firstItem],
+    productData[secondItem],
+    productData[thirdItem],
+    productData[fourthItem],
+    productData[fifthItem],
   ];
 
-  if (relatedData.length >= 5) {
+  if (productData.length >= 5) {
     displayArray = displayArray.slice(0, 5);
   } else {
-    displayArray = displayArray.slice(0, relatedData.length);
+    displayArray = displayArray.slice(0, productData.length);
   }
 
   const leftClick = () => {
@@ -35,7 +42,7 @@ function RelatedItems(props) {
   };
 
   const rightClick = () => {
-    if (fifthItem <= relatedData.length) {
+    if (fifthItem <= productData.length) {
       setFirstItem(firstItem + 1);
     }
   };
@@ -62,19 +69,19 @@ function RelatedItems(props) {
             </li>
           )}
         <div className="cardGroup">
-          {displayArray.map((id) => (
-            <Card key={id}>
+          {displayArray.map((id, index) => (
+            <Card key={index}>
               <div className="rating">
                 <span onClick={() => setModalShow(true)} className="btn">☆</span>
               </div>
-              <Card.Img variant="top" src={id.img} />
+              <Card.Img className="h-50" variant="top" src={id.styleInfo.results[0].photos[0].thumbnail_url} />
               <Card.Body>
-                <Card.Title>{id.name}</Card.Title>
+                <Card.Title>{id.productInfo.name}</Card.Title>
+                {console.log(id.productInfo.name)}
                 <Card.Text>
-                  <div>
-                    <p className="card-text">{id.category}</p>
-                    <p className="card-text">{id.defaultPrice}</p>
-                  </div>
+                    <p className="card-text">{id.productInfo.category}</p>
+                    <p className="card-text">{id.productInfo.default_price}</p>
+                    <p className="card-text">☆☆☆☆☆</p>
                 </Card.Text>
               </Card.Body>
             </Card>
@@ -82,9 +89,9 @@ function RelatedItems(props) {
         </div>
         <ComparisonModal show={modalShow} onHide={() => setModalShow(false)} />
 
-        {fifthItem === relatedData.length - 1 ? (<li><span style={{ opacity: 0 }} className="arrow arrow-right" /></li>) : (
-          <li><span onClick={rightClick} className="arrow arrow-right" /></li>)}
-
+        {fifthItem === productData.length - 1 ? (  <li><span style={{ opacity: 0 }} className="arrow arrow-right" /></li>) : (
+          <li><span onClick={rightClick} className="arrow arrow-right" /></li>
+          )}
       </CardDeck>
     </div>
   );
