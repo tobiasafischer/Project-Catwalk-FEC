@@ -110,3 +110,9 @@ body {
 #fill-bar:hover {
   background: tomato;
 }
+
+@font-face {
+  font-family: "Roboto";
+  src: local("Roboto");
+  font-display: swap;
+}

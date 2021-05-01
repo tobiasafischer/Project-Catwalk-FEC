@@ -5,8 +5,9 @@
   "main": "./src/index.js",
   "scripts": {
     "react-dev": "webpack --mode development --watch",
+    "react-prod": "webpack --mode production",
     "server-dev": "npx nodemon server/server.js",
-    "start": "npx server/server.js",
+    "server-prod": "node server/server.js",
     "test": "jest --coverage"
   },
   "repository": {
@@ -39,6 +40,7 @@
     "@babel/preset-react": "^7.13.13",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@testing-library/react": "^11.2.6",
+    "@types/regenerator-runtime": "^0.13.0",
     "babel-jest": "^26.6.3",
     "css-loader": "^5.2.2",
     "eslint": "^7.25.0",

@@ -41,8 +41,7 @@ app.get('/reviews', (req, res) => {
     .then((response) => {
       res.json({ response: response.data });
     })
-    .catch((err) => {
-      console.log(err);
+    .catch(() => {
       res.sendStatus(500);
     });
 });
@@ -126,21 +125,11 @@ app.get('/products', (req, res) => {
 });
 
 app.get('/related', (req, res) => {
-  const result = [];
-  axios.get(`${apiUrl}/products/${req.query.id}/related`, { headers: { Authorization: API_KEY } })
-    .then(((items) => {
-      // iterates through array and makes GET requests at the corresponding ids
-      items.data.forEach((id) => {
-        const info = axios.get(`${apiUrl}/products/${id}`, { headers: { Authorization: API_KEY } });
-        const styles = axios.get(`${apiUrl}/products/${id}/styles`, { headers: { Authorization: API_KEY } });
-        Promise.all([info, styles])
-          .then((ress) => {
-            result.push({ productInfo: ress[0].data, styleInfo: ress[1].data });
-          })
-          .catch((err) => {
-            throw err;
-          });
-      });
-    }));
-  res.send(result);
+  axios.get(`${apiUrl}products/${req.query.product_id}/related`, { headers: { Authorization: API_KEY } })
+    .then((items) => {
+      res.send(items.data);
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    });
 });

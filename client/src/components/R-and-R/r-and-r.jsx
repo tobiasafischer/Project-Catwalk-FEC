@@ -99,7 +99,6 @@ const Review = (props) => {
 
   return (
     <div>
-      <p>RATINGS & REVIEWS</p>
       <div className="d-inline-flex justify-content-end">
         <div style={{ marginLeft: '20px' }}>
           <div style={{ margin: '5px auto' }}>

@@ -47,6 +47,7 @@ const ReviewTile = (props) => {
             width: '100px',
             height: 'auto',
             marginTop: '10px',
+            objectFit: 'cover',
           }}
           src={image.url}
           rounded
