@@ -1,16 +1,27 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/alt-text */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 const ThumbnailPic = (props) => {
-  const [{ expand }] = useState(props);
-  const [{ data }] = useState(props);
-  const [{ currentInd }] = useState(props);
-  const [{ handleClick }] = useState(props);
-
-  if (expand) {
+  if (props.expand) {
+    return (
+      <ul id='thumbnail-expand'>
+        {
+          props.data.map((item, index) => {
+            return (
+              <li id='thumbnail-container' key={index}>
+                <button
+                  id={index}
+                  className='expandIcon'
+                  onClick={props.handleClick}>
+                </button>
+              </li>
+            )
+          })
+        }
+      </ul>
+    )
+  } else {
     return (
       <ul id="thumbnail-expand">
         {
@@ -33,7 +44,6 @@ const ThumbnailPic = (props) => {
             enlargeStyle = 'enlarge';
           }
           return (
-            // eslint-disable-next-line react/no-array-index-key
             <li id="thumbnail-container" key={index}>
               <img
                 id={index}

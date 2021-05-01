@@ -6,6 +6,7 @@ const cors = require('cors');
 
 // const { API_KEY } = process.env.API_KEY;
 const API_KEY = require('../config');
+console.log(API_KEY)
 
 const apiUrl = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-lax/';
 const port = process.env.PORT || 3000;
@@ -103,6 +104,7 @@ app.get('/productById', (req, res) => {
       product_id: req.query.product_id || 16056,
     },
   };
+  console.log(reviewHeader)
   axios.get(`${apiUrl}products/${req.query.product_id}`, reviewHeader)
     .then((response) => {
       res.json({ response: response.data });
